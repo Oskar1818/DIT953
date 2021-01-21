@@ -9,7 +9,6 @@ public class Volvo240{
     public Color color; // Color of the car
     public String modelName; // The car model name
     // Hello!
-    // Hello! //Oskar
     
     public Volvo240(){
         nrDoors = 4;
