@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public class Volvo240{
+public class Volvo240 extends Car implements Movable {
 
     public final static double trimFactor = 1.25;
     
@@ -42,13 +42,15 @@ public class Volvo240{
         setCurrentSpeed(Math.max(getCurrentSpeed() - speedFactor() * amount,0));
     }
 
-    // TODO fix this method according to lab pm
-    public void gas(double amount){
-        incrementSpeed(amount);
+    @Override
+    public void gas(double amount) {
+
     }
 
-    // TODO fix this method according to lab pm
-    public void brake(double amount){
-        decrementSpeed(amount);
+    @Override
+    public void brake(double amount) {
+
     }
+
+
 }
