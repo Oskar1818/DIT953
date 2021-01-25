@@ -72,6 +72,10 @@ public class Volvo240 extends Car implements Movable {
     public void brake(double amount) {
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public double speedFactor(){
         return getEnginePower() * 0.01 * trimFactor;
