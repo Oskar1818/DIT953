@@ -8,9 +8,21 @@ public abstract class Car {
     private Color color; // Color of the car
     private String modelName; // The car model name
 
+    public Car(){
+    }
+
+    public Car(Color clr){
+
+    }
+
+    public void setModelName(String name){ this.modelName = modelName; }
+
+    public String getModelName(){ return this.modelName; }
+
+    public void setNrDoors(int i){ this.nrDoors = i; }
 
     public int getNrDoors(){
-        return nrDoors;
+        return this.nrDoors;
     }
 
     public double getEnginePower(){
@@ -30,7 +42,7 @@ public abstract class Car {
     }
 
     public void setColor(Color clr){
-        color = clr;
+        this.color = clr;
     }
 
     public void startEngine(){
@@ -40,7 +52,5 @@ public abstract class Car {
     public void stopEngine(){
         currentSpeed = 0;
     }
-
-
 
 }

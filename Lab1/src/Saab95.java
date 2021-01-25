@@ -5,11 +5,11 @@ public class Saab95 extends Car implements Movable{
     public boolean turboOn;
     
     public Saab95(){
-        nrDoors = 2;
-        color = Color.red;
-        enginePower = 125;
+        setNrDoors(2);
+        setColor(Color.red);
+        setEnginePower(125);
 	    turboOn = false;
-        modelName = "Saab95";
+        setModelName("Saab95");
         stopEngine();
     }
 

@@ -5,10 +5,10 @@ public class Volvo240 extends Car implements Movable {
     public final static double trimFactor = 1.25;
     
     public Volvo240(){
-        nrDoors = 4;
-        color = Color.black;
-        enginePower = 100;
-        modelName = "Volvo240";
+        setNrDoors(4);
+        setColor(Color.black);
+        setEnginePower(100);
+        setModelName("Volvo240");
         stopEngine();
     }
 
