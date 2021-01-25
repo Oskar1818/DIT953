@@ -46,6 +46,7 @@ public class Volvo240 extends Car implements Movable {
         }
     }
 
+
     @Override
     public void turnRight() {
         switch (dir) {
@@ -55,6 +56,7 @@ public class Volvo240 extends Car implements Movable {
             case SOUTH -> this.dir = Direction.WEST;
         }
     }
+
 
     @Override
     public void incrementSpeed(double amount){
@@ -66,25 +68,21 @@ public class Volvo240 extends Car implements Movable {
         setCurrentSpeed(Math.max(getCurrentSpeed() - speedFactor() * amount,0));
     }
 
+
     @Override
     public void gas(double amount) {
-        double newSpeed = Math.max(Math.min(amount,1), 0);
+        double newSpeed = Math.max(Math.min(amount, 1), 0);
         setCurrentSpeed(getCurrentSpeed() + newSpeed);
-
     }
 
-    /**
-     *
-     * @param amount
-     */
     @Override
     public void brake(double amount) {
+        if (amount >= 0) {
+            double brakeFactor = Math.max(Math.min(amount, 1), 0);
+            setCurrentSpeed(getCurrentSpeed() - brakeFactor);
+        }
     }
 
-    /**
-     *
-     * @return
-     */
     @Override
     public double speedFactor(){
         return getEnginePower() * 0.01 * trimFactor;
