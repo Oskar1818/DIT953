@@ -26,13 +26,6 @@ public class Saab95 extends Car implements Movable{
     }
 
     @Override
-    public double speedFactor() {
-        double turbo = 1;
-        if(turboOn) turbo = 1.3;
-        return getEnginePower() * 0.01 * turbo;
-    }
-
-    @Override
     public void incrementSpeed(double amount){
         setCurrentSpeed(Math.min(getCurrentSpeed() + speedFactor() * amount, getEnginePower()));
     }
@@ -44,14 +37,18 @@ public class Saab95 extends Car implements Movable{
 
     @Override
     public void gas(double amount) {
-
     }
 
     @Override
     public void brake(double amount) {
-
     }
 
+    @Override
+    public double speedFactor() {
+        double turbo = 1;
+        if(turboOn) turbo = 1.3;
+        return getEnginePower() * 0.01 * turbo;
+    }
 
     public void setTurboOn(){
 	    turboOn = true;
@@ -60,6 +57,5 @@ public class Saab95 extends Car implements Movable{
     public void setTurboOff(){
 	    turboOn = false;
     }
-
 
 }
