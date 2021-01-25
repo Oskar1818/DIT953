@@ -8,11 +8,14 @@ public abstract class Car {
     private Color color; // Color of the car
     private String modelName; // The car model name
 
-    public Car(){
-    }
 
-    public Car(Color clr){
-
+    // possibly constructors here, not sure if necessary yet!
+    public Car(int d, double ep, double cs, Color c, String n){
+        this.nrDoors = d;
+        this.enginePower = ep;
+        this.currentSpeed = cs;
+        this.color = c;
+        this.modelName = n;
     }
 
     public void setModelName(String name){ this.modelName = modelName; }
@@ -29,13 +32,15 @@ public abstract class Car {
         return enginePower;
     }
 
-    public void setEnginePower(double enginePower){enginePower = enginePower;}
+    public void setEnginePower(double enginePower){this.enginePower = enginePower;}
 
     public double getCurrentSpeed(){
         return currentSpeed;
     }
 
-    public void setCurrentSpeed(double speed){ currentSpeed = speed; }
+    public void setCurrentSpeed(double speed){
+        currentSpeed = Math.min(speed, this.enginePower);
+    }
 
     public Color getColor(){
         return color;
