@@ -3,27 +3,35 @@ import java.awt.*;
 public class Volvo240 extends Car implements Movable {
 
     public final static double trimFactor = 1.25;
-    private static double xCord;
-    private static double yCord;
+    private double xCord;
+    private double yCord;
     private Direction dir;
     //private static direction =
 
-    public Volvo240(){
-        super(4, 100, 10, Color.black, "Volvo240");
-        xCord = 0;
-        yCord = 0;
+    public Volvo240(Color c, Point point){
+        super(4, 100, 0, c, "Volvo240");
+        this.xCord = point.getX();
+        this.yCord = point.getY();
         dir = Direction.NORTH;
         stopEngine();
+    }
+
+    public double getXCord() {
+        return this.xCord;
+    }
+
+    public double getYCord() {
+        return this.yCord;
     }
 
 
     @Override
     public void move() {
         switch (dir) {
-            case EAST -> xCord += getCurrentSpeed();
-            case WEST -> xCord -= getCurrentSpeed();
-            case NORTH -> yCord += getCurrentSpeed();
-            case SOUTH -> yCord -= getCurrentSpeed();
+            case EAST -> this.xCord += getCurrentSpeed();
+            case WEST -> this.xCord -= getCurrentSpeed();
+            case NORTH -> this.yCord += getCurrentSpeed();
+            case SOUTH -> this.yCord -= getCurrentSpeed();
         }
     }
 

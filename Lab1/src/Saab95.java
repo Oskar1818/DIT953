@@ -3,17 +3,21 @@ import java.awt.*;
 public class Saab95 extends Car implements Movable{
 
     public boolean turboOn;
-    private static int xCord;
-    private static int yCord;
+    private double xCord;
+    private double yCord;
     private Direction dir;
     
-    public Saab95(){
-        super(2, 125, 10, Color.red, "Saab95");
+    public Saab95(Color c, Point point){
+        super(2, 125, 10, c, "Saab95");
 	    turboOn = false;
-	    xCord = 0;
-	    yCord = 0;
+	    this.xCord = point.getX();
+	    this.yCord = point.getY();
 	    dir = Direction.NORTH;
         stopEngine();
+    }
+
+    public double getYCord() {
+        return this.yCord;
     }
 
     @Override
