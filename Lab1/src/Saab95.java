@@ -1,12 +1,22 @@
 import java.awt.*;
 
+/**
+ * A class for the cars of model Saab95. Saab95 is a subclass of Car, it inherits the methods and
+ * variables of the abstract class Car. Saab95 also implements the interface Movable, which describes the desired
+ * methods for which the car should implement, to be able to move.
+ */
 public class Saab95 extends Car implements Movable{
 
     public boolean turboOn;
     private double xCord;
     private double yCord;
     private Direction dir;
-    
+
+    /**
+     * The constructor that is called upon on creation of a Saab95.
+     * @param c The color of the car.
+     * @param point The starting position of the car. An x- and a y-coordinate.
+     */
     public Saab95(Color c, Point point){
         super(2, 125, 10, c, "Saab95");
 	    turboOn = false;
@@ -15,6 +25,8 @@ public class Saab95 extends Car implements Movable{
 	    dir = Direction.NORTH;
         stopEngine();
     }
+
+    public double getXCord() { return this.xCord; }
 
     public double getYCord() {
         return this.yCord;
