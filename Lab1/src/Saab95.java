@@ -13,7 +13,10 @@ public class Saab95 extends Car implements Movable{
     private Direction dir;
 
     /**
-     * The constructor that is called upon on creation of a Saab95.
+     * The constructor that is called upon on creation of a Saab95. It inherits the values; nrDoors, enginePower,
+     * currentSpeed, color and modelName; from its super class Car. With exception of color, all these values and the
+     * values; turboOn and dir, are standard values for a Saab95, and are assigned a default value upon
+     * creation.
      * @param c The color of the car.
      * @param point The starting position of the car. An x- and a y-coordinate.
      */
