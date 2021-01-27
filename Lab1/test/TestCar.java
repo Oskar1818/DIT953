@@ -26,17 +26,17 @@ public class TestCar {
     }*/
 
 
-    @Test // test name
+    @Test
     public void checkVolvoName() {
         assertEquals("Volvo240", volvo240.getModelName());
     }
 
-    @Test // test name
+    @Test
     public void checkSaabName() {
         assertEquals("Saab95", saab95.getModelName());
     }
 
-    @Test // test setCurrentSpeed
+    @Test
     public void moveVolvo() {
         volvo240.setCurrentSpeed(10);
         volvo240.move();
@@ -49,6 +49,18 @@ public class TestCar {
         saab95.move();
         assertEquals(40, saab95.getYCord(), 0);
     }
+
+
+    //@Test
+    //public void checkGas() {assertEquals(1, )}
+
+
+    @Test
+    public void checkVolvo240Color() {assertEquals("black", volvo240.getColor());}
+
+    @Test
+    public void checkSaab95Color() {assertEquals("red", saab95.getColor());}
+
 
 
 }
