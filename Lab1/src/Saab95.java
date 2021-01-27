@@ -14,9 +14,9 @@ public class Saab95 extends Car implements Movable{
     private Direction dir;
 
     /**
-     * The constructor that is called upon on creation of a Saab95. It inherits the values; nrDoors, enginePower,
-     * currentSpeed, color and modelName; from its super class Car. With exception of color, all these values and the
-     * values; turboOn and dir, are standard values for a Saab95, and are assigned a default value upon
+     * The constructor that is called upon on creation of a Saab95. It inherits the variables; nrDoors, enginePower,
+     * currentSpeed, color and modelName; from its super class Car. With exception of color, all these variables and the
+     * variables; turboOn and dir, have default values for a Saab95, and are assigned a final default value upon
      * creation.
      * @param c The color of the car.
      * @param point The starting position of the car. An x- and a y-coordinate.
@@ -85,6 +85,7 @@ public class Saab95 extends Car implements Movable{
 
     /**
      * Increases the speed of the Saab by the input amount times the speed factor, and makes sure the
+     * speed doesn't exceed the engine power of the car.
      * @param amount the amount at which the speed should increase by.
      */
     @Override
@@ -92,28 +93,44 @@ public class Saab95 extends Car implements Movable{
         setCurrentSpeed(Math.min(getCurrentSpeed() + speedFactor() * amount, getEnginePower()));
     }
 
-
+    /**
+     * Increases the speed of the Saab by the input amount times the speed factor, and makes sure the
+     * speed doesn't go below 0.
+     * @param amount amount the amount at which the speed should decrease by.
+     */
     @Override
     public void decrementSpeed(double amount){
         setCurrentSpeed(Math.max(getCurrentSpeed() - speedFactor() * amount,0));
     }
 
+    /**
+     * Makes the car go faster by increasing the speed via the incrementSpeed method.
+     * @param amount amount the amount at which the speed should increase by.
+     */
     @Override
     public void gas(double amount) {
         if (amount >= 0) {
             double gasFactor = Math.max(Math.min(amount, 1), 0);
-            setCurrentSpeed(getCurrentSpeed() + gasFactor);
+            incrementSpeed(gasFactor);
         }
     }
 
+    /**
+     * Makes the car go slower by decreasing the speed via the decrementSpeed method.
+     * @param amount amount amount the amount at which the speed should decrease by.
+     */
     @Override
     public void brake(double amount) {
         if (amount >= 0) {
             double brakeFactor = Math.max(Math.min(amount, 1), 0);
-            setCurrentSpeed(getCurrentSpeed() - brakeFactor);
+            decrementSpeed(brakeFactor);
         }
     }
 
+    /**
+     * The speed factor of the car, which depends on the turbo of the car and the engine power.
+     * @return returns the current speed factor.
+     */
     @Override
     public double speedFactor() {
         double turbo = 1;
@@ -121,10 +138,16 @@ public class Saab95 extends Car implements Movable{
         return getEnginePower() * 0.01 * turbo;
     }
 
+    /**
+     * Turns on the turbo in the Saab95.
+     */
     public void setTurboOn(){
 	    turboOn = true;
     }
 
+    /**
+     * Turns off the turbo in the Saab95.
+     */
     public void setTurboOff(){
 	    turboOn = false;
     }

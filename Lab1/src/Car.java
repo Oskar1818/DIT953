@@ -7,11 +7,11 @@ import java.awt.*;
  */
 public abstract class Car {
 
-    private int nrDoors; // Number of doors on the car
-    private double enginePower; // Engine power of the car
+    private final int nrDoors; // Number of doors on the car
+    private final double enginePower; // Engine power of the car
     private double currentSpeed; // The current speed of the car
     private Color color; // Color of the car
-    private String modelName; // The car model name
+    private final String modelName; // The car model name
 
 
     /**
@@ -30,17 +30,11 @@ public abstract class Car {
         this.modelName = n;
     }
 
-    // probably not a necessary method
-    public void setModelName(String name){ this.modelName = modelName; }
-
     /**
      *
      * @return Returns the model name of the car.
      */
     public String getModelName(){ return this.modelName; }
-
-    // probably not necessary, it is a default value in our case
-    public void setNrDoors(int i){ this.nrDoors = i; }
 
     /**
      *
@@ -53,9 +47,6 @@ public abstract class Car {
      * @return Returns the engine power of the car.
      */
     public double getEnginePower(){ return enginePower; }
-
-    // del
-    public void setEnginePower(double enginePower){this.enginePower = enginePower;}
 
     /**
      *
@@ -73,10 +64,7 @@ public abstract class Car {
      *
      * @return Returns the color of the car.
      */
-    public Color getColor(){ return color; }
-
-    // del
-    public void setColor(Color clr){ this.color = clr; }
+    public String getColor(){ return color.toString(); }
 
     /**
      * Starts the engine and sets the initial speed to 0.1.
