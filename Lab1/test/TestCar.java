@@ -46,10 +46,58 @@ public class TestCar {
 
     @Test
     public void moveSaab () {
-        saab95.setCurrentSpeed(20);
         saab95.move();
-        assertEquals(40, saab95.getYCord(), 0);
+        assertEquals(50, saab95.getXCord(), 0);
     }
 
+
+    @Test
+    public void checkVolvoGas() {
+        volvo240.gas(0.5);
+        assertEquals(10.625, volvo240.getCurrentSpeed(), 0);
+    }
+
+    @Test
+    public void checkSaabGas() {
+        saab95.gas(3);
+        assertEquals(21.25, saab95.getCurrentSpeed(), 0);
+    }
+
+    @Test
+    public void checkVolvoBrake() {
+        volvo240.brake(3);
+        assertEquals(8.75, volvo240.getCurrentSpeed(), 0);
+    }
+
+    @Test
+    public void checkSaabBrake() {
+        saab95.brake(0.1);
+        assertEquals(19.875, saab95.getCurrentSpeed(), 0);
+    }
+
+    /*@Test
+    public void checkVolvo240LeftTurn() {assertEquals();}
+
+    @Test
+    public void checkSaab95LeftTurn() {assertEquals();}
+
+    @Test
+    public void checkVolvo240RightTurn() {assertEquals();}
+
+    @Test
+    public void checkSaab95RightTurn() {assertEquals();}*/
+
+
+    @Test
+    public void checkVolvo240Color() {assertEquals(Color.black.toString(), volvo240.getColor());}
+
+    @Test
+    public void checkSaab95Color() {assertEquals(Color.red.toString(), saab95.getColor());}
+
+    @Test
+    public void checkVolvo240GetNrDoors() {assertEquals(4, volvo240.getNrDoors());}
+
+    @Test
+    public void checkSaab95GetNrDoors() {assertEquals(2, saab95.getNrDoors());}
 
 }
