@@ -17,6 +17,8 @@ public class TestCar {
     public void setUp(){
         volvo240 = new Volvo240(Color.black, new Point(10, 10));
         saab95 = new Saab95(Color.red, new Point(30, 20));
+        volvo240.setCurrentSpeed(10);
+        saab95.setCurrentSpeed(20);
     }
 
    /* @Test
@@ -38,7 +40,6 @@ public class TestCar {
 
     @Test
     public void moveVolvo() {
-        volvo240.setCurrentSpeed(10);
         volvo240.move();
         assertEquals(20, volvo240.getYCord(), 0);
     }
@@ -49,18 +50,6 @@ public class TestCar {
         saab95.move();
         assertEquals(40, saab95.getYCord(), 0);
     }
-
-
-    //@Test
-    //public void checkGas() {assertEquals(1, )}
-
-
-    @Test
-    public void checkVolvo240Color() {assertEquals("black", volvo240.getColor());}
-
-    @Test
-    public void checkSaab95Color() {assertEquals("red", saab95.getColor());}
-
 
 
 }
