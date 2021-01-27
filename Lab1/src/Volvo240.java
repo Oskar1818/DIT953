@@ -1,5 +1,9 @@
 import java.awt.*;
 
+/**
+ * @author Valter Miari, Oskar Sturebrand, Clara Josefsson
+ */
+
 public class Volvo240 extends Car implements Movable {
 
     public final static double trimFactor = 1.25;

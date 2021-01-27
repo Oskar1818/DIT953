@@ -4,6 +4,7 @@ import java.awt.*;
  * A class for the cars of model Saab95. Saab95 is a subclass of Car, it inherits the methods and
  * variables of the abstract class Car. Saab95 also implements the interface Movable, which describes the desired
  * methods for which the car should implement, to be able to move.
+ * @author Valter Miari, Oskar Sturebrand, Clara Josefsson
  */
 public class Saab95 extends Car implements Movable{
 
@@ -29,12 +30,23 @@ public class Saab95 extends Car implements Movable{
         stopEngine();
     }
 
+    /**
+     *
+     * @return returns the x-coordinate of the Saab.
+     */
     public double getXCord() { return this.xCord; }
 
+    /**
+     *
+     * @return returns the y-coordinate of the Saab.
+     */
     public double getYCord() {
         return this.yCord;
     }
 
+    /**
+     * A method that moves the Saab, with its current speed, in the direction that it's pointing at.
+     */
     @Override
     public void move() {
         switch (dir) {
@@ -45,6 +57,9 @@ public class Saab95 extends Car implements Movable{
         }
     }
 
+    /**
+     * Turns the car left, by changing the latitude or the longitude, depending on where the car is pointing.
+     */
     @Override
     public void turnLeft() {
         switch (dir) {
@@ -55,6 +70,9 @@ public class Saab95 extends Car implements Movable{
         }
     }
 
+    /**
+     * Turns the car right, by changing the latitude or the longitude, depending on where the car is pointing.
+     */
     @Override
     public void turnRight() {
         switch (dir) {
@@ -65,6 +83,10 @@ public class Saab95 extends Car implements Movable{
         }
     }
 
+    /**
+     * Increases the speed of the Saab by the input amount times the speed factor, and makes sure the
+     * @param amount the amount at which the speed should increase by.
+     */
     @Override
     public void incrementSpeed(double amount){
         setCurrentSpeed(Math.min(getCurrentSpeed() + speedFactor() * amount, getEnginePower()));
