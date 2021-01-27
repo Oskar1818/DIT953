@@ -1,9 +1,11 @@
 import org.junit.Before;
 import org.junit.Test;
-
 import java.awt.*;
-
 import static org.junit.Assert.*;
+
+/**
+ * @author Valter Miari, Oskar Sturebrand, Clara Josefsson
+ */
 
 public class TestCar {
 

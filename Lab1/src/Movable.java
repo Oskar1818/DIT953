@@ -1,7 +1,7 @@
 public interface Movable {
 
     /**
-     *
+     * @author Valter Miari, Oskar Sturebrand, Clara Josefsson
      */
 
     void move();
