@@ -26,17 +26,17 @@ public class TestCar {
     }*/
 
 
-    @Test
+    @Test // test name
     public void checkVolvoName() {
         assertEquals("Volvo240", volvo240.getModelName());
     }
 
-    @Test
+    @Test // test name
     public void checkSaabName() {
         assertEquals("Saab95", saab95.getModelName());
     }
 
-    @Test
+    @Test // test setCurrentSpeed
     public void moveVolvo() {
         volvo240.setCurrentSpeed(10);
         volvo240.move();
@@ -49,4 +49,6 @@ public class TestCar {
         saab95.move();
         assertEquals(40, saab95.getYCord(), 0);
     }
+
+
 }
