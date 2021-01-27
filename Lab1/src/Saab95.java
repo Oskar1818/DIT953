@@ -26,7 +26,7 @@ public class Saab95 extends Car implements Movable{
 	    turboOn = false;
 	    this.xCord = point.getX();
 	    this.yCord = point.getY();
-	    dir = Direction.NORTH;
+	    dir = Direction.EAST;
         stopEngine();
     }
 
@@ -122,7 +122,7 @@ public class Saab95 extends Car implements Movable{
     @Override
     public void brake(double amount) {
         if (amount >= 0) {
-            double brakeFactor = Math.max(Math.min(amount, 1), 0);
+            double brakeFactor = Math.max(Math.min(amount, 1), 0); // 0 <= breakFactor <= 1
             decrementSpeed(brakeFactor);
         }
     }
