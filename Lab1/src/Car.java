@@ -1,7 +1,7 @@
 import java.awt.*;
 
 /**
- * An abstract class representing a car. In the class there are variables and methods which all the
+ * An abstract class representing a car. In the class there are variables and methods which all
  * cars should have.
  * @author Valter Miari, Oskar Sturebrand, Clara Josefsson
  */
