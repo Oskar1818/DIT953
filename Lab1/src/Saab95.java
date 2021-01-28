@@ -32,6 +32,11 @@ public class Saab95 extends Car implements Movable{
 
     /**
      *
+     * @return Returns the direction the car is pointing at.
+     */
+    public Direction getDir() { return this.dir; }
+    /**
+     *
      * @return returns the x-coordinate of the Saab.
      */
     public double getXCord() { return this.xCord; }
@@ -65,8 +70,8 @@ public class Saab95 extends Car implements Movable{
         switch (dir) {
             case EAST -> this.dir = Direction.NORTH;
             case WEST -> this.dir = Direction.SOUTH;
-            case NORTH -> this.dir = Direction.EAST;
-            case SOUTH -> this.dir = Direction.WEST;
+            case NORTH -> this.dir = Direction.WEST;
+            case SOUTH -> this.dir = Direction.EAST;
         }
     }
 
@@ -133,6 +138,11 @@ public class Saab95 extends Car implements Movable{
         if(turboOn) turbo = 1.3;
         return getEnginePower() * 0.01 * turbo;
     }
+    /**
+     *
+     */
+    public boolean isTurboOn() { return this.turboOn; }
+
 
     /**
      * Turns on the turbo in the Saab95.

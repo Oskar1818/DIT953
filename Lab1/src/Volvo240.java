@@ -22,14 +22,19 @@ public class Volvo240 extends Car implements Movable {
      * @param c The color of the car.
      * @param point The starting position of the car. An x- and a y-coordinate.
      */
-    public Volvo240(Color c, Point point){
+    public Volvo240(Color c, Point point, Direction dir){
         super(4, 100, 0, c, "Volvo240");
         this.xCord = point.getX();
         this.yCord = point.getY();
-        dir = Direction.NORTH;
+        this.dir = dir;
         stopEngine();
     }
 
+    /**
+     *
+     * @return Returns the direction the car is pointing at.
+     */
+    public Direction getDir(){ return this.dir; }
     /**
      *
      * @return returns the x-coordinate of the Volvo.
@@ -69,8 +74,8 @@ public class Volvo240 extends Car implements Movable {
         switch (dir) {
             case EAST -> this.dir = Direction.NORTH;
             case WEST -> this.dir = Direction.SOUTH;
-            case NORTH -> this.dir = Direction.EAST;
-            case SOUTH -> this.dir = Direction.WEST;
+            case NORTH -> this.dir = Direction.WEST;
+            case SOUTH -> this.dir = Direction.EAST;
         }
     }
 
