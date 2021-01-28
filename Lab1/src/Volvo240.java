@@ -126,10 +126,8 @@ public class Volvo240 extends Car implements Movable {
      */
     @Override
     public void brake(double amount) {
-        if (amount >= 0) {
             double brakeFactor = Math.max(Math.min(amount, 1), 0);
             decrementSpeed(brakeFactor);
-        }
     }
 
     /**

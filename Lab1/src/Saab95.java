@@ -50,10 +50,10 @@ public class Saab95 extends Car implements Movable{
     @Override
     public void move() {
         switch (dir) {
-            case EAST -> xCord += getCurrentSpeed();
-            case WEST -> xCord -= getCurrentSpeed();
-            case NORTH -> yCord += getCurrentSpeed();
-            case SOUTH -> yCord -= getCurrentSpeed();
+            case EAST -> this.xCord += getCurrentSpeed();
+            case WEST -> this.xCord -= getCurrentSpeed();
+            case NORTH -> this.yCord += getCurrentSpeed();
+            case SOUTH -> this.yCord -= getCurrentSpeed();
         }
     }
 
@@ -109,10 +109,8 @@ public class Saab95 extends Car implements Movable{
      */
     @Override
     public void gas(double amount) {
-        if (amount >= 0) {
             double gasFactor = Math.max(Math.min(amount, 1), 0);
             incrementSpeed(gasFactor);
-        }
     }
 
     /**
@@ -121,10 +119,8 @@ public class Saab95 extends Car implements Movable{
      */
     @Override
     public void brake(double amount) {
-        if (amount >= 0) {
             double brakeFactor = Math.max(Math.min(amount, 1), 0); // 0 <= breakFactor <= 1
             decrementSpeed(brakeFactor);
-        }
     }
 
     /**
