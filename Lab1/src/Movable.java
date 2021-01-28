@@ -31,10 +31,22 @@ public interface Movable {
      */
     void incrementSpeed(double amount);
 
+    /**
+     * Describes a method that should increase the speed of the object.
+     * @param amount the amount at which the speed should be increased by.
+     */
     void decrementSpeed(double amount);
 
+    /**
+     * Describes a method that increases the speed of the vehicle.
+     * @param amount how much the vehicle should gas by.
+     */
     void gas(double amount);
 
+    /**
+     * Describes a method that decreases the speed of the vehicle.
+     * @param amount how much the vehicle should break by.
+     */
     void brake(double amount);
 
 }

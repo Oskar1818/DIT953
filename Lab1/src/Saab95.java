@@ -139,7 +139,7 @@ public class Saab95 extends Car implements Movable{
         return getEnginePower() * 0.01 * turbo;
     }
     /**
-     *
+     * Checks if the turbo in the Saab is on.
      */
     public boolean isTurboOn() { return this.turboOn; }
 
