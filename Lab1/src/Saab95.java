@@ -21,12 +21,12 @@ public class Saab95 extends Car implements Movable{
      * @param c The color of the car.
      * @param point The starting position of the car. An x- and a y-coordinate.
      */
-    public Saab95(Color c, Point point){
-        super(2, 125, 10, c, "Saab95");
+    public Saab95(Color c, Point point, Direction dir){
+        super(2, 125, 0, c, "Saab95");
 	    turboOn = false;
 	    this.xCord = point.getX();
 	    this.yCord = point.getY();
-	    dir = Direction.EAST;
+	    this.dir = dir;
         stopEngine();
     }
 

@@ -104,7 +104,10 @@ public class TestCar {
     }
 
     @Test
-    public void checkSaab95RightTurn() {assertEquals();}*/
+    public void checkSaab95RightTurn() {
+        saab95.turnRight();
+        assertEquals(Direction.SOUTH, saab95.getDir());
+    }
 
 
     @Test

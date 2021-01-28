@@ -67,9 +67,9 @@ public abstract class Car {
     public String getColor(){ return color.toString(); }
 
     /**
-     * Starts the engine and sets the initial speed to 0.1.
+     * Starts the engine and sets the initial speed to 1.
      */
-    public void startEngine(){ currentSpeed = 0.1; }
+    public void startEngine(){ currentSpeed = 1; }
 
     /**
      * Stops the engine, which makes the car stop.
