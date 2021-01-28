@@ -9,7 +9,6 @@ import static org.junit.Assert.*;
 
 public class TestCar {
 
-
     public Volvo240 volvo240;
     public Volvo240 volvo240two;
 
@@ -27,16 +26,7 @@ public class TestCar {
         saab95two = new Saab95(Color.red, new Point(30, 20), Direction.NORTH);
         volvo240two.setCurrentSpeed(10);
         saab95two.setCurrentSpeed(20);
-
-
     }
-
-   /* @Test
-    public void nameCheck(){
-        checkName(volvo240);
-        checkName(saab95);
-    }*/
-
 
     @Test
     public void checkVolvoName() {
