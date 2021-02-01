@@ -30,12 +30,12 @@ public class TestCar {
 
     @Test
     public void checkVolvoName() {
-        assertEquals("Volvo240", volvo240.getModelName());
+        assertEquals("Volvo240", volvo240.getName());
     }
 
     @Test
     public void checkSaabName() {
-        assertEquals("Saab95", saab95.getModelName());
+        assertEquals("Saab95", saab95.getName());
     }
 
     @Test

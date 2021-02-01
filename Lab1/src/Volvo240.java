@@ -7,12 +7,17 @@ import java.awt.*;
  * @author Valter Miari, Oskar Sturebrand, Clara Josefsson
  */
 
-public class Volvo240 extends Car implements Movable {
+public class Volvo240 implements ICar, Movable {
 
     public final static double trimFactor = 1.25;
     private double xCord;
     private double yCord;
     private Direction dir;
+    private Color color;
+    private final String name = "Volvo240";
+    private double currentSpeed = 0;
+    private final double enginePower = 100;
+    private final int nrDoors = 4;
 
     /**
      * The constructor that is called upon on creation of a Volvo240. It inherits the variables; nrDoors, enginePower,
@@ -23,66 +28,33 @@ public class Volvo240 extends Car implements Movable {
      * @param point The starting position of the car. An x- and a y-coordinate.
      */
     public Volvo240(Color c, Point point, Direction dir){
-        super(4, 100, 0, c, "Volvo240");
+        this.color = c;
         this.xCord = point.getX();
         this.yCord = point.getY();
         this.dir = dir;
         stopEngine();
     }
 
-    /**
-     *
-     * @return Returns the direction the car is pointing at.
-     */
+    // From IVehicle
+    @Override
+    public String getName(){ return this.name; }
+
+    @Override
+    public String getColor(){ return color.toString(); }
+
+    @Override
     public Direction getDir(){ return this.dir; }
-    /**
-     *
-     * @return returns the x-coordinate of the Volvo.
-     */
-    public double getXCord() {
-        return this.xCord;
-    }
 
-    /**
-     *
-     * @return returns the y-coordinate of the Volvo.
-     */
-    public double getYCord() {
-        return this.yCord;
-    }
-
-
-    /**
-     * A method that moves the Volvo, with its current speed, in the direction that it's pointing at.
-     */
     @Override
     public void move() {
         switch (dir) {
-            case EAST -> this.xCord += getCurrentSpeed();
-            case WEST -> this.xCord -= getCurrentSpeed();
-            case NORTH -> this.yCord += getCurrentSpeed();
-            case SOUTH -> this.yCord -= getCurrentSpeed();
+            case EAST -> this.xCord += getSpeed();
+            case WEST -> this.xCord -= getSpeed();
+            case NORTH -> this.yCord += getSpeed();
+            case SOUTH -> this.yCord -= getSpeed();
         }
     }
 
-
-    /**
-     * Turns the car left, by changing the latitude or the longitude, depending on where the car is pointing.
-     */
-    @Override
-    public void turnLeft() {
-        switch (dir) {
-            case EAST -> this.dir = Direction.NORTH;
-            case WEST -> this.dir = Direction.SOUTH;
-            case NORTH -> this.dir = Direction.WEST;
-            case SOUTH -> this.dir = Direction.EAST;
-        }
-    }
-
-
-    /**
-     * Turns the car right, by changing the latitude or the longitude, depending on where the car is pointing.
-     */
     @Override
     public void turnRight() {
         switch (dir) {
@@ -93,56 +65,72 @@ public class Volvo240 extends Car implements Movable {
         }
     }
 
-
-    /**
-     * Increases the speed of the Saab by the input amount times the speed factor, and makes sure the
-     * speed doesn't exceed the engine power of the car.
-     * @param amount the amount at which the speed should increase by.
-     */
     @Override
-    public void incrementSpeed(double amount){
-        setCurrentSpeed(Math.min(getCurrentSpeed() + speedFactor() * amount, getEnginePower()));
+    public void turnLeft() {
+        switch (dir) {
+            case EAST -> this.dir = Direction.NORTH;
+            case WEST -> this.dir = Direction.SOUTH;
+            case NORTH -> this.dir = Direction.WEST;
+            case SOUTH -> this.dir = Direction.EAST;
+        }
     }
 
-    /**
-     * Increases the speed of the Saab by the input amount times the speed factor, and makes sure the
-     * speed doesn't go below 0.
-     * @param amount amount the amount at which the speed should decrease by.
-     */
     @Override
-    public void decrementSpeed(double amount){
-        setCurrentSpeed(Math.max(getCurrentSpeed() - speedFactor() * amount,0));
+    public double getXCord() {
+        return this.xCord;
     }
 
+    @Override
+    public double getYCord() {
+        return this.yCord;
+    }
 
-    /**
-     * Makes the car go faster by increasing the speed via the incrementSpeed method.
-     * @param amount amount the amount at which the speed should increase by.
-     */
+    @Override
+    public void setSpeed(double speed){ currentSpeed = Math.min(speed, this.enginePower); }
+
+    @Override
+    public double getSpeed(){ return currentSpeed; }
+
+    @Override
+    public double speedFactor(){
+        return getEnginePower() * 0.01 * trimFactor;
+    }
+
     @Override
     public void gas(double amount) {
         double gasFactor = Math.max(Math.min(amount, 1), 0);
         incrementSpeed(gasFactor);
     }
 
-    /**
-     * Makes the car go slower by decreasing the speed via the decrementSpeed method.
-     * @param amount amount amount the amount at which the speed should decrease by.
-     */
+    @Override
+    public void incrementSpeed(double amount){
+        setSpeed(Math.min(getSpeed() + speedFactor() * amount, getEnginePower()));
+    }
+
     @Override
     public void brake(double amount) {
             double brakeFactor = Math.max(Math.min(amount, 1), 0);
             decrementSpeed(brakeFactor);
     }
 
-    /**
-     * The speed factor of the car, which depends on the turbo of the car and the engine power.
-     * @return returns the current speed factor.
-     */
     @Override
-    public double speedFactor(){
-        return getEnginePower() * 0.01 * trimFactor;
+    public void decrementSpeed(double amount){
+        setSpeed(Math.max(getSpeed() - speedFactor() * amount,0));
     }
+
+    // From ICar
+    @Override
+    public int getNrDoors(){ return this.nrDoors; }
+
+    @Override
+    public double getEnginePower(){ return enginePower; }
+
+    @Override
+    public void startEngine(){ currentSpeed = 1; }
+
+    @Override
+    public void stopEngine(){ currentSpeed = 0; }
+
 
 
 }

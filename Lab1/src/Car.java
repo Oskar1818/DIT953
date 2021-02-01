@@ -76,4 +76,9 @@ public abstract class Car {
      */
     public void stopEngine(){ currentSpeed = 0; }
 
+    // put in respective class, bc interfaces
+    public void errorMsg(String s){
+        System.out.println(s);
+    }
+
 }

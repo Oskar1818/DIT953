@@ -49,4 +49,8 @@ public interface Movable {
      */
     void brake(double amount);
 
+    double getSpeed();
+
+    void setSpeed(double speed);
+
 }

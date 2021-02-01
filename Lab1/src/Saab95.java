@@ -6,12 +6,17 @@ import java.awt.*;
  * methods for which the car should implement, to be able to move.
  * @author Valter Miari, Oskar Sturebrand, Clara Josefsson
  */
-public class Saab95 extends Car implements Movable{
+public class Saab95 implements ICar, Movable{
 
-    public boolean turboOn;
+    private boolean turboOn;
     private double xCord;
     private double yCord;
     private Direction dir;
+    private Color color;
+    private final String name = "Saab95";
+    private double currentSpeed = 0;
+    private final double enginePower = 125;
+    private final int nrDoors = 2;
 
     /**
      * The constructor that is called upon on creation of a Saab95. It inherits the variables; nrDoors, enginePower,
@@ -22,7 +27,6 @@ public class Saab95 extends Car implements Movable{
      * @param point The starting position of the car. An x- and a y-coordinate.
      */
     public Saab95(Color c, Point point, Direction dir){
-        super(2, 125, 0, c, "Saab95");
 	    turboOn = false;
 	    this.xCord = point.getX();
 	    this.yCord = point.getY();
@@ -30,54 +34,26 @@ public class Saab95 extends Car implements Movable{
         stopEngine();
     }
 
-    /**
-     *
-     * @return Returns the direction the car is pointing at.
-     */
+    // From IVehicle
+    @Override
+    public String getName(){ return this.name; }
+
+    @Override
+    public String getColor(){ return color.toString(); }
+
+    @Override
     public Direction getDir() { return this.dir; }
-    /**
-     *
-     * @return returns the x-coordinate of the Saab.
-     */
-    public double getXCord() { return this.xCord; }
 
-    /**
-     *
-     * @return returns the y-coordinate of the Saab.
-     */
-    public double getYCord() {
-        return this.yCord;
-    }
-
-    /**
-     * A method that moves the Saab, with its current speed, in the direction that it's pointing at.
-     */
     @Override
     public void move() {
         switch (dir) {
-            case EAST -> this.xCord += getCurrentSpeed();
-            case WEST -> this.xCord -= getCurrentSpeed();
-            case NORTH -> this.yCord += getCurrentSpeed();
-            case SOUTH -> this.yCord -= getCurrentSpeed();
+            case EAST -> this.xCord += getSpeed();
+            case WEST -> this.xCord -= getSpeed();
+            case NORTH -> this.yCord += getSpeed();
+            case SOUTH -> this.yCord -= getSpeed();
         }
     }
 
-    /**
-     * Turns the car left, by changing the latitude or the longitude, depending on where the car is pointing.
-     */
-    @Override
-    public void turnLeft() {
-        switch (dir) {
-            case EAST -> this.dir = Direction.NORTH;
-            case WEST -> this.dir = Direction.SOUTH;
-            case NORTH -> this.dir = Direction.WEST;
-            case SOUTH -> this.dir = Direction.EAST;
-        }
-    }
-
-    /**
-     * Turns the car right, by changing the latitude or the longitude, depending on where the car is pointing.
-     */
     @Override
     public void turnRight() {
         switch (dir) {
@@ -88,61 +64,75 @@ public class Saab95 extends Car implements Movable{
         }
     }
 
-    /**
-     * Increases the speed of the Saab by the input amount times the speed factor, and makes sure the
-     * speed doesn't exceed the engine power of the car.
-     * @param amount the amount at which the speed should increase by.
-     */
     @Override
-    public void incrementSpeed(double amount){
-        setCurrentSpeed(Math.min(getCurrentSpeed() + speedFactor() * amount, getEnginePower()));
+    public void turnLeft() {
+        switch (dir) {
+            case EAST -> this.dir = Direction.NORTH;
+            case WEST -> this.dir = Direction.SOUTH;
+            case NORTH -> this.dir = Direction.WEST;
+            case SOUTH -> this.dir = Direction.EAST;
+        }
     }
 
-    /**
-     * Increases the speed of the Saab by the input amount times the speed factor, and makes sure the
-     * speed doesn't go below 0.
-     * @param amount amount the amount at which the speed should decrease by.
-     */
     @Override
-    public void decrementSpeed(double amount){
-        setCurrentSpeed(Math.max(getCurrentSpeed() - speedFactor() * amount,0));
-    }
+    public double getXCord() { return this.xCord; }
 
-    /**
-     * Makes the car go faster by increasing the speed via the incrementSpeed method.
-     * @param amount amount the amount at which the speed should increase by.
-     */
     @Override
-    public void gas(double amount) {
-            double gasFactor = Math.max(Math.min(amount, 1), 0);
-            incrementSpeed(gasFactor);
-    }
+    public double getYCord() { return this.yCord; }
 
-    /**
-     * Makes the car go slower by decreasing the speed via the decrementSpeed method.
-     * @param amount amount amount the amount at which the speed should decrease by.
-     */
     @Override
-    public void brake(double amount) {
-            double brakeFactor = Math.max(Math.min(amount, 1), 0); // 0 <= breakFactor <= 1
-            decrementSpeed(brakeFactor);
-    }
+    public void setSpeed(double speed){ currentSpeed = Math.min(speed, this.enginePower); }
 
-    /**
-     * The speed factor of the car, which depends on the turbo of the car and the engine power.
-     * @return returns the current speed factor.
-     */
+    @Override
+    public double getSpeed(){ return currentSpeed; }
+
     @Override
     public double speedFactor() {
         double turbo = 1;
         if(turboOn) turbo = 1.3;
         return getEnginePower() * 0.01 * turbo;
     }
+
+    @Override
+    public void gas(double amount) {
+            double gasFactor = Math.max(Math.min(amount, 1), 0);
+            incrementSpeed(gasFactor);
+    }
+
+    @Override
+    public void incrementSpeed(double amount){
+        setSpeed(Math.min(getSpeed() + speedFactor() * amount, getEnginePower()));
+    }
+
+    @Override
+    public void brake(double amount) {
+            double brakeFactor = Math.max(Math.min(amount, 1), 0); // 0 <= breakFactor <= 1
+            decrementSpeed(brakeFactor);
+    }
+
+    @Override
+    public void decrementSpeed(double amount){
+        setSpeed(Math.max(getSpeed() - speedFactor() * amount,0));
+    }
+
+    // From ICar
+    @Override
+    public int getNrDoors(){ return this.nrDoors; }
+
+    @Override
+    public double getEnginePower(){ return enginePower; }
+
+    @Override
+    public void startEngine(){ currentSpeed = 1; }
+
+    @Override
+    public void stopEngine(){ currentSpeed = 0; }
+
+    // Specific to saab95.
     /**
      * Checks if the turbo in the Saab is on.
      */
     public boolean isTurboOn() { return this.turboOn; }
-
 
     /**
      * Turns on the turbo in the Saab95.
@@ -150,7 +140,6 @@ public class Saab95 extends Car implements Movable{
     public void setTurboOn(){
 	    turboOn = true;
     }
-
 
     /**
      * Turns off the turbo in the Saab95.
