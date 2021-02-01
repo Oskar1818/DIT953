@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.util.ArrayDeque;
 import java.util.Deque;
 
 public class CarTransport implements ITruck{
@@ -12,9 +13,9 @@ public class CarTransport implements ITruck{
     private final double enginePower = 100;
     private final int nrDoors = 4;
     private int capacity;
-    private Deque<ICar>
+    private final Deque<ICar> load;
 
-    private boolean bedOpen;
+    private boolean rampOpen;
 
     public CarTransport(Color c, Point point, Direction dir, int capacity){
         this.xCord = point.getX();
@@ -22,7 +23,8 @@ public class CarTransport implements ITruck{
         this.color = c;
         this.dir = dir;
         this.capacity = capacity;
-        this.bedOpen = false;
+        this.load = new ArrayDeque<>(capacity);
+        this.rampOpen = false;
         stopEngine();
     }
 
@@ -45,7 +47,7 @@ public class CarTransport implements ITruck{
 
     @Override
     public void move () {
-        if (bedOpen) {
+        if (rampOpen) {
             System.out.println("Kan inte köra med flaket öppet");
         }
         else {
@@ -60,7 +62,7 @@ public class CarTransport implements ITruck{
 
     @Override
     public void turnLeft() {
-        if (bedOpen) {
+        if (rampOpen) {
             System.out.println("Kan inte köra med flaket öppet");
         }
         else {
@@ -75,7 +77,7 @@ public class CarTransport implements ITruck{
 
     @Override
     public void turnRight() {
-        if (bedOpen) {
+        if (rampOpen) {
             System.out.println("Kan inte köra med flaket öppet");
         }
         else {
@@ -132,5 +134,25 @@ public class CarTransport implements ITruck{
 
     @Override
     public double getEnginePower(){ return enginePower; }
+
+    public void rampDown(){
+        if (currentSpeed != 0)
+            System.out.println("Car must not move!");
+        else
+            rampOpen = true;
+    }
+
+    public void loadTransport(ICar car){
+        if (!rampOpen)
+            System.out.println("Ramp must be open!");
+        else{
+            if (yCord - car.getXCord() > 1)
+                System.out.println("Must move car closer");
+            else
+                load.add(car);
+        }
+    }
+
+    //public void dumpLoad();
 
 }
