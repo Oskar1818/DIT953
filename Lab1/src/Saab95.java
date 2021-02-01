@@ -115,6 +115,7 @@ public class Saab95 implements ICar, Movable{
         setSpeed(Math.max(getSpeed() - speedFactor() * amount,0));
     }
 
+
     // From ICar
     @Override
     public int getNrDoors(){ return this.nrDoors; }
@@ -127,6 +128,7 @@ public class Saab95 implements ICar, Movable{
 
     @Override
     public void stopEngine(){ currentSpeed = 0; }
+
 
     // Specific to saab95.
     /**

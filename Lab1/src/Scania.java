@@ -87,7 +87,55 @@ public class Scania implements ITruck{
     }
 
     @Override
+    public void setSpeed(double speed){ currentSpeed = Math.min(speed, this.enginePower); }
+
+    @Override
     public double getSpeed(){ return currentSpeed; }
+
+    @Override
+    public double speedFactor() {
+        return getEnginePower() * 0.01;
+    }
+
+    @Override
+    public void gas(double amount) {
+        double gasFactor = Math.max(Math.min(amount, 1), 0);
+        incrementSpeed(gasFactor);
+    }
+
+    @Override
+    public void incrementSpeed(double amount){
+        setSpeed(Math.min(getSpeed() + speedFactor() * amount, getEnginePower()));
+    }
+
+    @Override
+    public void brake(double amount) {
+        double brakeFactor = Math.max(Math.min(amount, 1), 0); // 0 <= breakFactor <= 1
+        decrementSpeed(brakeFactor);
+    }
+
+    @Override
+    public void decrementSpeed(double amount){
+        setSpeed(Math.max(getSpeed() - speedFactor() * amount,0));
+    }
+
+
+    // From ICar
+    @Override
+    public int getNrDoors(){ return this.nrDoors; }
+
+    @Override
+    public double getEnginePower(){ return enginePower; }
+
+    @Override
+    public void startEngine(){ currentSpeed = 1; }
+
+    @Override
+    public void stopEngine(){ currentSpeed = 0; }
+
+
+    // Specific to Scania
+    public double getBedAngle () { return this.bedAngle; }
 
     /**
      * Sets the angle at which the bed should tilt.
@@ -100,57 +148,5 @@ public class Scania implements ITruck{
             this.bedAngle = Math.max(Math.min(a, 70), 0);
         }
     }
-
-
-    @Override
-    public double speedFactor() {
-        return getEnginePower() * 0.01;
-    }
-
-    @Override
-    public void incrementSpeed(double amount){
-        setSpeed(Math.min(getSpeed() + speedFactor() * amount, getEnginePower()));
-    }
-
-    @Override
-    public void decrementSpeed(double amount){
-        setSpeed(Math.max(getSpeed() - speedFactor() * amount,0));
-    }
-
-    @Override
-    public void gas(double amount) {
-        double gasFactor = Math.max(Math.min(amount, 1), 0);
-        incrementSpeed(gasFactor);
-    }
-
-    @Override
-    public void brake(double amount) {
-        double brakeFactor = Math.max(Math.min(amount, 1), 0); // 0 <= breakFactor <= 1
-        decrementSpeed(brakeFactor);
-    }
-
-
-    @Override
-    public void setSpeed(double speed){ currentSpeed = Math.min(speed, this.enginePower); }
-
-    @Override
-    public void startEngine(){ currentSpeed = 1; }
-
-    @Override
-    public void stopEngine(){ currentSpeed = 0; }
-
-    @Override
-    public int getNrDoors(){ return this.nrDoors; }
-
-    @Override
-    public double getEnginePower(){ return enginePower; }
-
-
-
-    public double getBedAngle () { return this.bedAngle; }
-
-
-
-
 
 }

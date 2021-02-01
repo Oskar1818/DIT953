@@ -35,6 +35,7 @@ public class Volvo240 implements ICar, Movable {
         stopEngine();
     }
 
+
     // From IVehicle
     @Override
     public String getName(){ return this.name; }
@@ -118,6 +119,7 @@ public class Volvo240 implements ICar, Movable {
         setSpeed(Math.max(getSpeed() - speedFactor() * amount,0));
     }
 
+
     // From ICar
     @Override
     public int getNrDoors(){ return this.nrDoors; }
@@ -130,7 +132,5 @@ public class Volvo240 implements ICar, Movable {
 
     @Override
     public void stopEngine(){ currentSpeed = 0; }
-
-
 
 }
