@@ -28,6 +28,8 @@ public class CarTransport implements ITruck{
         stopEngine();
     }
 
+
+    // From IVehicle
     @Override
     public String getName(){ return this.name; }
 
@@ -36,14 +38,6 @@ public class CarTransport implements ITruck{
 
     @Override
     public Direction getDir() { return this.dir; }
-
-    @Override
-    public double getXCord() { return this.xCord; }
-
-    @Override
-    public double getYCord() {
-        return this.yCord;
-    }
 
     @Override
     public void move () {
@@ -56,21 +50,6 @@ public class CarTransport implements ITruck{
                 case WEST -> this.xCord -= getSpeed();
                 case NORTH -> this.yCord += getSpeed();
                 case SOUTH -> this.yCord -= getSpeed();
-            }
-        }
-    }
-
-    @Override
-    public void turnLeft() {
-        if (rampOpen) {
-            System.out.println("Kan inte köra med flaket öppet");
-        }
-        else {
-            switch (dir) {
-                case EAST -> this.dir = Direction.NORTH;
-                case WEST -> this.dir = Direction.SOUTH;
-                case NORTH -> this.dir = Direction.WEST;
-                case SOUTH -> this.dir = Direction.EAST;
             }
         }
     }
@@ -91,18 +70,37 @@ public class CarTransport implements ITruck{
     }
 
     @Override
+    public void turnLeft() {
+        if (rampOpen) {
+            System.out.println("Kan inte köra med flaket öppet");
+        }
+        else {
+            switch (dir) {
+                case EAST -> this.dir = Direction.NORTH;
+                case WEST -> this.dir = Direction.SOUTH;
+                case NORTH -> this.dir = Direction.WEST;
+                case SOUTH -> this.dir = Direction.EAST;
+            }
+        }
+    }
+
+    @Override
+    public double getXCord() { return this.xCord; }
+
+    @Override
+    public double getYCord() {
+        return this.yCord;
+    }
+
+    @Override
+    public void setSpeed(double speed){ currentSpeed = Math.min(speed, this.enginePower); }
+
+    @Override
+    public double getSpeed(){ return currentSpeed; }
+
+    @Override
     public double speedFactor() {
         return getEnginePower() * 0.01;
-    }
-
-    @Override
-    public void incrementSpeed(double amount){
-        setSpeed(Math.min(getSpeed() + speedFactor() * amount, getEnginePower()));
-    }
-
-    @Override
-    public void decrementSpeed(double amount){
-        setSpeed(Math.max(getSpeed() - speedFactor() * amount,0));
     }
 
     @Override
@@ -112,16 +110,28 @@ public class CarTransport implements ITruck{
     }
 
     @Override
+    public void incrementSpeed(double amount){
+        setSpeed(Math.min(getSpeed() + speedFactor() * amount, getEnginePower()));
+    }
+
+    @Override
     public void brake(double amount) {
         double brakeFactor = Math.max(Math.min(amount, 1), 0); // 0 <= breakFactor <= 1
         decrementSpeed(brakeFactor);
     }
 
     @Override
-    public double getSpeed(){ return currentSpeed; }
+    public void decrementSpeed(double amount){
+        setSpeed(Math.max(getSpeed() - speedFactor() * amount,0));
+    }
+
+
+    // From ICar
+    @Override
+    public int getNrDoors(){ return this.nrDoors; }
 
     @Override
-    public void setSpeed(double speed){ currentSpeed = Math.min(speed, this.enginePower); }
+    public double getEnginePower(){ return enginePower; }
 
     @Override
     public void startEngine(){ currentSpeed = 1; }
@@ -129,12 +139,8 @@ public class CarTransport implements ITruck{
     @Override
     public void stopEngine(){ currentSpeed = 0; }
 
-    @Override
-    public int getNrDoors(){ return this.nrDoors; }
 
-    @Override
-    public double getEnginePower(){ return enginePower; }
-
+    // Specific to CarTransport
     public void rampDown(){
         if (currentSpeed != 0)
             System.out.println("Car must not move!");

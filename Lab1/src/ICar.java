@@ -19,4 +19,5 @@ public interface ICar extends IVehicle {
      * Stops the engine, which makes the car stop.
      */
     void stopEngine();
+
 }
