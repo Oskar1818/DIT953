@@ -53,4 +53,6 @@ public interface Movable {
 
     void setSpeed(double speed);
 
+
+
 }

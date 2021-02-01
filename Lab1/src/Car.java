@@ -52,13 +52,13 @@ public abstract class Car {
      *
      * @return Returns the speed the car currently has.
      */
-    public double getCurrentSpeed(){ return currentSpeed; }
+    public double getSpeed(){ return currentSpeed; }
 
     /**
      * Sets the speed of the car, and makes sure the speed doesn't exceed the engine power of the car.
      * @param speed The desired speed.
      */
-    public void setCurrentSpeed(double speed){ currentSpeed = Math.min(speed, this.enginePower); }
+    public void setSpeed(double speed){ currentSpeed = Math.min(speed, this.enginePower); }
 
     /**
      *

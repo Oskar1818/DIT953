@@ -20,12 +20,13 @@ public class TestCar {
     public void setUp(){
         volvo240 = new Volvo240(Color.black, new Point(10, 10), Direction.NORTH);
         saab95 = new Saab95(Color.red, new Point(30, 20), Direction.EAST);
-        volvo240.setCurrentSpeed(10);
-        saab95.setCurrentSpeed(20);
+        volvo240.setSpeed(10);
+        saab95.setSpeed(20);
+
         volvo240two = new Volvo240(Color.black, new Point(10, 10), Direction.EAST);
         saab95two = new Saab95(Color.red, new Point(30, 20), Direction.NORTH);
-        volvo240two.setCurrentSpeed(10);
-        saab95two.setCurrentSpeed(20);
+        volvo240two.setSpeed(10);
+        saab95two.setSpeed(20);
     }
 
     @Test
@@ -54,25 +55,25 @@ public class TestCar {
     @Test
     public void checkVolvoGas() {
         volvo240.gas(0.5);
-        assertEquals(10.625, volvo240.getCurrentSpeed(), 0);
+        assertEquals(10.625, volvo240.getSpeed(), 0);
     }
 
     @Test
     public void checkSaabGas() {
         saab95.gas(3);
-        assertEquals(21.25, saab95.getCurrentSpeed(), 0);
+        assertEquals(21.25, saab95.getSpeed(), 0);
     }
 
     @Test
     public void checkVolvoBrake() {
         volvo240.brake(3);
-        assertEquals(8.75, volvo240.getCurrentSpeed(), 0);
+        assertEquals(8.75, volvo240.getSpeed(), 0);
     }
 
     @Test
     public void checkSaabBrake() {
         saab95.brake(0.1);
-        assertEquals(19.875, saab95.getCurrentSpeed(), 0);
+        assertEquals(19.875, saab95.getSpeed(), 0);
     }
 
     @Test
@@ -120,7 +121,7 @@ public class TestCar {
     public void startEngine() {
         volvo240.stopEngine();
         volvo240.startEngine();
-        assertEquals(1, volvo240.getCurrentSpeed(), 0);
+        assertEquals(1, volvo240.getSpeed(), 0);
     }
 
     @Test
