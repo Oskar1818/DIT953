@@ -1,0 +1,156 @@
+import java.awt.*;
+
+public class Scania implements ITruck{
+
+    private double xCord;
+    private double yCord;
+    private Direction dir;
+    private final String name = "Scania";
+    private Color color;
+    private double currentSpeed = 0;
+    private final double enginePower = 500;
+    private final int nrDoors = 2;
+
+    private double bedAngle;
+
+
+    public Scania(Color c, Point point, Direction dir){
+        this.xCord = point.getX();
+        this.yCord = point.getY();
+        this.color = c;
+        this.dir = dir;
+        this.bedAngle = 0;
+        stopEngine();
+    }
+
+    // From IVehicle
+    @Override
+    public String getName(){ return this.name; }
+
+    @Override
+    public String getColor() {return color.toString(); }
+
+    @Override
+    public Direction getDir() { return this.dir; }
+
+    @Override
+    public void move () {
+        if (bedAngle != 0) {
+            System.out.println("Kan inte köra med flaket öppet");
+        }
+        else {
+            switch (dir) {
+                case EAST -> this.xCord += getSpeed();
+                case WEST -> this.xCord -= getSpeed();
+                case NORTH -> this.yCord += getSpeed();
+                case SOUTH -> this.yCord -= getSpeed();
+            }
+        }
+    }
+
+    @Override
+    public void turnRight() {
+        if (bedAngle != 0) {
+            System.out.println("Kan inte köra med flaket öppet");
+        }
+        else {
+            switch (dir) {
+                case EAST -> this.dir = Direction.SOUTH;
+                case WEST -> this.dir = Direction.NORTH;
+                case NORTH -> this.dir = Direction.EAST;
+                case SOUTH -> this.dir = Direction.WEST;
+            }
+        }
+    }
+
+    @Override
+    public void turnLeft() {
+        if (bedAngle != 0) {
+            System.out.println("Kan inte köra med flaket öppet");
+        }
+        else {
+            switch (dir) {
+                case EAST -> this.dir = Direction.NORTH;
+                case WEST -> this.dir = Direction.SOUTH;
+                case NORTH -> this.dir = Direction.WEST;
+                case SOUTH -> this.dir = Direction.EAST;
+            }
+        }
+    }
+
+    @Override
+    public double getXCord() { return this.xCord; }
+
+    @Override
+    public double getYCord() {
+        return this.yCord;
+    }
+
+    @Override
+    public double getSpeed(){ return currentSpeed; }
+
+    /**
+     * Sets the angle at which the bed should tilt.
+     * @param a The specified angel, which cannot go beyond 70 degrees or beneath 0 degrees.
+     */
+    public void setBedAngle (double a) {
+        if (getSpeed() != 0) {
+            System.out.println("Cannot tilt while moving!");
+        } else {
+            this.bedAngle = Math.max(Math.min(a, 70), 0);
+        }
+    }
+
+
+    @Override
+    public double speedFactor() {
+        return getEnginePower() * 0.01;
+    }
+
+    @Override
+    public void incrementSpeed(double amount){
+        setSpeed(Math.min(getSpeed() + speedFactor() * amount, getEnginePower()));
+    }
+
+    @Override
+    public void decrementSpeed(double amount){
+        setSpeed(Math.max(getSpeed() - speedFactor() * amount,0));
+    }
+
+    @Override
+    public void gas(double amount) {
+        double gasFactor = Math.max(Math.min(amount, 1), 0);
+        incrementSpeed(gasFactor);
+    }
+
+    @Override
+    public void brake(double amount) {
+        double brakeFactor = Math.max(Math.min(amount, 1), 0); // 0 <= breakFactor <= 1
+        decrementSpeed(brakeFactor);
+    }
+
+
+    @Override
+    public void setSpeed(double speed){ currentSpeed = Math.min(speed, this.enginePower); }
+
+    @Override
+    public void startEngine(){ currentSpeed = 1; }
+
+    @Override
+    public void stopEngine(){ currentSpeed = 0; }
+
+    @Override
+    public int getNrDoors(){ return this.nrDoors; }
+
+    @Override
+    public double getEnginePower(){ return enginePower; }
+
+
+
+    public double getBedAngle () { return this.bedAngle; }
+
+
+
+
+
+}
