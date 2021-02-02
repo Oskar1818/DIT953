@@ -41,7 +41,7 @@ public class MercedesActros implements ITruck{
         if (!rampOpen)
             System.out.println("Ramp must be open!");
         else{
-            if (yCord - car.getXCord() > 1)
+            if (yCord - car.getXCord() > 1 | load.size() - 1 >= capacity)
                 System.out.println("Must move car closer");
             else
                 load.add(car);
