@@ -2,7 +2,7 @@ import java.awt.*;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-public class CarTransport implements ITruck{
+public class MercedesActros implements ITruck{
 
     private double xCord;
     private double yCord;
@@ -17,7 +17,7 @@ public class CarTransport implements ITruck{
 
     private boolean rampOpen;
 
-    public CarTransport(Color c, Point point, Direction dir, int capacity){
+    public MercedesActros(Color c, Point point, Direction dir, int capacity){
         this.xCord = point.getX();
         this.yCord = point.getY();
         this.color = c;
@@ -27,6 +27,42 @@ public class CarTransport implements ITruck{
         this.rampOpen = false;
         stopEngine();
     }
+
+
+    // Specific to MercedesActros
+    public void rampDown(){
+        if (currentSpeed != 0)
+            System.out.println("Car must not move!");
+        else
+            rampOpen = true;
+    }
+
+    public void loadTransport(ICar car){
+        if (!rampOpen)
+            System.out.println("Ramp must be open!");
+        else{
+            if (yCord - car.getXCord() > 1)
+                System.out.println("Must move car closer");
+            else
+                load.add(car);
+        }
+    }
+
+    //public void dumpLoad();
+
+
+    // From ITruck
+    @Override
+    public int getNrDoors(){ return this.nrDoors; }
+
+    @Override
+    public double getEnginePower(){ return enginePower; }
+
+    @Override
+    public void startEngine(){ currentSpeed = 1; }
+
+    @Override
+    public void stopEngine(){ currentSpeed = 0; }
 
 
     // From IVehicle
@@ -124,41 +160,5 @@ public class CarTransport implements ITruck{
     public void decrementSpeed(double amount){
         setSpeed(Math.max(getSpeed() - speedFactor() * amount,0));
     }
-
-
-    // From ICar
-    @Override
-    public int getNrDoors(){ return this.nrDoors; }
-
-    @Override
-    public double getEnginePower(){ return enginePower; }
-
-    @Override
-    public void startEngine(){ currentSpeed = 1; }
-
-    @Override
-    public void stopEngine(){ currentSpeed = 0; }
-
-
-    // Specific to CarTransport
-    public void rampDown(){
-        if (currentSpeed != 0)
-            System.out.println("Car must not move!");
-        else
-            rampOpen = true;
-    }
-
-    public void loadTransport(ICar car){
-        if (!rampOpen)
-            System.out.println("Ramp must be open!");
-        else{
-            if (yCord - car.getXCord() > 1)
-                System.out.println("Must move car closer");
-            else
-                load.add(car);
-        }
-    }
-
-    //public void dumpLoad();
 
 }
