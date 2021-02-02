@@ -48,6 +48,11 @@ public interface IVehicle {
     double getXCord();
 
     /**
+     * Sets the y-coordinate of the vehicle.
+     */
+    void setYCord(double y);
+
+    /**
      * @return Returns y coordinate of vehicle.
      */
     double getYCord();
