@@ -12,7 +12,7 @@ public class MercedesActros implements ICarTransporter {
     private double speed = 0;
     private final double enginePower = 100;
     private final int nrDoors = 4;
-    private int capacity;
+    private final int capacity;
     private final Deque<ICar> load;
 
     private boolean rampOpen;
@@ -51,7 +51,8 @@ public class MercedesActros implements ICarTransporter {
         }
     }
 
-    public void unloadVehicle(){
+    @Override
+    public void unloadTransport(){
         ICar car = load.pollLast();
         car.setXCord(this.xCord); // why?
         car.setYCord(this.yCord + 1);

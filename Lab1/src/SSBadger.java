@@ -1,4 +1,6 @@
 import java.awt.*;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 public class SSBadger implements ICarTransporter{
 
@@ -9,6 +11,17 @@ public class SSBadger implements ICarTransporter{
     private Color color;
     private double speed = 0;
     private final double enginePower = 2000;
+    private final int capacity;
+    private final Deque<ICar> load;
+
+    public SSBadger(Color c, Point point, Direction dir, int capacity){
+        this.xCord = point.getX();
+        this.yCord = point.getY();
+        this.color = c;
+        this.dir = dir;
+        this.capacity = capacity;
+        this.load = new ArrayDeque<>(capacity);
+    }
 
 
     @Override
@@ -34,6 +47,10 @@ public class SSBadger implements ICarTransporter{
     @Override
     public void loadTransport(ICar car) {
 
+    }
+
+    @Override
+    public void unloadTransport() {
     }
 
     @Override
