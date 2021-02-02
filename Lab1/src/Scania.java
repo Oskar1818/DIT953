@@ -23,6 +23,37 @@ public class Scania implements ITruck{
         stopEngine();
     }
 
+
+    // Specific to Scania
+    public double getBedAngle () { return this.bedAngle; }
+
+    /**
+     * Sets the angle at which the bed should tilt.
+     * @param a The specified angel, which cannot go beyond 70 degrees or beneath 0 degrees.
+     */
+    public void setBedAngle (double a) {
+        if (getSpeed() != 0) {
+            System.out.println("Cannot tilt while moving!");
+        } else {
+            this.bedAngle = Math.max(Math.min(a, 70), 0);
+        }
+    }
+
+
+    // From ITruck
+    @Override
+    public int getNrDoors(){ return this.nrDoors; }
+
+    @Override
+    public double getEnginePower(){ return enginePower; }
+
+    @Override
+    public void startEngine(){ currentSpeed = 1; }
+
+    @Override
+    public void stopEngine(){ currentSpeed = 0; }
+
+
     // From IVehicle
     @Override
     public String getName(){ return this.name; }
@@ -117,36 +148,6 @@ public class Scania implements ITruck{
     @Override
     public void decrementSpeed(double amount){
         setSpeed(Math.max(getSpeed() - speedFactor() * amount,0));
-    }
-
-
-    // From ICar
-    @Override
-    public int getNrDoors(){ return this.nrDoors; }
-
-    @Override
-    public double getEnginePower(){ return enginePower; }
-
-    @Override
-    public void startEngine(){ currentSpeed = 1; }
-
-    @Override
-    public void stopEngine(){ currentSpeed = 0; }
-
-
-    // Specific to Scania
-    public double getBedAngle () { return this.bedAngle; }
-
-    /**
-     * Sets the angle at which the bed should tilt.
-     * @param a The specified angel, which cannot go beyond 70 degrees or beneath 0 degrees.
-     */
-    public void setBedAngle (double a) {
-        if (getSpeed() != 0) {
-            System.out.println("Cannot tilt while moving!");
-        } else {
-            this.bedAngle = Math.max(Math.min(a, 70), 0);
-        }
     }
 
 }

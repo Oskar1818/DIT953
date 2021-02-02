@@ -6,7 +6,7 @@ import java.awt.*;
  * methods for which the car should implement, to be able to move.
  * @author Valter Miari, Oskar Sturebrand, Clara Josefsson
  */
-public class Saab95 implements ICar, Movable{
+public class Saab95 implements ICar {
 
     private boolean turboOn;
     private double xCord;
@@ -33,6 +33,42 @@ public class Saab95 implements ICar, Movable{
 	    this.dir = dir;
         stopEngine();
     }
+
+
+    // Specific to saab95.
+    /**
+     * Checks if the turbo in the Saab is on.
+     */
+    public boolean isTurboOn() { return this.turboOn; }
+
+    /**
+     * Turns on the turbo in the Saab95.
+     */
+    public void setTurboOn(){
+	    turboOn = true;
+    }
+
+    /**
+     * Turns off the turbo in the Saab95.
+     */
+    public void setTurboOff(){
+	    turboOn = false;
+    }
+
+
+    // From ICar
+    @Override
+    public int getNrDoors(){ return this.nrDoors; }
+
+    @Override
+    public double getEnginePower(){ return enginePower; }
+
+    @Override
+    public void startEngine(){ currentSpeed = 1; }
+
+    @Override
+    public void stopEngine(){ currentSpeed = 0; }
+
 
     // From IVehicle
     @Override
@@ -113,41 +149,6 @@ public class Saab95 implements ICar, Movable{
     @Override
     public void decrementSpeed(double amount){
         setSpeed(Math.max(getSpeed() - speedFactor() * amount,0));
-    }
-
-
-    // From ICar
-    @Override
-    public int getNrDoors(){ return this.nrDoors; }
-
-    @Override
-    public double getEnginePower(){ return enginePower; }
-
-    @Override
-    public void startEngine(){ currentSpeed = 1; }
-
-    @Override
-    public void stopEngine(){ currentSpeed = 0; }
-
-
-    // Specific to saab95.
-    /**
-     * Checks if the turbo in the Saab is on.
-     */
-    public boolean isTurboOn() { return this.turboOn; }
-
-    /**
-     * Turns on the turbo in the Saab95.
-     */
-    public void setTurboOn(){
-	    turboOn = true;
-    }
-
-    /**
-     * Turns off the turbo in the Saab95.
-     */
-    public void setTurboOff(){
-	    turboOn = false;
     }
 
 }

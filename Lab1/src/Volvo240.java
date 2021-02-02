@@ -7,7 +7,7 @@ import java.awt.*;
  * @author Valter Miari, Oskar Sturebrand, Clara Josefsson
  */
 
-public class Volvo240 implements ICar, Movable {
+public class Volvo240 implements ICar {
 
     public final static double trimFactor = 1.25;
     private double xCord;
@@ -34,6 +34,20 @@ public class Volvo240 implements ICar, Movable {
         this.dir = dir;
         stopEngine();
     }
+
+
+    // From ICar
+    @Override
+    public int getNrDoors(){ return this.nrDoors; }
+
+    @Override
+    public double getEnginePower(){ return enginePower; }
+
+    @Override
+    public void startEngine(){ currentSpeed = 1; }
+
+    @Override
+    public void stopEngine(){ currentSpeed = 0; }
 
 
     // From IVehicle
@@ -118,19 +132,5 @@ public class Volvo240 implements ICar, Movable {
     public void decrementSpeed(double amount){
         setSpeed(Math.max(getSpeed() - speedFactor() * amount,0));
     }
-
-
-    // From ICar
-    @Override
-    public int getNrDoors(){ return this.nrDoors; }
-
-    @Override
-    public double getEnginePower(){ return enginePower; }
-
-    @Override
-    public void startEngine(){ currentSpeed = 1; }
-
-    @Override
-    public void stopEngine(){ currentSpeed = 0; }
 
 }
