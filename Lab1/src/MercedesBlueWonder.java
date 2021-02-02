@@ -1,12 +1,20 @@
+import java.awt.*;
+import java.util.Deque;
+
 public class MercedesBlueWonder implements ITruck {
 
+    private double xCord;
+    private double yCord;
+    private Direction dir;
+    private Color color;
+    private final String name = "Volvo240";
+    private double currentSpeed = 0;
+    private final double enginePower = 100;
+    private final int nrDoors = 4;
+    private int capacity;
+    private final Deque<ICar> load;
 
-
-
-
-
-
-
+    private boolean rampOpen;
 
     // From ITruck
     @Override
