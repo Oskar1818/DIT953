@@ -8,8 +8,8 @@ public class MercedesActros implements ITruck{
     private double yCord;
     private Direction dir;
     private Color color;
-    private final String name = "Volvo240";
-    private double currentSpeed = 0;
+    private final String name = "Actros";
+    private double speed = 0;
     private final double enginePower = 100;
     private final int nrDoors = 4;
     private int capacity;
@@ -31,7 +31,7 @@ public class MercedesActros implements ITruck{
 
     // Specific to MercedesActros
     public void rampDown(){
-        if (currentSpeed != 0)
+        if (speed != 0)
             System.out.println("Car must not move!");
         else
             rampOpen = true;
@@ -43,12 +43,19 @@ public class MercedesActros implements ITruck{
         else{
             if (yCord - car.getXCord() > 1 | load.size() - 1 >= capacity)
                 System.out.println("Must move car closer");
-            else
+            else {
                 load.add(car);
+                car.setXCord(this.xCord);
+                car.setYCord(this.yCord); // how to dynamically update?
+            }
         }
     }
 
-    //public void dumpLoad();
+    public void dumpCar(){
+        ICar car = load.pollLast();
+        car.setXCord(this.xCord); // why?
+        car.setYCord(this.yCord + 1);
+    };
 
 
     // From ITruck
@@ -59,10 +66,10 @@ public class MercedesActros implements ITruck{
     public double getEnginePower(){ return enginePower; }
 
     @Override
-    public void startEngine(){ currentSpeed = 1; }
+    public void startEngine(){ speed = 1; }
 
     @Override
-    public void stopEngine(){ currentSpeed = 0; }
+    public void stopEngine(){ speed = 0; }
 
 
     // From IVehicle
@@ -71,6 +78,9 @@ public class MercedesActros implements ITruck{
 
     @Override
     public String getColor() {return color.toString(); }
+
+    @Override
+    public void setDir(Direction d) { this.dir = d; }
 
     @Override
     public Direction getDir() { return this.dir; }
@@ -82,10 +92,10 @@ public class MercedesActros implements ITruck{
         }
         else {
             switch (dir) {
-                case EAST -> this.xCord += getSpeed();
-                case WEST -> this.xCord -= getSpeed();
-                case NORTH -> this.yCord += getSpeed();
-                case SOUTH -> this.yCord -= getSpeed();
+                case EAST: this.xCord += getSpeed(); for (ICar c : load) c.setXCord(this.xCord += getSpeed());
+                case WEST: this.xCord -= getSpeed(); for (ICar c : load) c.setXCord(this.xCord -= getSpeed());
+                case NORTH: this.yCord += getSpeed(); for (ICar c : load) c.setYCord(this.yCord += getSpeed());
+                case SOUTH: this.yCord -= getSpeed(); for (ICar c : load) c.setYCord(this.yCord -= getSpeed());
             }
         }
     }
@@ -97,10 +107,10 @@ public class MercedesActros implements ITruck{
         }
         else {
             switch (dir) {
-                case EAST -> this.dir = Direction.SOUTH;
-                case WEST -> this.dir = Direction.NORTH;
-                case NORTH -> this.dir = Direction.EAST;
-                case SOUTH -> this.dir = Direction.WEST;
+                case EAST: this.dir = Direction.SOUTH; for (ICar c : load) c.setDir(Direction.SOUTH);
+                case WEST: this.dir = Direction.NORTH; for (ICar c : load) c.setDir(Direction.NORTH);
+                case NORTH: this.dir = Direction.EAST; for (ICar c : load) c.setDir(Direction.EAST);
+                case SOUTH: this.dir = Direction.WEST; for (ICar c : load) c.setDir(Direction.WEST);
             }
         }
     }
@@ -112,27 +122,31 @@ public class MercedesActros implements ITruck{
         }
         else {
             switch (dir) {
-                case EAST -> this.dir = Direction.NORTH;
-                case WEST -> this.dir = Direction.SOUTH;
-                case NORTH -> this.dir = Direction.WEST;
-                case SOUTH -> this.dir = Direction.EAST;
+                case EAST: this.dir = Direction.NORTH; for (ICar c : load) c.setDir(Direction.NORTH);
+                case WEST: this.dir = Direction.SOUTH; for (ICar c : load) c.setDir(Direction.SOUTH);
+                case NORTH: this.dir = Direction.WEST; for (ICar c : load) c.setDir(Direction.WEST);
+                case SOUTH: this.dir = Direction.EAST; for (ICar c : load) c.setDir(Direction.EAST);
             }
         }
     }
 
     @Override
+    public void setXCord(double x) { this.xCord = x; }
+
+    @Override
     public double getXCord() { return this.xCord; }
 
     @Override
-    public double getYCord() {
-        return this.yCord;
-    }
+    public void setYCord(double y) { this.yCord = y;}
 
     @Override
-    public void setSpeed(double speed){ currentSpeed = Math.min(speed, this.enginePower); }
+    public double getYCord() { return this.yCord; }
 
     @Override
-    public double getSpeed(){ return currentSpeed; }
+    public void setSpeed(double speed){ speed = Math.min(speed, this.enginePower); }
+
+    @Override
+    public double getSpeed(){ return speed; }
 
     @Override
     public double speedFactor() {

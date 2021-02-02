@@ -15,13 +15,13 @@ public class Volvo240 implements ICar {
     private Direction dir;
     private Color color;
     private final String name = "Volvo240";
-    private double currentSpeed = 0;
+    private double speed = 0;
     private final double enginePower = 100;
     private final int nrDoors = 4;
 
     /**
      * The constructor that is called upon on creation of a Volvo240. It inherits the variables; nrDoors, enginePower,
-     * currentSpeed, color and modelName; from its super class Car. With exception of color, all these variables and the
+     * speed, color and modelName; from its super class Car. With exception of color, all these variables and the
      * variable dir, have default values for a Volvo240, and are assigned a final default value upon
      * creation.
      * @param c The color of the car.
@@ -44,10 +44,10 @@ public class Volvo240 implements ICar {
     public double getEnginePower(){ return enginePower; }
 
     @Override
-    public void startEngine(){ currentSpeed = 1; }
+    public void startEngine(){ speed = 1; }
 
     @Override
-    public void stopEngine(){ currentSpeed = 0; }
+    public void stopEngine(){ speed = 0; }
 
 
     // From IVehicle
@@ -56,6 +56,9 @@ public class Volvo240 implements ICar {
 
     @Override
     public String getColor(){ return color.toString(); }
+
+    @Override
+    public void setDir(Direction d) { this.dir = d; }
 
     @Override
     public Direction getDir(){ return this.dir; }
@@ -91,9 +94,15 @@ public class Volvo240 implements ICar {
     }
 
     @Override
+    public void setXCord(double x) { this.xCord = x; }
+
+    @Override
     public double getXCord() {
         return this.xCord;
     }
+
+    @Override
+    public void setYCord(double y) { this.yCord = y;}
 
     @Override
     public double getYCord() {
@@ -101,10 +110,10 @@ public class Volvo240 implements ICar {
     }
 
     @Override
-    public void setSpeed(double speed){ currentSpeed = Math.min(speed, this.enginePower); }
+    public void setSpeed(double speed){ speed = Math.min(speed, this.enginePower); }
 
     @Override
-    public double getSpeed(){ return currentSpeed; }
+    public double getSpeed(){ return speed; }
 
     @Override
     public double speedFactor(){

@@ -13,6 +13,12 @@ public interface IVehicle {
     String getColor();
 
     /**
+     *
+     * @param d sets direction.
+     */
+    void setDir(Direction d);
+
+    /**
      * @return Returns direction of vehicle.
      */
     Direction getDir();
@@ -31,6 +37,10 @@ public interface IVehicle {
      * Turns the car left, by changing the latitude or the longitude, depending on where the car is pointing.
      */
     void turnLeft();
+    /**
+     * Sets the x-coordinate of the vehicle.
+     */
+    void setXCord(double x);
 
     /**
      * @return Returns x coordinate of vehicle.
