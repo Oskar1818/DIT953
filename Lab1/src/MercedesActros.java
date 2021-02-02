@@ -2,7 +2,7 @@ import java.awt.*;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-public class MercedesActros implements ITruck{
+public class MercedesActros implements ICarTransporter {
 
     private double xCord;
     private double yCord;
@@ -36,7 +36,7 @@ public class MercedesActros implements ITruck{
         else
             rampOpen = true;
     }
-
+    @Override
     public void loadTransport(ICar car){
         if (!rampOpen)
             System.out.println("Ramp must be open!");
@@ -51,7 +51,7 @@ public class MercedesActros implements ITruck{
         }
     }
 
-    public void dumpCar(){
+    public void unloadVehicle(){
         ICar car = load.pollLast();
         car.setXCord(this.xCord); // why?
         car.setYCord(this.yCord + 1);
