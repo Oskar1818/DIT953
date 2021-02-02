@@ -21,7 +21,7 @@ public class Workshop<T extends ICar> {
 
     public static void main(String[] args){
         Workshop<Volvo240> volvo240Workshop = new Workshop<>(10);
-        volvo240Workshop.addCar(new Saab95(Color.BLACK, new Point(10,10), Direction.EAST));
+        volvo240Workshop.addCar(new Saab95(Color.BLACK, new Point(10,10), Direction.EAST)); //TODO
 
     }
 }
