@@ -20,9 +20,5 @@ public interface ITruck extends IVehicle{
      */
     void stopEngine();
 
-    double getBedAngle();
-
-    void setBedAngle(double d);
-
 }
 

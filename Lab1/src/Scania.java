@@ -25,14 +25,12 @@ public class Scania implements ITruck{
 
 
     // Specific to Scania
-    @Override
     public double getBedAngle () { return this.bedAngle; }
 
     /**
      * Sets the angle at which the bed should tilt.
      * @param a The specified angel, which cannot go beyond 70 degrees or beneath 0 degrees.
      */
-    @Override
     public void setBedAngle (double a) {
         if (getSpeed() != 0) {
             System.out.println("Cannot tilt while moving!");
