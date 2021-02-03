@@ -45,6 +45,16 @@ public class MercedesBlueWonder implements ITruck {
 
     }
 
+    @Override
+    public double getBedAngle() {
+        return 0;
+    }
+
+    @Override
+    public void setBedAngle(double d) {
+
+    }
+
 
     // From IVehicle
     @Override
