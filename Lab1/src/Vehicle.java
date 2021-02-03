@@ -83,4 +83,5 @@ public abstract class Vehicle implements IMovable{
 
     @Override
     public double getSpeed(){ return speed; }
+
 }

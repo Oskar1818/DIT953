@@ -1,4 +1,4 @@
-public interface IStorable<T> {
+public interface ILoadable<T> {
 
     T getObject();
 

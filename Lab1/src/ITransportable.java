@@ -1,4 +1,4 @@
-public interface IPositionable {
+public interface ITransportable {
 
     void setXCord(double x);
 
@@ -11,4 +11,5 @@ public interface IPositionable {
     void setDirection(Direction d);
 
     Direction getDirection();
+
 }

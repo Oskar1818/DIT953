@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public abstract class Car extends Vehicle {
+public abstract class Car extends Vehicle{
 
     public Car(Color color, double enginePower, int nrDoors, String name, Point point, Direction dir){
         super(color, enginePower, nrDoors, name, point, dir);
