@@ -1,5 +1,7 @@
-public interface ITruck extends IVehicle{
 
+// It could be better to have a more general interface "Transporter", where you use type parameters instead.
+// not quite sure how to implement though.
+public interface ICarTransporter extends IVehicle {
     /**
      * @return Returns the number of doors the car has.
      */
@@ -20,9 +22,7 @@ public interface ITruck extends IVehicle{
      */
     void stopEngine();
 
-    double getBedAngle();
+    void loadTransport(ICar car);
 
-    void setBedAngle(double d);
-
+    void unloadTransport();
 }
-
