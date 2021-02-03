@@ -1,5 +1,5 @@
 
-// It could be better to have a more general interface "VehicleTransporter", where you use type parameters instead.
+// It could be better to have a more general interface "Transporter", where you use type parameters instead.
 // not quite sure how to implement though.
 public interface ICarTransporter extends IVehicle {
     /**

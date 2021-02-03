@@ -1,9 +1,14 @@
 import java.awt.*;
-import java.util.ArrayDeque;
-import java.util.Deque;
 
-public class SSBadger extends VehicleTransporter<Car> {
+public class SSBadger extends Transporter<Car> {
 
+    /**
+     * A ferry
+     * @param color
+     * @param point
+     * @param dir
+     * @param capacity
+     */
     public SSBadger(Color color, Point point, Direction dir, int capacity){
         super(color, 1000, 10, "SSBadger", point, dir, capacity);
     }
@@ -13,25 +18,32 @@ public class SSBadger extends VehicleTransporter<Car> {
         return getEnginePower() * 0.01;
     }
 
+    // could move this to VTransporter, but would that make it confusing or prevent extensibility..?
     @Override
-    public void loadTransporter(Car car) {
-        if (isRampOpen()) {
+    public void addLoad(Car car){
+        if (isRampDown()){
             if (getYCord() - car.getXCord() > 1 | getLoadSize() - 1 >= getCapacity())
                 System.out.println("Must move car closer");
             else {
-                addLoad(car);
+                getLoad().add(car);
                 car.setXCord(getXCord());
                 car.setYCord(getYCord());
             }
         }
         else
             System.out.println("Ramp must be open!");
-
     }
 
     @Override
-    public void unloadTransporter() {
-
+    public Car unload(){
+        if (getLoadSize() > 0 && isRampDown()) {
+            Car car = getLoad().getFirst();
+            car.setXCord(car.getXCord() + 1); // why?
+            car.setYCord(car.getYCord() + 1);
+            return car;
+        }
+        System.out.println("The load is empty");
+        return null;
     }
 
 }

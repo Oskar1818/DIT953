@@ -2,43 +2,43 @@ import java.awt.*;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-public abstract class VehicleTransporter<T extends Vehicle & ITransportable> extends Vehicle implements ITransporter<T>{
+public abstract class Transporter<T extends ITransportable> extends Vehicle implements ITransporter<T>{
 
     private final int capacity;
     private final Deque<T> load;
-    private boolean isRampOpen;
+    private double rampAngle;
 
-    public VehicleTransporter(Color color, double enginePower, int nrDoors, String name, Point p, Direction dir, int capacity){
+    public Transporter(Color color, double enginePower, int nrDoors, String name, Point p, Direction dir, int capacity){
         super(color, enginePower, nrDoors, name, p, dir);
         this.capacity = capacity;
         this.load = new ArrayDeque<>(capacity);
-        this.isRampOpen = false;
+        this.rampAngle = 0;
     }
 
-    // These could need some tweaking!
-    public void openRamp(){
+    /**
+     * Sets the angle at which the ramp should tilt.
+     * @param a The specified angel, which cannot go beyond 70 degrees or beneath 0 degrees.
+     */
+    public void setRampAngle(double a){
         if (getSpeed() != 0)
             System.out.println("Car must not move!");
         else
-            isRampOpen = true;
+            rampAngle = Math.max(Math.min(a, 70), 0);
     }
 
-    /*public void loadTransport(T vehicle){
-        if (!isRampOpen)
-            System.out.println("Ramp must be open!");
-        else{
-            if (getYCord() - vehicle.getXCord() > 1 | load.size() - 1 >= capacity)
-                System.out.println("Must move car closer");
-            else {
-                load.add(vehicle);
-                vehicle.setXCord(getXCord());
-                vehicle.setYCord(getYCord());
-            }
-        }
-    } */
+    public double getRampAngle() {
+        return this.rampAngle;
+    }
 
-    public boolean isRampOpen(){
-        return isRampOpen;
+    public void setRampDown(){
+        rampAngle = 0;
+    }
+
+    public boolean isRampDown(){
+        if (rampAngle > 50)
+            return true;
+        else
+            return false;
     }
 
     public int getCapacity(){
@@ -49,32 +49,19 @@ public abstract class VehicleTransporter<T extends Vehicle & ITransportable> ext
         return this.load.size();
     }
 
-
-    public void unloadTransport(){
-        T vehicle = load.pollLast();
-        vehicle.setXCord(vehicle.getXCord() + 1); // why?
-        vehicle.setYCord(vehicle.getYCord() + 1);
-    };
-
-    // deque doesn't have a get method, an it is probably not necessary in our case, considering their use cases
-    /*@Override
-    public T getLoad(T obj){
-        return load.get(obj);
-    } */
-
     @Override
-    public void unload(){
-       return load.pollLast();
+    public Deque<T> getLoad(){
+        return load;
     }
 
     @Override
-    public void addLoad(T obj){
-        load.add(obj);
+    public T unload(){
+        return load.getLast();
     }
 
     @Override
     public void move () {
-        if (isRampOpen) {
+        if (isRampDown()) {
             System.out.println("Kan inte köra med flaket öppet");
         } else {
             switch (getDirection()) {
@@ -100,7 +87,7 @@ public abstract class VehicleTransporter<T extends Vehicle & ITransportable> ext
 
     @Override
     public void turnRight () {
-        if (isRampOpen) {
+        if (isRampDown()) {
             System.out.println("Kan inte köra med flaket öppet");
         } else {
             switch (getDirection()) {
@@ -122,7 +109,7 @@ public abstract class VehicleTransporter<T extends Vehicle & ITransportable> ext
 
     @Override
     public void turnLeft () {
-        if (isRampOpen) {
+        if (isRampDown()) {
             System.out.println("Kan inte köra med flaket öppet");
         } else {
             switch (getDirection()) {

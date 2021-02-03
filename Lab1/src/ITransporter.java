@@ -1,12 +1,12 @@
+import java.util.Collection;
+
 public interface ITransporter<T extends ITransportable> {
 
     void addLoad(T object);
 
-    void unload();
+    Collection<T> getLoad();
 
-    void loadTransporter(T object);
-
-    void unloadTransporter();
+    T unload();
 
     int getLoadSize();
 }
