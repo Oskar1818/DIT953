@@ -1,5 +1,4 @@
 import java.awt.*;
-//hello
 public interface IVehicle {
 
     /**
