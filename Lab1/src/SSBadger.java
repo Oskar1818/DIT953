@@ -15,6 +15,17 @@ public class SSBadger extends VehicleTransporter<Car> {
 
     @Override
     public void loadTransporter(Car car) {
+        if (isRampOpen()) {
+            if (getYCord() - car.getXCord() > 1 | getLoadSize() - 1 >= getCapacity())
+                System.out.println("Must move car closer");
+            else {
+                addLoad(car);
+                car.setXCord(getXCord());
+                car.setYCord(getYCord());
+            }
+        }
+        else
+            System.out.println("Ramp must be open!");
 
     }
 

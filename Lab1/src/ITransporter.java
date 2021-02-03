@@ -2,7 +2,7 @@ public interface ITransporter<T extends ITransportable> {
 
     void addLoad(T object);
 
-    T unload();
+    void unload();
 
     void loadTransporter(T object);
 

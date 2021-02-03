@@ -8,23 +8,24 @@ public class MercedesActros extends VehicleTransporter<Car> {
     }
 
     @Override
-    public void loadTransporter(Car vehicle){
-        if (!isRampOpen())
-            System.out.println("Ramp must be open!");
-        else{
-            if (getYCord() - vehicle.getXCord() > 1 | getLoadSize() - 1 >= getCapacity())
+    public void loadTransporter(Car car){
+        if (isRampOpen()){
+            if (getYCord() - car.getXCord() > 1 | getLoadSize() - 1 >= getCapacity())
                 System.out.println("Must move car closer");
             else {
-                addLoad(vehicle);
-                vehicle.setXCord(getXCord());
-                vehicle.setYCord(getYCord());
+                addLoad(car);
+                car.setXCord(getXCord());
+                car.setYCord(getYCord());
             }
         }
+        else
+            System.out.println("Ramp must be open!");
     }
 
     @Override
     public void unloadTransporter(){
-
+        if (getLoadSize() > 0 && isRampOpen())
+            unload();
     }
 
     @Override

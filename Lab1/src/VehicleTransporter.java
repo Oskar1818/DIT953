@@ -63,8 +63,8 @@ public abstract class VehicleTransporter<T extends Vehicle & ITransportable> ext
     } */
 
     @Override
-    public T unload(){
-       return load.getLast();
+    public void unload(){
+       return load.pollLast();
     }
 
     @Override

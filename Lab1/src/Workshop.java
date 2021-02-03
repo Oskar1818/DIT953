@@ -3,7 +3,7 @@ import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Workshop<T extends ICar> {
+public class Workshop<T extends Car> {
     private int capacity;
     private ArrayList<T> workshop;
 
@@ -37,7 +37,7 @@ public class Workshop<T extends ICar> {
         // Generates a compile error ^, which is what we want.
         volvo240Workshop.getCar(volvo240);
 
-        Workshop<ICar> carWorkshop = new Workshop<>(20);
+        Workshop<Car> carWorkshop = new Workshop<>(20);
         Saab95 saab95 = new Saab95(Color.BLACK, new Point(10,10), Direction.EAST);
         carWorkshop.addCar(saab95);
         carWorkshop.addCar(volvo240);
