@@ -6,17 +6,9 @@ import java.awt.*;
  * methods for which the car should implement, to be able to move.
  * @author Valter Miari, Oskar Sturebrand, Clara Josefsson
  */
-public class Saab95 implements ICar {
+public class Saab95 extends Car {
 
     private boolean turboOn;
-    private double xCord;
-    private double yCord;
-    private Direction dir;
-    private Color color;
-    private final String name = "Saab95";
-    private double speed = 0;
-    private final double enginePower = 125;
-    private final int nrDoors = 2;
 
     /**
      * The constructor that is called upon on creation of a Saab95. It inherits the variables; nrDoors, enginePower,
@@ -26,11 +18,9 @@ public class Saab95 implements ICar {
      * @param c The color of the car.
      * @param point The starting position of the car. An x- and a y-coordinate.
      */
-    public Saab95(Color c, Point point, Direction dir){
-	    turboOn = false;
-	    this.xCord = point.getX();
-	    this.yCord = point.getY();
-	    this.dir = dir;
+    public Saab95(Color color, Point point, Direction dir){
+	    super(color, 125.0, 4, "Saab95", point, dir);
+        turboOn = false;
         stopEngine();
     }
 
@@ -56,81 +46,6 @@ public class Saab95 implements ICar {
     }
 
 
-    // From ICar
-    @Override
-    public int getNrDoors(){ return this.nrDoors; }
-
-    @Override
-    public double getEnginePower(){ return enginePower; }
-
-    @Override
-    public void startEngine(){ speed = 1; }
-
-    @Override
-    public void stopEngine(){ speed = 0; }
-
-
-    // From IVehicle
-    @Override
-    public String getName(){ return this.name; }
-
-    @Override
-    public String getColor(){ return color.toString(); }
-
-    @Override
-    public void setDir(Direction d) { this.dir = d; }
-
-    @Override
-    public Direction getDir() { return this.dir; }
-
-    @Override
-    public void move() {
-        switch (dir) {
-            case EAST -> this.xCord += getSpeed();
-            case WEST -> this.xCord -= getSpeed();
-            case NORTH -> this.yCord += getSpeed();
-            case SOUTH -> this.yCord -= getSpeed();
-        }
-    }
-
-    @Override
-    public void turnRight() {
-        switch (dir) {
-            case EAST -> this.dir = Direction.SOUTH;
-            case WEST -> this.dir = Direction.NORTH;
-            case NORTH -> this.dir = Direction.EAST;
-            case SOUTH -> this.dir = Direction.WEST;
-        }
-    }
-
-    @Override
-    public void turnLeft() {
-        switch (dir) {
-            case EAST -> this.dir = Direction.NORTH;
-            case WEST -> this.dir = Direction.SOUTH;
-            case NORTH -> this.dir = Direction.WEST;
-            case SOUTH -> this.dir = Direction.EAST;
-        }
-    }
-
-    @Override
-    public void setXCord(double x) { this.xCord = x; }
-
-    @Override
-    public double getXCord() { return this.xCord; }
-
-    @Override
-    public void setYCord(double y) { this.yCord = y;}
-
-    @Override
-    public double getYCord() { return this.yCord; }
-
-    @Override
-    public void setSpeed(double speed){ speed = Math.min(speed, this.enginePower); }
-
-    @Override
-    public double getSpeed(){ return speed; }
-
     @Override
     public double speedFactor() {
         double turbo = 1;
@@ -138,7 +53,9 @@ public class Saab95 implements ICar {
         return getEnginePower() * 0.01 * turbo;
     }
 
-    @Override
+    // not sure if we need to define them here, because they are dependant on a method implemented (altough not described)
+    // in this class.
+   /* @Override
     public void gas(double amount) {
             double gasFactor = Math.max(Math.min(amount, 1), 0);
             incrementSpeed(gasFactor);
@@ -159,5 +76,5 @@ public class Saab95 implements ICar {
     public void decrementSpeed(double amount){
         setSpeed(Math.max(getSpeed() - speedFactor() * amount,0));
     }
-
+*/
 }
