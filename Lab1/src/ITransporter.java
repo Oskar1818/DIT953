@@ -1,6 +1,6 @@
 import java.util.Collection;
 
-public interface ITransporter<T extends ITransportable> {
+public interface ITransporter<T extends ITransportable>{
 
     void addLoad(T object);
 

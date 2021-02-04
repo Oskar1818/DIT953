@@ -15,7 +15,7 @@ public class TestTruck {
 
     @Test
     public void CheckScaniaMove() {
-        scania.move();
+        scania.setSpeed(0);
         scania.setRampAngle(10);
         assertEquals(0, scania.getXCord(),0);
     }

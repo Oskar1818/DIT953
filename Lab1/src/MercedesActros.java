@@ -10,7 +10,7 @@ public class MercedesActros extends Transporter<Car> {
      * @param capacity
      */
     public MercedesActros(Color color, Point point, Direction dir, int capacity){
-        super(color, 725, 2, "MercedesActros", point, dir, capacity);
+        super(color, 725, 2, "Mercedes Actros", point, dir, capacity);
         stopEngine();
     }
 

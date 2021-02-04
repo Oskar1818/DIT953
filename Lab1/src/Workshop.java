@@ -3,7 +3,7 @@ import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Workshop<T extends Car> {
+public class Workshop<T extends Car> { // implements ILoader/IStore
     private int capacity;
     private ArrayList<T> workshop;
 
