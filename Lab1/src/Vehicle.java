@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public abstract class Vehicle implements IMovable{
+public abstract class Vehicle implements IMove{
 
     private double xCord;
     private double yCord;

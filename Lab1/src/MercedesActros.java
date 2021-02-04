@@ -17,8 +17,8 @@ public class MercedesActros extends Transporter<Car> {
     // could move this to VTransporter, but would that make it confusing or prevent extensibility..?
     @Override
     public void addLoad(Car car){
-        if (isRampDown()){
-            if (getYCord() - car.getXCord() > 1 | getLoadSize() - 1 >= getCapacity())
+        if (!isRampDown()){
+            if (getLoadSize() - 1 >= getCapacity() | (getYCord() - car.getYCord() > 1 && getXCord() - car.getXCord() > 1))
                 System.out.println("Must move car closer");
             else {
                 getLoad().add(car);
@@ -32,9 +32,9 @@ public class MercedesActros extends Transporter<Car> {
 
     @Override
     public Car unload(){
-        if (getLoadSize() > 0 && isRampDown()) {
+        if (getLoadSize() > 0 && !isRampDown()) {
             Car car = getLoad().getLast();
-            car.setXCord(car.getXCord() + 1); // why?
+            car.setXCord(car.getXCord() + 1);
             car.setYCord(car.getYCord() + 1);
             return car;
         }

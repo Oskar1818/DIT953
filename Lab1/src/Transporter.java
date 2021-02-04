@@ -15,27 +15,18 @@ public abstract class Transporter<T extends ITransportable> extends Vehicle impl
         this.rampAngle = 0;
     }
 
-    /**
-     * Sets the angle at which the ramp should tilt.
-     * @param a The specified angel, which cannot go beyond 70 degrees or beneath 0 degrees.
-     */
-    public void setRampAngle(double a){
-        if (getSpeed() != 0)
-            System.out.println("Car must not move!");
-        else
-            rampAngle = Math.max(Math.min(a, 70), 0);
-    }
-
     public double getRampAngle() {
         return this.rampAngle;
     }
 
     public void setRampDown(){
-        rampAngle = 0;
+        rampAngle = 70;
     }
 
+    public void setRampUp() { rampAngle = 0; }
+
     public boolean isRampDown(){
-        if (rampAngle > 50)
+        if (rampAngle == 70)
             return true;
         else
             return false;
@@ -67,19 +58,16 @@ public abstract class Transporter<T extends ITransportable> extends Vehicle impl
             switch (getDirection()) {
                 case EAST:
                     setXCord(getXCord() + getSpeed());
-                    for (T v : load) v.setXCord(getXCord() + getSpeed());
-
+                    for (T v : load) v.setXCord(v.getXCord() + getSpeed());
                 case WEST:
                     setXCord(getXCord() - getSpeed());
-                    for (T v : load) v.setXCord(getXCord() - getSpeed());
-
+                    for (T v : load) v.setXCord(v.getXCord() - getSpeed());
                 case NORTH:
                     setYCord(getYCord() + getSpeed());
-                    for (T v : load) v.setYCord(getYCord() + getSpeed());
-
+                    for (T v : load) v.setYCord(v.getYCord() + getSpeed());
                 case SOUTH:
-                    setYCord(getYCord() + getSpeed());
-                    for (T v : load) v.setYCord(getYCord() + getSpeed());
+                    setYCord(getYCord() - getSpeed());
+                    for (T v : load) v.setYCord(v.getYCord() - getSpeed());
             }
         }
     }
@@ -94,15 +82,19 @@ public abstract class Transporter<T extends ITransportable> extends Vehicle impl
                 case EAST:
                     setDirection(Direction.SOUTH);
                     for (T v : load) v.setDirection(Direction.SOUTH);
+                    break;
                 case WEST:
                     setDirection(Direction.NORTH);
                     for (T v : load) v.setDirection(Direction.NORTH);
+                    break;
                 case NORTH:
                     setDirection(Direction.EAST);
                     for (T v : load) v.setDirection(Direction.EAST);
+                    break;
                 case SOUTH:
                     setDirection(Direction.WEST);
                     for (T v : load) v.setDirection(Direction.WEST);
+                    break;
             }
         }
     }

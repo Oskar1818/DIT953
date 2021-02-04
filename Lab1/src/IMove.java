@@ -1,4 +1,4 @@
-public interface IMovable extends ITransportable{
+public interface IMove extends ITransportable{
 
     void move();
 
