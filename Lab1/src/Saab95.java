@@ -24,7 +24,6 @@ public class Saab95 extends Car {
         stopEngine();
     }
 
-
     // Specific to saab95.
     /**
      * Checks if the turbo in the Saab is on.
@@ -52,29 +51,4 @@ public class Saab95 extends Car {
         if(turboOn) turbo = 1.3;
         return getEnginePower() * 0.01 * turbo;
     }
-
-    // not sure if we need to define them here, because they are dependant on a method implemented (altough not described)
-    // in this class.
-   /* @Override
-    public void gas(double amount) {
-            double gasFactor = Math.max(Math.min(amount, 1), 0);
-            incrementSpeed(gasFactor);
-    }
-
-    @Override
-    public void incrementSpeed(double amount){
-        setSpeed(Math.min(getSpeed() + speedFactor() * amount, getEnginePower()));
-    }
-
-    @Override
-    public void brake(double amount) {
-            double brakeFactor = Math.max(Math.min(amount, 1), 0); // 0 <= breakFactor <= 1
-            decrementSpeed(brakeFactor);
-    }
-
-    @Override
-    public void decrementSpeed(double amount){
-        setSpeed(Math.max(getSpeed() - speedFactor() * amount,0));
-    }
-*/
 }

@@ -8,7 +8,6 @@ public class Scania extends Transporter<CommonGoods> {
         stopEngine();
     }
 
-
     @Override
     public void addLoad(CommonGoods something) {
         getLoad().add(something);
