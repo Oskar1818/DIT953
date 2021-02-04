@@ -19,7 +19,7 @@ public class Saab95 extends Car {
      * @param point The starting position of the car. An x- and a y-coordinate.
      */
     public Saab95(Color color, Point point, Direction dir){
-	    super(color, 125.0, 4, "Saab95", point, dir);
+	    super(color, 125.0, 2, "Saab95", point, dir);
         turboOn = false;
         stopEngine();
     }
