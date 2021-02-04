@@ -4,10 +4,10 @@ public class MercedesActros extends Transporter<Car> {
 
     /**
      * A truck that transports cars
-     * @param color
-     * @param point
-     * @param dir
-     * @param capacity
+     * @param color - The color of the transporter.
+     * @param point - The coordinates of the transporter, represented as a point (x, y).
+     * @param dir - The direction at which the transporter is pointing at.
+     * @param capacity - The maximum amount of cars the transporter can transport.
      */
     public MercedesActros(Color color, Point point, Direction dir, int capacity){
         super(color, 725, 2, "Mercedes Actros", point, dir, capacity);
@@ -46,7 +46,5 @@ public class MercedesActros extends Transporter<Car> {
     public double speedFactor() {
         return getEnginePower() * 0.01;
     }
-
-    // could probably be moved to super class
 
 }

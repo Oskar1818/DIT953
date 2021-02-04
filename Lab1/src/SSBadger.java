@@ -18,7 +18,6 @@ public class SSBadger extends Transporter<Car> {
         return getEnginePower() * 0.01;
     }
 
-    // could move this to VTransporter, but would that make it confusing or prevent extensibility..?
     @Override
     public void addLoad(Car car){
         if (!isRampDown()){

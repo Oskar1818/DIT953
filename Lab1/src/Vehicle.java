@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public abstract class Vehicle implements IMove{
+public abstract class Vehicle implements IMove, ITransportable{
 
     private double xCord;
     private double yCord;
@@ -11,13 +11,23 @@ public abstract class Vehicle implements IMove{
     private double enginePower;
     private int nrDoors;
 
-    public Vehicle(Color color, double enginePower, double speed, int nrDoors, String name, Point p, Direction dir){
+    /**
+     *
+     * @param color - The color of a vehicle.
+     * @param enginePower - The engine power of a vehicle.
+     * @param speed The current speed of a vehicle.
+     * @param nrDoors The number of doors of a vehicle.
+     * @param name - The name of a specific instance of a vehicle.
+     * @param point - The coordinates of a vehicle, represented as a point (x, y).
+     * @param dir
+     */
+    public Vehicle(Color color, double enginePower, double speed, int nrDoors, String name, Point point, Direction dir){
         this.color = color;
         this.enginePower = enginePower;
         this.nrDoors = nrDoors;
         this.name = name;
-        this.xCord = p.getX();
-        this.yCord = p.getY();
+        this.xCord = point.getX();
+        this.yCord = point.getY();
         this.dir = dir;
         this.speed = speed;
     }

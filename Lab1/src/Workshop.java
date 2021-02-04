@@ -19,6 +19,10 @@ public class Workshop<T extends Vehicle> implements IStationary{ // implements I
             System.out.println("Cannot store your vehicle!");
     }
 
+    // The workshop is designed in a manner which does not allow any cars of wrong type to be placed in a workshop
+    // and the same goes for vehicles, e.g. you cannot add a Truck to a workshop that only allows cars.
+    // This implies that the type of vehicles that you can get out from a workshop is as general or as narrow as the
+    // list is defined, which prevents any unwanted side effects. A faulty vehicle (type) is identified at compile time.
     public T getVehicle(T vehicle){
         int i = workshop.indexOf(vehicle);
         if (i != -1)
@@ -27,26 +31,7 @@ public class Workshop<T extends Vehicle> implements IStationary{ // implements I
             return null;
     }
 
-    /* not sure if necessary
-    public void removeVehicle(){
-
-    }
-    */
-
     public int getCapacity(){ return capacity; }
-
-    /*public static void main(String[] args){
-        Workshop<Volvo240> volvo240CarWorkshop = new Workshop<>(10);
-        Volvo240 volvo240 = new Volvo240(Color.BLACK, new Point(10,10), Direction.EAST);
-        volvo240CarWorkshop.addVehicle(volvo240);
-        //volvo240CarWorkshop.addCar(new Saab95(Color.BLACK, new Point(10,10), Direction.EAST));
-        // Generates a compile error ^, which is what we want.
-
-        Workshop<Car> carWorkshop = new Workshop<>(20);
-        Saab95 saab95 = new Saab95(Color.BLACK, new Point(10,10), Direction.EAST);
-        carWorkshop.addVehicle(saab95);
-        carWorkshop.addVehicle(volvo240);
-    }*/
 
     @Override
     public double getYCord() {
