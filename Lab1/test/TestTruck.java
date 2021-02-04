@@ -9,14 +9,14 @@ public class TestTruck {
 
     @Before
     public void setUp() {
-        scania = new Scania(Color.red, new Point(0,0), Direction.WEST);
+        scania = new Scania(Color.red, new Point(0,0), Direction.WEST, 10);
         scania.setSpeed(10);
     }
 
     @Test
     public void CheckScaniaMove() {
         scania.move();
-        scania.setBedAngle(10);
+        scania.setRampAngle(10);
         assertEquals(0, scania.getXCord(),0);
     }
 
@@ -29,8 +29,8 @@ public class TestTruck {
     @Test
     public void TestSetBedAngle() {
         scania.stopEngine();
-        scania.setBedAngle(90);
-        assertEquals(70, scania.getBedAngle(), 0);
+        scania.setRampAngle(90);
+        assertEquals(70, scania.getRampAngle(), 0);
     }
 }
 

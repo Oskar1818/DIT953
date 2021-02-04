@@ -9,7 +9,7 @@ public abstract class Transporter<T extends ITransportable> extends Vehicle impl
     private double rampAngle;
 
     public Transporter(Color color, double enginePower, int nrDoors, String name, Point p, Direction dir, int capacity){
-        super(color, enginePower, nrDoors, name, p, dir);
+        super(color, enginePower, 0, nrDoors, name, p, dir);
         this.capacity = capacity;
         this.load = new ArrayDeque<>(capacity);
         this.rampAngle = 0;

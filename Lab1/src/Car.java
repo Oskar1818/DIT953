@@ -3,7 +3,7 @@ import java.awt.*;
 public abstract class Car extends Vehicle implements ITransportable{
 
     public Car(Color color, double enginePower, int nrDoors, String name, Point point, Direction dir){
-        super(color, enginePower, nrDoors, name, point, dir);
+        super(color, enginePower, 0, nrDoors, name, point, dir);
     }
 
     @Override

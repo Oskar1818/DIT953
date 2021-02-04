@@ -80,28 +80,28 @@ public class TestCar {
     public void checkVolvo240LeftTurn() {
         for (int i = 0; i < 5; i++)
             volvo240.turnLeft();
-        assertEquals(Direction.WEST, volvo240.getDir());
+        assertEquals(Direction.WEST, volvo240.getDirection());
     }
 
     @Test
     public void checkVolvo240RightTurn() {
         for (int i = 0; i<5; i++)
             volvo240.turnRight();
-        assertEquals(Direction.EAST, volvo240.getDir());
+        assertEquals(Direction.EAST, volvo240.getDirection());
     }
 
     @Test
     public void checkSaab95LeftTurn() {
         for (int i=0; i<5; i++)
             saab95.turnLeft();
-        assertEquals(Direction.NORTH, saab95.getDir());
+        assertEquals(Direction.NORTH, saab95.getDirection());
     }
 
     @Test
     public void checkSaab95RightTurn() {
         for (int i = 0; i < 5; i++)
             saab95.turnRight();
-        assertEquals(Direction.SOUTH, saab95.getDir());
+        assertEquals(Direction.SOUTH, saab95.getDirection());
     }
 
 

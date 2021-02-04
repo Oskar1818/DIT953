@@ -11,7 +11,7 @@ public abstract class Vehicle implements IMovable{
     private double enginePower;
     private int nrDoors;
 
-    public Vehicle(Color color, double enginePower, int nrDoors, String name, Point p, Direction dir){
+    public Vehicle(Color color, double enginePower, double speed, int nrDoors, String name, Point p, Direction dir){
         this.color = color;
         this.enginePower = enginePower;
         this.nrDoors = nrDoors;
@@ -19,17 +19,16 @@ public abstract class Vehicle implements IMovable{
         this.xCord = p.getX();
         this.yCord = p.getY();
         this.dir = dir;
+        this.speed = speed;
     }
 
-
-    // From ICar
     public int getNrDoors(){ return this.nrDoors; }
 
-    public double getEnginePower(){ return enginePower; }
+    public double getEnginePower(){ return this.enginePower; }
 
-    public void startEngine(){ speed = 1; }
+    public void startEngine(){ this.speed = 1; }
 
-    public void stopEngine(){ speed = 0; }
+    public void stopEngine(){ this.speed = 0; }
 
     public void gas(double amount) {
         double gasFactor = Math.max(Math.min(amount, 1), 0);
@@ -41,8 +40,6 @@ public abstract class Vehicle implements IMovable{
         decrementSpeed(brakeFactor);
     }
 
-
-    // From IVehicle
     public String getName(){ return this.name; }
 
     public String getColor(){ return color.toString(); }
@@ -79,9 +76,9 @@ public abstract class Vehicle implements IMovable{
     public double getYCord() { return this.yCord; }
 
     @Override
-    public void setSpeed(double speed){ speed = Math.min(speed, this.enginePower); }
+    public void setSpeed(double speed){ this.speed = Math.min(speed, this.enginePower); }
 
     @Override
-    public double getSpeed(){ return speed; }
+    public double getSpeed(){ return this.speed; }
 
 }
