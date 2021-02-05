@@ -17,7 +17,7 @@ public class Saab95 extends Car {
      * creation.
      * @param color The color of the car.
      * @param point The starting position of the car. An x- and a y-coordinate.
-     * @param dir The starting directino of the car.
+     * @param dir The starting direction of the car.
      */
     public Saab95(Color color, Point point, Direction dir){
 	    super(color, 125.0, 2, "Saab95", point, dir);

@@ -2,6 +2,11 @@ import java.awt.*;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
+/**
+ * The abstract base class for all transporters.
+ * @param <T> The parameter type of which transportable object the transporter can transport.
+ */
+
 public abstract class Transporter<T extends ITransportable> extends Vehicle implements ITransporter<T>{
 
     private final int capacity;

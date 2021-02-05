@@ -1,5 +1,8 @@
 import java.awt.*;
 
+/**
+ * The abstract base class for all vehicles.
+ */
 public abstract class Vehicle implements IMove, ITransportable{
 
     private double xCord;
@@ -19,7 +22,7 @@ public abstract class Vehicle implements IMove, ITransportable{
      * @param nrDoors The number of doors of a vehicle.
      * @param name - The name of a specific instance of a vehicle.
      * @param point - The coordinates of a vehicle, represented as a point (x, y).
-     * @param dir
+     * @param dir - The initial direction of the vehicle.
      */
     public Vehicle(Color color, double enginePower, double speed, int nrDoors, String name, Point point, Direction dir){
         this.color = color;
