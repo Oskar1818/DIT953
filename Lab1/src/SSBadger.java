@@ -1,13 +1,15 @@
 import java.awt.*;
 
+/**
+ * A car ferry in the form of the model SSBadger.
+ */
 public class SSBadger extends Transporter<Car> {
 
     /**
-     * A ferry
-     * @param color
-     * @param point
-     * @param dir
-     * @param capacity
+     * @param color The color of the SSBadger.
+     * @param point The starting position of the SSBadger. An x- and a y-coordinate.
+     * @param dir The initial direction of the SSBadger.
+     * @param capacity The initial direction of the SSBadger.
      */
     public SSBadger(Color color, Point point, Direction dir, int capacity){
         super(color, 1000, 10, "SSBadger", point, dir, capacity);
@@ -18,6 +20,10 @@ public class SSBadger extends Transporter<Car> {
         return getEnginePower() * 0.01;
     }
 
+    /**
+     * Adds load to the ferry, and makes sure it fits and is close enough to be loaded.
+     * @param car The desired car to be added to the load of the ferry.
+     */
     @Override
     public void addLoad(Car car){
         if (!isRampDown()){
@@ -33,11 +39,15 @@ public class SSBadger extends Transporter<Car> {
             System.out.println("Ramp must be open!");
     }
 
+    /**
+     * Unloads the car using the first in, first out principle.
+     * @return Returns the first car in the queue.
+     */
     @Override
     public Car unload(){
         if (getLoadSize() > 0 && !isRampDown()) {
             Car car = getLoad().getFirst();
-            car.setXCord(car.getXCord() + 1); // why?
+            car.setXCord(car.getXCord() + 1);
             car.setYCord(car.getYCord() + 1);
             return car;
         }

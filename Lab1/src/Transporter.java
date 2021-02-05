@@ -10,9 +10,18 @@ import java.util.Deque;
 public abstract class Transporter<T extends ITransportable> extends Vehicle implements ITransporter<T>{
 
     private final int capacity;
-    private final Deque<T> load;
+    private final Deque<T> load; // The data structure Deque which represents the load
     private double rampAngle;
 
+    /**
+     * @param color - The color of a transporter.
+     * @param enginePower The engine power of a transporter.
+     * @param nrDoors The number of doors on a transporter.
+     * @param name The name of a specific transporter.
+     * @param p - The coordinates of a transporter, represented as a point (x, y).
+     * @param dir - The direction at which a transporter is pointing at.
+     * @param capacity - The maximum amount of cars that a transporter can transport.
+     */
     public Transporter(Color color, double enginePower, int nrDoors, String name, Point p, Direction dir, int capacity){
         super(color, enginePower, 0, nrDoors, name, p, dir);
         this.capacity = capacity;
@@ -20,16 +29,28 @@ public abstract class Transporter<T extends ITransportable> extends Vehicle impl
         this.rampAngle = 0;
     }
 
+    /**
+     * @return returns the ramp angel
+     */
     public double getRampAngle() {
         return this.rampAngle;
     }
 
+    /**
+     * Turns down the ramp.
+     */
     public void setRampDown(){
         rampAngle = 70;
     }
 
+    /**
+     * Turns the ramp to 0 degrees.
+     */
     public void setRampUp() { rampAngle = 0; }
 
+    /**
+     * @return Returns if the ramp is down or not.
+     */
     public boolean isRampDown(){
         if (rampAngle == 70)
             return true;
@@ -37,14 +58,23 @@ public abstract class Transporter<T extends ITransportable> extends Vehicle impl
             return false;
     }
 
+    /**
+     * @return Returns the maximum amount of vehicles the transporter can transport.
+     */
     public int getCapacity(){
         return this.capacity;
     }
 
+    /**
+     * @return Returns the amount of vehicles in the load.
+     */
     public int getLoadSize(){
         return this.load.size();
     }
 
+    /**
+     * @return Returns the load of the specific vehicle type.
+     */
     @Override
     public Deque<T> getLoad(){
         return load;
@@ -55,6 +85,9 @@ public abstract class Transporter<T extends ITransportable> extends Vehicle impl
         return load.getLast();
     }
 
+    /**
+     * Moves the transporter and its corresponding load by changing the x- or y -coordinate with its speed.
+     */
     @Override
     public void move () {
         if (isRampDown()) {
@@ -76,8 +109,10 @@ public abstract class Transporter<T extends ITransportable> extends Vehicle impl
             }
         }
     }
-        // the minus here could be wrong, check later
 
+    /**
+     * Changes the direction of the car and its corresponding load.
+     */
     @Override
     public void turnRight () {
         if (isRampDown()) {
@@ -104,6 +139,9 @@ public abstract class Transporter<T extends ITransportable> extends Vehicle impl
         }
     }
 
+    /**
+     * Changes the direction of the car and its corresponding load.
+     */
     @Override
     public void turnLeft () {
         if (isRampDown()) {

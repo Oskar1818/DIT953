@@ -1,14 +1,17 @@
 import java.awt.*;
 import java.util.ArrayList;
 
-public class Workshop<T extends Vehicle> implements IStationary{ // implements ILoader/IStore
+/**
+ * The class representing a workshop that can store vehicles.
+ * @param <T> The specified type parameter of which Vehicles that could be stored in a specific workshop.
+ */
+public class Workshop<T extends Vehicle> implements IStationary{
 
     private final int capacity;
     private final ArrayList<T> workshop; // The data structure representing the storage.
     private final Point location;
 
     /**
-     *
      * @param capacity The maximum amount of vehicles that the workshop can store.
      * @param location The static (not movable) location of the workshop.
      */
