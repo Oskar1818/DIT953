@@ -2,7 +2,13 @@ import java.awt.*;
 
 public class Scania extends Transporter<CommonGoods> {
 
-
+    /**
+     *
+     * @param color The color of the truck.
+     * @param point The coordinates of the transporter, represented as a point (x, y).
+     * @param dir The direction at which the transporter is pointing at.
+     * @param capacity The maximum amount of goods the transporter can transport.
+     */
     public Scania(Color color, Point point, Direction dir, int capacity){
         super(color, 500, 2, "Scania", point, dir, capacity);
         stopEngine();

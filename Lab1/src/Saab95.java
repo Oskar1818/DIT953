@@ -15,8 +15,9 @@ public class Saab95 extends Car {
      * speed, color and modelName; from its super class Car. With exception of color, all these variables and the
      * variables; turboOn and dir, have default values for a Saab95, and are assigned a final default value upon
      * creation.
-     * @param c The color of the car.
+     * @param color The color of the car.
      * @param point The starting position of the car. An x- and a y-coordinate.
+     * @param dir The starting directino of the car.
      */
     public Saab95(Color color, Point point, Direction dir){
 	    super(color, 125.0, 2, "Saab95", point, dir);

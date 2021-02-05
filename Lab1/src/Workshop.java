@@ -2,6 +2,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class Workshop<T extends Vehicle> implements IStationary{ // implements ILoader/IStore
+
     private final int capacity;
     private final ArrayList<T> workshop;
     private final Point location;
