@@ -22,7 +22,7 @@ public class Scania extends Transporter<CommonGoods> {
         if (getSpeed() != 0)
             System.out.println("Car must not move!");
         else
-            setRampAngle(Math.max(Math.min(a, 70), 0));
+            setRamp(Math.max(Math.min(a, 70), 0));
     }
 
     @Override
@@ -32,6 +32,6 @@ public class Scania extends Transporter<CommonGoods> {
 
     @Override
     public double speedFactor() {
-        return 0;
+        return getEnginePower() * 0.01;
     }
 }

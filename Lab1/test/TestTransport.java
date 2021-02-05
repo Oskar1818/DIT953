@@ -30,8 +30,9 @@ public class TestTransport {
 
     @Test
     public void CheckScaniaMove2() {
+        scania.gas(1);
         scania.move();
-        assertEquals(-10, scania.getXCord(),0);
+        assertEquals(-5, scania.getXCord(),0);
     }
 
     @Test

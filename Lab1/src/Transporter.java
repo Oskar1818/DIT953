@@ -48,14 +48,13 @@ public abstract class Transporter<T extends ITransportable> extends Vehicle impl
      */
     public void setRampUp() { rampAngle = 0; }
 
+    public void setRamp(double d) { rampAngle = d; }
+
     /**
      * @return Returns if the ramp is down or not.
      */
     public boolean isRampDown(){
-        if (rampAngle == 70)
-            return true;
-        else
-            return false;
+        return rampAngle == 70;
     }
 
     /**
@@ -91,7 +90,7 @@ public abstract class Transporter<T extends ITransportable> extends Vehicle impl
     @Override
     public void move () {
         if (isRampDown()) {
-            System.out.println("Kan inte köra med flaket öppet");
+            System.out.println("Cannot drive with ramp down");
         } else {
             switch (getDirection()) {
                 case EAST:
@@ -116,7 +115,7 @@ public abstract class Transporter<T extends ITransportable> extends Vehicle impl
     @Override
     public void turnRight () {
         if (isRampDown()) {
-            System.out.println("Kan inte köra med flaket öppet");
+            System.out.println("Cannot drive with ramp down");
         } else {
             switch (getDirection()) {
                 case EAST:
@@ -145,7 +144,7 @@ public abstract class Transporter<T extends ITransportable> extends Vehicle impl
     @Override
     public void turnLeft () {
         if (isRampDown()) {
-            System.out.println("Kan inte köra med flaket öppet");
+            System.out.println("Cannot drive with ramp down");
         } else {
             switch (getDirection()) {
                 case EAST:
