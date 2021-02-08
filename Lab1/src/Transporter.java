@@ -71,6 +71,24 @@ public abstract class Transporter<T extends ITransportable> extends Vehicle impl
         return this.load.size();
     }
 
+    private void moveCargo(Direction direction) {
+        switch (direction) {
+            case EAST ->  { for (T v : load) v.setXCord(v.getXCord() + getSpeed()); }
+            case WEST ->  { for (T v : load) v.setXCord(v.getXCord() - getSpeed()); }
+            case NORTH -> { for (T v : load) v.setYCord(v.getYCord() + getSpeed()); }
+            case SOUTH -> { for (T v : load) v.setYCord(v.getYCord() - getSpeed()); }
+        }
+    }
+
+    private void turnCargo(Direction direction) {
+        switch (direction) {
+            case EAST ->  { for (T v : load) v.setDirection(Direction.SOUTH); }
+            case WEST ->  { for (T v : load) v.setDirection(Direction.NORTH); }
+            case NORTH -> { for (T v : load) v.setDirection(Direction.EAST); }
+            case SOUTH -> { for (T v : load) v.setDirection(Direction.WEST); }
+        }
+    }
+
     /**
      * @return Returns the load of the specific vehicle type.
      */
@@ -88,79 +106,41 @@ public abstract class Transporter<T extends ITransportable> extends Vehicle impl
      * Moves the transporter and its corresponding load by changing the x- or y -coordinate with its speed.
      */
     @Override
-    public void move () {
+    public void move() {
         if (isRampDown()) {
             System.out.println("Cannot drive with ramp down");
         } else {
-            switch (getDirection()) {
-                case EAST:
-                    setXCord(getXCord() + getSpeed());
-                    for (T v : load) v.setXCord(v.getXCord() + getSpeed());
-                case WEST:
-                    setXCord(getXCord() - getSpeed());
-                    for (T v : load) v.setXCord(v.getXCord() - getSpeed());
-                case NORTH:
-                    setYCord(getYCord() + getSpeed());
-                    for (T v : load) v.setYCord(v.getYCord() + getSpeed());
-                case SOUTH:
-                    setYCord(getYCord() - getSpeed());
-                    for (T v : load) v.setYCord(v.getYCord() - getSpeed());
-            }
+           super.move();
+           moveCargo(getDirection());
         }
     }
 
-    /**
-     * Changes the direction of the car and its corresponding load.
-     */
-    @Override
-    public void turnRight () {
-        if (isRampDown()) {
-            System.out.println("Cannot drive with ramp down");
-        } else {
-            switch (getDirection()) {
-                case EAST:
-                    setDirection(Direction.SOUTH);
-                    for (T v : load) v.setDirection(Direction.SOUTH);
-                    break;
-                case WEST:
-                    setDirection(Direction.NORTH);
-                    for (T v : load) v.setDirection(Direction.NORTH);
-                    break;
-                case NORTH:
-                    setDirection(Direction.EAST);
-                    for (T v : load) v.setDirection(Direction.EAST);
-                    break;
-                case SOUTH:
-                    setDirection(Direction.WEST);
-                    for (T v : load) v.setDirection(Direction.WEST);
-                    break;
-            }
-        }
-    }
 
-    /**
-     * Changes the direction of the car and its corresponding load.
-     */
-    @Override
-    public void turnLeft () {
-        if (isRampDown()) {
-            System.out.println("Cannot drive with ramp down");
-        } else {
-            switch (getDirection()) {
-                case EAST:
-                    setDirection(Direction.NORTH);
-                    for (T v : load) v.setDirection(Direction.NORTH);
-                case WEST:
-                    setDirection(Direction.SOUTH);
-                    for (T v : load) v.setDirection(Direction.SOUTH);
-                case NORTH:
-                    setDirection(Direction.WEST);
-                    for (T v : load) v.setDirection(Direction.WEST);
-                case SOUTH:
-                    setDirection(Direction.EAST);
-                    for (T v : load) v.setDirection(Direction.EAST);
-            }
-        }
-    }
+   /**
+    * Changes the direction of the car and its corresponding load.
+    */
+   @Override
+   public void turnRight () {
+       if (isRampDown()) {
+           System.out.println("Cannot drive with ramp down");
+       } else {
+           super.turnRight();
+           turnCargo(getDirection());
+       }
+   }
 
+   /**
+    * Changes the direction of the car and its corresponding load.
+    */
+   @Override
+   public void turnLeft () {
+       if (isRampDown()) {
+           System.out.println("Cannot drive with ramp down");
+       } else {
+           super.turnLeft();
+           turnCargo(getDirection());
+       }
+   }
 }
+
+
