@@ -34,11 +34,9 @@ public class Workshop<T extends Vehicle> implements IStationary{
     // list is defined, which prevents any unwanted side effects. A faulty vehicle (type) is identified at compile time.
     public T getVehicle(T vehicle){
         int i = workshop.indexOf(vehicle);
-        if (i != -1)
-            return workshop.get(i);
-        else
-            return null;
+        return i != -1 ? workshop.get(i) : null;
     }
+
 
     public int getCapacity(){ return capacity; }
 

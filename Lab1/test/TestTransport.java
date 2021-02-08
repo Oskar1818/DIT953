@@ -45,7 +45,7 @@ public class TestTransport {
     @Test
     public void TestIsRampDown() {
         scania.setSpeed(20);
-        assertEquals(false, scania.isRampDown());
+        assertFalse(scania.isRampDown());
     }
 
     @Test
