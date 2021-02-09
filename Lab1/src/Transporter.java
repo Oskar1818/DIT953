@@ -115,7 +115,6 @@ public abstract class Transporter<T extends ITransportable> extends Vehicle impl
         }
     }
 
-
    /**
     * Changes the direction of the car and its corresponding load.
     */
