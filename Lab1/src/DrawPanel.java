@@ -2,6 +2,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
@@ -10,14 +11,26 @@ import javax.swing.*;
 public class DrawPanel extends JPanel{
 
     // Just a single image, TODO: Generalize
-    BufferedImage volvoImage;
+   //private List<BufferedImage> carPics = new ArrayList<>();
+    private BufferedImage volvoImage;
+    private BufferedImage saabImage;
+    private BufferedImage scaniaImage;
+
+    private
+
     // To keep track of a singel cars position
     Point volvoPoint = new Point();
 
     // TODO: Make this genereal for all cars
     void moveit(int x, int y){
-        volvoPoint.x = x;
-        volvoPoint.y = y;
+        volvoPoint.x += x;
+        volvoPoint.y += y;
+
+        saabPoint.x += x;
+        saabPoint.y += y;
+
+        scaniaPoint.x += x;
+        scaniaPoint.y += y;
     }
 
     // Initializes the panel and reads the images
