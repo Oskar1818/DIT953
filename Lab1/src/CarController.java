@@ -50,7 +50,7 @@ public class CarController {
                 car.move();
                 int x = (int) Math.round(car.getXCord());
                 int y = (int) Math.round(car.getYCord());
-                frame.drawPanel.moveit(x, y);
+                frame.drawPanel.moveit(car.getName(), x, y);
                 // repaint() calls the paintComponent method of the panel
                 frame.drawPanel.repaint();
             }
@@ -99,5 +99,17 @@ public class CarController {
                 ((Scania) truck).setRampDown();
     }
 }
+
+    public void startAll() {
+        for (Vehicle car : cars) {
+            car.startEngine();
+        }
+    }
+
+    public void stopAll() {
+        for (Vehicle car : cars) {
+            car.stopEngine();
+        }
+    }
 
 }

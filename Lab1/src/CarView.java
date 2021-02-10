@@ -81,17 +81,17 @@ public class CarView extends JFrame{
         controlPanel.add(lowerBedButton, 5);
         controlPanel.setPreferredSize(new Dimension((X/2)+4, 200));
         this.add(controlPanel);
-        controlPanel.setBackground(Color.CYAN);
+        controlPanel.setBackground(Color.BLACK);
 
 
-        startButton.setBackground(Color.blue);
-        startButton.setForeground(Color.green);
+        //startButton.setBackground(Color.BLUE);
+        startButton.setForeground(Color.BLACK);
         startButton.setPreferredSize(new Dimension(X/5-15,200));
         this.add(startButton);
 
 
-        stopButton.setBackground(Color.red);
-        stopButton.setForeground(Color.black);
+        //stopButton.setBackground(Color.red);
+        stopButton.setForeground(Color.BLACK);
         stopButton.setPreferredSize(new Dimension(X/5-15,200));
         this.add(stopButton);
 
@@ -108,6 +108,10 @@ public class CarView extends JFrame{
         turboOffButton.addActionListener(e -> carC.turboOff());
 
         lowerBedButton.addActionListener(e -> carC.lowerBed());
+
+        startButton.addActionListener(e -> carC.startAll());
+
+        stopButton.addActionListener(e -> carC.stopAll());
 
 
         // Make the frame pack all it's components by respecting the sizes if possible.
