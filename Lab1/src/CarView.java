@@ -63,11 +63,7 @@ public class CarView extends JFrame{
                         100, //max
                         1);//step
         gasSpinner = new JSpinner(spinnerModel);
-        gasSpinner.addChangeListener(new ChangeListener() {
-            public void stateChanged(ChangeEvent e) {
-                gasAmount = (int) ((JSpinner)e.getSource()).getValue();
-            }
-        });
+        gasSpinner.addChangeListener(e -> gasAmount = (int) ((JSpinner)e.getSource()).getValue());
 
         gasPanel.setLayout(new BorderLayout());
         gasPanel.add(gasLabel, BorderLayout.PAGE_START);
@@ -99,7 +95,6 @@ public class CarView extends JFrame{
         stopButton.setPreferredSize(new Dimension(X/5-15,200));
         this.add(stopButton);
 
-        // This actionListener is for the gas button only
         // TODO: Create more for each component as necessary
 
         gasButton.addActionListener(e -> carC.gas(gasAmount));
@@ -113,6 +108,7 @@ public class CarView extends JFrame{
         turboOffButton.addActionListener(e -> carC.turboOff());
 
         lowerBedButton.addActionListener(e -> carC.lowerBed());
+
 
         // Make the frame pack all it's components by respecting the sizes if possible.
         this.pack();

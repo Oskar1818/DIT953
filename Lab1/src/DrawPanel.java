@@ -19,7 +19,9 @@ public class DrawPanel extends JPanel{
     private
 
     // To keep track of a singel cars position
-    Point volvoPoint = new Point();
+    Point volvoPoint = new Point(0, 0);
+    Point saabPoint = new Point(0, -200);
+    Point scaniaPoint = new Point(0, -400);
 
     // TODO: Make this genereal for all cars
     void moveit(int x, int y){
@@ -32,12 +34,13 @@ public class DrawPanel extends JPanel{
         scaniaPoint.x += x;
         scaniaPoint.y += y;
     }
+    // hj
 
     // Initializes the panel and reads the images
     public DrawPanel(int x, int y) {
         this.setDoubleBuffered(true);
         this.setPreferredSize(new Dimension(x, y));
-        this.setBackground(Color.green);
+        this.setBackground(Color.lightGray);
         // Print an error message in case file is not found with a try/catch block
         try {
             // You can remove the "pics" part if running outside of IntelliJ and
@@ -47,10 +50,15 @@ public class DrawPanel extends JPanel{
             // Rememember to rightclick src New -> Package -> name: pics -> MOVE *.jpg to pics.
             // if you are starting in IntelliJ.
             volvoImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Volvo240.jpg"));
+            saabImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Saab95.jpg"));
+            scaniaImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Scania.jpg"));
+
         } catch (IOException ex)
         {
             ex.printStackTrace();
         }
+
+
 
     }
 
@@ -60,5 +68,8 @@ public class DrawPanel extends JPanel{
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.drawImage(volvoImage, volvoPoint.x, volvoPoint.y, null); // see javadoc for more info on the parameters
+        g.drawImage(saabImage, saabPoint.x, saabPoint.y, null);
+        g.drawImage(scaniaImage, scaniaPoint.x, scaniaPoint.y, null);
+
     }
 }
