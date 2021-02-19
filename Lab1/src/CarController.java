@@ -4,6 +4,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+// TODO
+// knapparna kan inte ligga i carView
+// single responsibility använd morgans "och trick"
+// Carfactory har referens till sina motsvarande bilar
+
+
 /*
 * This class represents the Controller part in the MVC pattern.
 * It's responsibilities is to listen to the View and responds in a appropriate manner by
