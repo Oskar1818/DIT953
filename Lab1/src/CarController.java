@@ -28,7 +28,7 @@ public class CarController {
     // The frame that represents this instance View of the MVC pattern
     CarView frame;
     // A list of cars, modify if needed
-    ArrayList<Vehicle> cars = new ArrayList<>();
+    ArrayList<MotorizedVehicle> cars = new ArrayList<>();
 
     //methods:
 
@@ -52,7 +52,7 @@ public class CarController {
     * */
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            for (Vehicle car : cars) {
+            for (MotorizedVehicle car : cars) {
                 car.move();
                 int x = (int) Math.round(car.getXCord());
                 int y = (int) Math.round(car.getYCord());
@@ -66,7 +66,7 @@ public class CarController {
     // Calls the gas method for each car once
     void gas(int amount) {
         double gas = ((double) amount) / 100;
-        for (Vehicle car : cars
+        for (MotorizedVehicle car : cars
                 ) {
             car.gas(gas);
         }
@@ -74,46 +74,46 @@ public class CarController {
 
     void brake(int amount) {
         double brake = ((double) amount / 100);
-        for (Vehicle car : cars)
+        for (MotorizedVehicle car : cars)
             car.brake(brake);
     }
 
     void turboOn() {
-        for (Vehicle car : cars) {
+        for (MotorizedVehicle car : cars) {
             if (car instanceof Saab95)
                 ((Saab95) car).setTurboOn();
         }
     }
 
     void turboOff() {
-        for (Vehicle car : cars) {
+        for (MotorizedVehicle car : cars) {
             if (car instanceof Saab95)
                 ((Saab95) car).setTurboOff();
         }
     }
 
     void liftBed() {
-        for(Vehicle truck : cars) {
+        for(MotorizedVehicle truck : cars) {
             if (truck instanceof Transporter)
                 ((Scania) truck).setRampUp();
         }
     }
 
     void lowerBed() {
-        for(Vehicle truck : cars) {
+        for(MotorizedVehicle truck : cars) {
             if (truck instanceof Transporter)
                 ((Scania) truck).setRampDown();
     }
 }
 
     public void startAll() {
-        for (Vehicle car : cars) {
+        for (MotorizedVehicle car : cars) {
             car.startEngine();
         }
     }
 
     public void stopAll() {
-        for (Vehicle car : cars) {
+        for (MotorizedVehicle car : cars) {
             car.stopEngine();
         }
     }

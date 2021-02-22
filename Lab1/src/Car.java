@@ -3,7 +3,7 @@ import java.awt.*;
 /**
  * The abstract base class for all cars.
  */
-public abstract class Car extends Vehicle implements ITransportable{
+public abstract class Car extends MotorizedVehicle implements ITransportable{
 
     /**
      * @param color The color of the car.

@@ -7,7 +7,7 @@ import java.util.Deque;
  * @param <T> The parameter type of which transportable object the transporter can transport.
  */
 
-public abstract class Transporter<T extends ITransportable> extends Vehicle implements ITransporter<T>{
+public abstract class Transporter<T extends ITransportable> extends MotorizedVehicle implements ITransporter<T>{
 
     private final int capacity;
     private final Deque<T> load; // The data structure Deque which represents the load

@@ -11,22 +11,19 @@ public abstract class Vehicle implements IMove, ITransportable{
     private Color color;
     private String name;
     private double speed;
-    private double enginePower;
     private int nrDoors;
 
     /**
      *
      * @param color - The color of a vehicle.
-     * @param enginePower - The engine power of a vehicle.
      * @param speed The current speed of a vehicle.
      * @param nrDoors The number of doors of a vehicle.
      * @param name - The name of a specific instance of a vehicle.
      * @param point - The coordinates of a vehicle, represented as a point (x, y).
      * @param dir - The initial direction of the vehicle.
      */
-    public Vehicle(Color color, double enginePower, double speed, int nrDoors, String name, Point point, Direction dir){
+    public Vehicle(Color color, double speed, int nrDoors, String name, Point point, Direction dir){
         this.color = color;
-        this.enginePower = enginePower;
         this.nrDoors = nrDoors;
         this.name = name;
         this.xCord = point.getX();
@@ -40,20 +37,6 @@ public abstract class Vehicle implements IMove, ITransportable{
      */
     public int getNrDoors(){ return this.nrDoors; }
 
-    /**
-     * @return Returns the engine power of the car.
-     */
-    public double getEnginePower(){ return this.enginePower; }
-
-    /**
-     * Starts the engine and sets the initial speed to 1.
-     */
-    public void startEngine(){ this.speed = 1; }
-
-    /**
-     * Stops the engine, which makes the car stop.
-     */
-    public void stopEngine(){ this.speed = 0; }
 
     /**
      * Makes the car go faster by increasing the speed via the incrementSpeed method.
@@ -104,7 +87,7 @@ public abstract class Vehicle implements IMove, ITransportable{
      */
     @Override
     public void incrementSpeed(double amount){
-        setSpeed(Math.min(getSpeed() + speedFactor() * amount, getEnginePower()));
+        setSpeed(getSpeed() + speedFactor() * amount);
     }
 
     /**
@@ -145,7 +128,7 @@ public abstract class Vehicle implements IMove, ITransportable{
      * @param speed - the desired speed.
      */
     @Override
-    public void setSpeed(double speed){ this.speed = Math.min(speed, this.enginePower); }
+    public void setSpeed(double speed){ this.speed = speed; }
 
     /**
      * @return Gets the speed.

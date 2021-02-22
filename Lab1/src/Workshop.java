@@ -5,7 +5,7 @@ import java.util.ArrayList;
  * The class representing a workshop that can store vehicles.
  * @param <T> The specified type parameter of which Vehicles that could be stored in a specific workshop.
  */
-public class Workshop<T extends Vehicle> implements IStationary{
+public class Workshop<T extends Vehicle> implements IStationary, IStorable<T>{
 
     private final int capacity;
     private final ArrayList<T> workshop; // The data structure representing the storage.
@@ -48,5 +48,15 @@ public class Workshop<T extends Vehicle> implements IStationary{
     @Override
     public double getXCord() {
         return this.location.getX();
+    }
+
+    @Override
+    public void putObject(T object) {
+
+    }
+
+    @Override
+    public T getObject() {
+        return null;
     }
 }
