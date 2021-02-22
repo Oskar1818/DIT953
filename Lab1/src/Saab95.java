@@ -6,9 +6,10 @@ import java.awt.*;
  * methods for which the car should implement, to be able to move.
  * @author Valter Miari, Oskar Sturebrand, Clara Josefsson
  */
-public class Saab95 extends Car {
+public class Saab95 extends Car implements ITurbo{
 
     private boolean turboOn;
+    public final static double turboFactor = 1.3;
 
     /**
      * The constructor that is called upon on creation of a Saab95. It inherits the variables; nrDoors, enginePower,
@@ -29,11 +30,13 @@ public class Saab95 extends Car {
     /**
      * Checks if the turbo in the Saab is on.
      */
+    @Override
     public boolean isTurboOn() { return this.turboOn; }
 
     /**
      * Turns on the turbo in the Saab95.
      */
+    @Override
     public void setTurboOn(){
 	    turboOn = true;
     }
@@ -41,15 +44,21 @@ public class Saab95 extends Car {
     /**
      * Turns off the turbo in the Saab95.
      */
+    @Override
     public void setTurboOff(){
 	    turboOn = false;
     }
 
 
     @Override
+    public double getTurboPower() {return turboFactor; }
+
+
+    @Override
     public double speedFactor() {
-        double turbo = 1;
-        if(turboOn) turbo = 1.3;
-        return getEnginePower() * 0.01 * turbo;
+        if(turboOn)
+            return getEnginePower() * 0.01 * turboFactor;
+        else
+            return getEnginePower() * 0.01;
     }
 }
