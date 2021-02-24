@@ -22,7 +22,7 @@ public abstract class Vehicle implements IMove, ITransportable{
      * @param point - The coordinates of a vehicle, represented as a point (x, y).
      * @param dir - The initial direction of the vehicle.
      */
-    public Vehicle(Color color, double speed, int nrDoors, String name, Point point, Direction dir){
+    public Vehicle(Color color, double speed, int nrDoors, String name, Point point, Direction dir) {
         this.color = color;
         this.nrDoors = nrDoors;
         this.name = name;
@@ -31,6 +31,17 @@ public abstract class Vehicle implements IMove, ITransportable{
         this.dir = dir;
         this.speed = speed;
     }
+
+    // constructor for MotorizedVehicle
+    public Vehicle(Color color, int nrDoors, String name, Point point, Direction dir) {
+        this.color = color;
+        this.nrDoors = nrDoors;
+        this.name = name;
+        this.xCord = point.getX();
+        this.yCord = point.getY();
+        this.dir = dir;
+    }
+
 
     /**
      * @return Returns the number of doors the car has.
@@ -46,6 +57,7 @@ public abstract class Vehicle implements IMove, ITransportable{
         double gasFactor = Math.max(Math.min(amount, 1), 0);
         incrementSpeed(gasFactor);
     }
+    //make gas abstract possibly
 
     /**
      * Makes the car go slower by decreasing the speed via the decrementSpeed method.
@@ -81,14 +93,12 @@ public abstract class Vehicle implements IMove, ITransportable{
     public Direction getDirection() { return this.dir; }
 
     /**
-     * Increases the speed of the Saab by the input amount times the speed factor, and makes sure the
+     * Increases the speed of the Vehicle by the input amount times the speed factor, and makes sure the
      * speed doesn't go above the engine power.
      * @param amount amount the amount at which the speed should decrease by.
      */
     @Override
-    public void incrementSpeed(double amount){
-        setSpeed(getSpeed() + speedFactor() * amount);
-    }
+    public abstract void incrementSpeed(double amount);
 
     /**
      * Decreases the speed of the Saab by the input amount times the speed factor, and makes sure the
@@ -128,13 +138,14 @@ public abstract class Vehicle implements IMove, ITransportable{
      * @param speed - the desired speed.
      */
     @Override
-    public void setSpeed(double speed){ this.speed = speed; }
+    public abstract void setSpeed(double speed);
+    //  this.speed = speed;
 
     /**
      * @return Gets the speed.
      */
     @Override
-    public double getSpeed(){ return this.speed; }
+    public abstract double getSpeed();
 
     @Override
     public void move() {

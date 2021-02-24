@@ -25,15 +25,15 @@ public class DrawPanel extends JPanel{
 
     // TODO: Make this genereal for all cars
     void moveit(String name, int x, int y){
-        if (name == "Volvo240") {
+        if (name.equals("Volvo240")) {
             volvoPoint.x = x;
             volvoPoint.y = y;
         }
-        else if (name == "Saab95") {
+        else if (name.equals("Saab95")) {
             saabPoint.x = x;
             saabPoint.y = y;
         }
-        else if (name == "Scania") {
+        else if (name.equals("Scania")) {
             scaniaPoint.x = x;
             scaniaPoint.y = y;
         }

@@ -40,8 +40,7 @@ public class CarView extends JFrame{
     JButton stopButton = new JButton("Stop all cars");
 
     // Constructor
-    public CarView(String framename, CarController cc){
-        this.carC = cc;
+    public CarView(String framename){
         initComponents(framename);
     }
 
@@ -94,24 +93,6 @@ public class CarView extends JFrame{
         stopButton.setForeground(Color.BLACK);
         stopButton.setPreferredSize(new Dimension(X/5-15,200));
         this.add(stopButton);
-
-        // TODO: Create more for each component as necessary
-
-        gasButton.addActionListener(e -> carC.gas(gasAmount));
-
-        turboOnButton.addActionListener(e -> carC.turboOn());
-
-        liftBedButton.addActionListener(e -> carC.liftBed());
-
-        brakeButton.addActionListener(e -> carC.brake(gasAmount));
-
-        turboOffButton.addActionListener(e -> carC.turboOff());
-
-        lowerBedButton.addActionListener(e -> carC.lowerBed());
-
-        startButton.addActionListener(e -> carC.startAll());
-
-        stopButton.addActionListener(e -> carC.stopAll());
 
 
         // Make the frame pack all it's components by respecting the sizes if possible.

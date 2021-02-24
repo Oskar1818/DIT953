@@ -2,9 +2,11 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class VehicleFactory <T extends Vehicle>{
+public class VehicleFactory <T extends Vehicle> {
 
     private ArrayList<Vehicle> vehicleList = new ArrayList<>();
+    // this class should perhaps not have a list in itself. Instead create a list in the desired class and add cars
+    // to it by calling this classes methods.
 
 
     public VehicleFactory() {

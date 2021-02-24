@@ -23,16 +23,48 @@ public class CarController {
     private final int delay = 50;
     // The timer is started with an listener (see below) that executes the statements
     // each step between delays.
-    private Timer timer = new Timer(delay, new TimerListener());
+    //
+    public Timer timer = new Timer(delay, new TimerListener());
 
     // The frame that represents this instance View of the MVC pattern
-    CarView frame;
+
+    CarView view;
     // A list of cars, modify if needed
-    ArrayList<MotorizedVehicle> cars = new ArrayList<>();
+    ArrayList<MotorizedVehicle> vehicles;
+    int gasAmount = 0;
+
+    public CarController(CarView view, ArrayList<MotorizedVehicle> vehicles){
+        this.view = view;
+        this.vehicles = vehicles;
+        addButtonFunctionality();
+    }
+
+    private void addButtonFunctionality(){
+
+        view.gasSpinner.addChangeListener(e -> gasAmount = (int) ((JSpinner)e.getSource()).getValue());
+
+        view.gasButton.addActionListener(e -> gas(gasAmount));
+
+        view.turboOnButton.addActionListener(e -> turboOn());
+
+        view.liftBedButton.addActionListener(e -> liftBed());
+
+        view.brakeButton.addActionListener(e -> brake(gasAmount));
+
+        view.turboOffButton.addActionListener(e -> turboOff());
+
+        view.lowerBedButton.addActionListener(e -> lowerBed());
+
+        view.startButton.addActionListener(e -> startAll());
+
+        view.stopButton.addActionListener(e -> stopAll());
+
+    }
+
 
     //methods:
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         // Instance of this class
         CarController cc = new CarController();
 
@@ -41,11 +73,11 @@ public class CarController {
         cc.cars.add(new Scania(Color.BLACK, new Point(0,400), Direction.EAST, 10));
 
         // Start a new view and send a reference of self
-        cc.frame = new CarView("CarSim 1.0", cc);
 
         // Start the timer
         cc.timer.start();
-    }
+
+    }*/
 
     /* Each step the TimerListener moves all the cars in the list and tells the
     * view to update its images. Change this method to your needs.
@@ -56,9 +88,9 @@ public class CarController {
                 car.move();
                 int x = (int) Math.round(car.getXCord());
                 int y = (int) Math.round(car.getYCord());
-                frame.drawPanel.moveit(car.getName(), x, y);
+                view.drawPanel.moveit(car.getName(), x, y);
                 // repaint() calls the paintComponent method of the panel
-                frame.drawPanel.repaint();
+                view.drawPanel.repaint();
             }
         }
     }
