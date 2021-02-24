@@ -10,6 +10,8 @@ import java.util.ArrayList;
 // Carfactory har referens till sina motsvarande bilar
 
 
+//TODO CarController should only have references to VFactory. (Instance of).
+
 /*
 * This class represents the Controller part in the MVC pattern.
 * It's responsibilities is to listen to the View and responds in a appropriate manner by
