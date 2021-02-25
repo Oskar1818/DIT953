@@ -99,36 +99,24 @@ public class CarController {
     }
 
     void turboOff() {
-        for (MotorizedVehicle car : vehicles) {
-            if (car instanceof Saab95)
-                ((Saab95) car).setTurboOff();
-        }
+        vehicles.getTurboList().forEach(ITurbo::setTurboOff);
     }
 
     void liftBed() {
-        for(MotorizedVehicle truck : vehicles) {
-            if (truck instanceof Transporter)
-                ((Scania) truck).setRampUp();
-        }
+        vehicles.getTransporterList().forEach(Transporter::setRampUp);
     }
 
     void lowerBed() {
-        for(MotorizedVehicle truck : vehicles) {
-            if (truck instanceof Transporter)
-                ((Scania) truck).setRampDown();
+        vehicles.getTransporterList().forEach(Transporter::setRampDown);
     }
-}
+
 
     public void startAll() {
-        for (MotorizedVehicle car : vehicles) {
-            car.startEngine();
-        }
+        vehicles.getVehicleList().forEach(MotorizedVehicle::startEngine);
     }
 
     public void stopAll() {
-        for (MotorizedVehicle car : vehicles) {
-            car.stopEngine();
-        }
+        vehicles.getVehicleList().forEach(MotorizedVehicle::stopEngine);
     }
 
 }

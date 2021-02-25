@@ -28,4 +28,6 @@ public class Volvo240 extends Car implements IProduction{
     public double speedFactor(){
         return getEnginePower() * 0.01 * trimFactor;
     }
+
+
 }
