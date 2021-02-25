@@ -33,10 +33,10 @@ public class CarController {
 
     CarView view;
     // A list of cars, modify if needed
-    ArrayList<MotorizedVehicle> vehicles;
+    Production vehicles;
     int gasAmount = 0;
 
-    public CarController(CarView view, ArrayList<MotorizedVehicle> vehicles){
+    public CarController(CarView view, Production vehicles){
         this.view = view;
         this.vehicles = vehicles;
         addButtonFunctionality();
@@ -65,59 +65,37 @@ public class CarController {
     }
 
 
-    //methods:
-
-    /*public static void main(String[] args) {
-        // Instance of this class
-        CarController cc = new CarController();
-
-        cc.vehicles.add(new Volvo240(Color.red, new Point(0,0), Direction.EAST));
-        cc.vehicles.add(new Saab95(Color.BLACK, new Point(0,200), Direction.EAST));
-        cc.vehicles.add(new Scania(Color.BLACK, new Point(0,400), Direction.EAST, 10));
-
-        // Start a new view and send a reference of self
-
-        // Start the timer
-        cc.timer.start();
-
-    }*/
-
     /* Each step the TimerListener moves all the cars in the list and tells the
     * view to update its images. Change this method to your needs.
     * */
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            for (MotorizedVehicle car : vehicles) {
-                car.move();
-                int x = (int) Math.round(car.getXCord());
-                int y = (int) Math.round(car.getYCord());
-                view.drawPanel.moveit(car.getName(), x, y);
+            vehicles.getVehicleList().forEach( v -> {
+                v.move();
+                int x = (int) Math.round(v.getXCord());
+                int y = (int) Math.round(v.getYCord());
+                view.drawPanel.moveit(v.getName(), x, y);
                 // repaint() calls the paintComponent method of the panel
                 view.drawPanel.repaint();
+            });
             }
         }
-    }
+
 
     // Calls the gas method for each car once
     void gas(int amount) {
         double gas = ((double) amount) / 100;
-        for (MotorizedVehicle car : vehicles
-                ) {
-            car.gas(gas);
-        }
+        vehicles.getVehicleList().forEach( v -> v.gas((int) gas));
+
     }
 
     void brake(int amount) {
         double brake = ((double) amount / 100);
-        for (MotorizedVehicle car : vehicles)
-            car.brake(brake);
+        vehicles.getVehicleList().forEach( v -> v.brake( (int) brake));
     }
 
     void turboOn() {
-        for (MotorizedVehicle car : vehicles) {
-            if (car instanceof Saab95)
-                ((Saab95) car).setTurboOn();
-        }
+        vehicles.getTurboList().forEach(ITurbo::setTurboOn);
     }
 
     void turboOff() {

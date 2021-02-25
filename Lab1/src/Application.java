@@ -5,14 +5,16 @@ public class Application {
 
     public static void main(String[] args){
         VFactory factory = new VFactory();
-        ArrayList<VFactory> vehicleList = new ArrayList<>(); //TODO Application has a refeence to MotorizedVehicle.
 
-        vehicleList.add(factory.addVolvo240());
-        vehicleList.add(factory.addScania());
-        vehicleList.add(factory.addSaab95());
+        Production productionVehicles = new Production();
+
+        productionVehicles.addSaab95(factory.addSaab95());
+        productionVehicles.addVolvo240(factory.addVolvo240());
+        productionVehicles.addScania(factory.addScania());
+
 
         CarView view = new CarView("CarSim 1.1");
-        CarController controller = new CarController(view, vehicleList);
+        CarController controller = new CarController(view, productionVehicles);
         //controller.addButtonFunctionality();
 
         controller.timer.start();

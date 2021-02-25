@@ -2,7 +2,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class VehicleFactory <T extends Vehicle> {
+public class VehicleFactory {
 
     private ArrayList<Vehicle> vehicleList = new ArrayList<>();
     // this class should perhaps not have a list in itself. Instead create a list in the desired class and add cars
@@ -30,6 +30,8 @@ public class VehicleFactory <T extends Vehicle> {
     public Transporter addScania() {
         return new Scania(Color.red, new Point(0,0), Direction.EAST, 10);
     }
+
+    // public getVolvo240
 
 
 //    private Transporter addMercedesActros() {

@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public class Scania extends Transporter<CommonGoods> {
+public class Scania extends Transporter<CommonGoods> implements IProduction {
 
     /**
      *

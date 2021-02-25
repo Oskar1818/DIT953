@@ -6,7 +6,7 @@ import java.awt.*;
  * methods for which the car should implement, to be able to move.
  * @author Valter Miari, Oskar Sturebrand, Clara Josefsson
  */
-public class Saab95 extends Car implements ITurbo{
+public class Saab95 extends Car implements ITurbo, IProduction{
 
     private boolean turboOn;
     public final static double turboFactor = 1.3;
