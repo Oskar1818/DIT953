@@ -103,11 +103,11 @@ public class CarController {
     }
 
     void liftBed() {
-        vehicles.getTransporterList().forEach(Transporter::setRampUp);
+        vehicles.getTransporterList().forEach( t -> t.setRampUp());
     }
-
+    // check if this changes the pointers probably not...
     void lowerBed() {
-        vehicles.getTransporterList().forEach(Transporter::setRampDown);
+        vehicles.getTransporterList().forEach( t -> t.setRampDown());
     }
 
 
