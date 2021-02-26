@@ -1,4 +1,6 @@
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * The abstract base class for all vehicles.
@@ -91,6 +93,22 @@ public abstract class Vehicle implements IMove, ITransportable{
      */
     @Override
     public Direction getDirection() { return this.dir; }
+
+    @Override
+    public Direction getOppositeDirection(Direction dir) {
+        ArrayList<Direction> directions = new ArrayList<>(Arrays.asList(Direction.values()));
+        switch (directions.indexOf(dir)) {
+            case 0:
+                return directions.get(1);
+            case 1:
+                return directions.get(0);
+            case 2:
+                return directions.get(3);
+            case 3:
+                return directions.get(2);
+        }
+        return null;
+    }
 
     /**
      * Increases the speed of the Vehicle by the input amount times the speed factor, and makes sure the

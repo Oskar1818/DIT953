@@ -12,7 +12,7 @@ public class DrawPanel extends JPanel{
 
     // Just a single image, TODO: Generalize
     //TODO make some sort of interface for the pictures
-    private ArrayList<BufferedImage> carPics = new ArrayList<>();
+    //private ArrayList<BufferedImage> carPics = new ArrayList<>();
     private BufferedImage volvoImage;
     private BufferedImage saabImage;
     private BufferedImage scaniaImage;
@@ -83,6 +83,5 @@ public class DrawPanel extends JPanel{
         g.drawImage(volvoImage, volvoPoint.x, volvoPoint.y, null); // see javadoc for more info on the parameters
         g.drawImage(saabImage, saabPoint.x, saabPoint.y, null);
         g.drawImage(scaniaImage, scaniaPoint.x, scaniaPoint.y, null);
-
     }
 }

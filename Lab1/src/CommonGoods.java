@@ -28,4 +28,9 @@ public class CommonGoods implements ITransportable{
     public Direction getDirection() {
         return null;
     }
+
+    @Override
+    public Direction getOppositeDirection(Direction direction) {
+        return null;
+    }
 }

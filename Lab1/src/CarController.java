@@ -42,7 +42,6 @@ public class CarController {
     }
 
     private void addButtonFunctionality(){
-
         view.gasSpinner.addChangeListener(e -> gasAmount = (int) ((JSpinner)e.getSource()).getValue());
 
         view.gasButton.addActionListener(e -> gas(gasAmount));
@@ -60,7 +59,6 @@ public class CarController {
         view.startButton.addActionListener(e -> startAll());
 
         view.stopButton.addActionListener(e -> stopAll());
-
     }
 
 
@@ -81,7 +79,6 @@ public class CarController {
             }
         }
 
-
     // Calls the gas method for each car once
     void gas(int amount) {
         double gas = ((double) amount) / 100;
@@ -100,14 +97,12 @@ public class CarController {
 
     void turboOff() { vehicles.getTurboList().forEach(ITurbo::setTurboOff); }
 
-    void liftBed() {
-        vehicles.getTransporterList().forEach( t -> t.setRampUp());
-    }
+    void liftBed() { vehicles.getTransporterList().forEach( t -> t.setRampUp()); }
+
     // Does static methods in Production take away the pointers to the specific classes?
     void lowerBed() {
         vehicles.getTransporterList().forEach( t -> t.setRampDown());
     }
-
 
     public void startAll() {
         vehicles.getVehicleList().forEach(MotorizedVehicle::startEngine);
@@ -119,9 +114,8 @@ public class CarController {
 
     public void collisionDetection(){
         vehicles.getVehicleList().forEach(v -> {
-            if (v.getXCord() < 0 || v.getXCord() > 800 || v.getYCord() < 0 || v.getYCord() + 60 > 800 - 240) {
-                // how should this be?
-                v.setDirection(Direction.WEST); // implement getOppositeDirection()
+            if (v.getXCord() < 0 || v.getXCord() > 700 || v.getYCord() < 0 || v.getYCord() > 700 - 200) {
+                v.setDirection(v.getOppositeDirection(v.getDirection()));
             }
         });
     }

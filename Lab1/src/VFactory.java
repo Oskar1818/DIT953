@@ -6,7 +6,7 @@ public class VFactory {
     //public VFactory(){}
 
     public MotorizedVehicle createVolvo240() {
-        return new Volvo240(Color.red, new Point(0,0), Direction.EAST);
+        return new Volvo240(Color.red, new Point(0,0), Direction.WEST);
     }
 
     public Saab95 createSaab95() {

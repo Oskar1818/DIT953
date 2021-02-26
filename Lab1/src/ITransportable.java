@@ -12,4 +12,6 @@ public interface ITransportable {
 
     Direction getDirection();
 
+    Direction getOppositeDirection(Direction direction);
+
 }
