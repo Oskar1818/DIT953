@@ -14,9 +14,12 @@ public class Production implements IProduction {
     /* TODO cannot rely on abstraction ITransporter bs it doesn't define the methods with ramps, think about creating a
     interface */
 
+    // We could make all the lists contain some abstraction, for instance MotorizedVehicle, but then we can't have
+    // compile time checking of the correct type of Vehicle in the correct list, e.g. a volvo could be added to turbos.
+
     private ArrayList<MotorizedVehicle> vehicles;
-    private ArrayList<ITurbo> turbos;
-    private ArrayList<Transporter> transporters;
+    private ArrayList<ITurbo> turbos; //ITurbo
+    private ArrayList<Transporter> transporters; //Transporter
 
     public Production() {
         this.vehicles = new ArrayList<>();
@@ -29,7 +32,7 @@ public class Production implements IProduction {
         turbos.add(saab);
     }
 
-    public void addVolvo240(Volvo240 volvo) {
+    public void addVolvo240(MotorizedVehicle volvo) {
         vehicles.add(volvo);
     }
 

@@ -5,7 +5,6 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 // TODO
-// knapparna kan inte ligga i carView
 // single responsibility använd morgans "och trick"
 // Carfactory har referens till sina motsvarande bilar
 
@@ -71,6 +70,7 @@ public class CarController {
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             vehicles.getVehicleList().forEach( v -> {
+                collisionDetection();
                 v.move();
                 int x = (int) Math.round(v.getXCord());
                 int y = (int) Math.round(v.getYCord());
@@ -98,14 +98,12 @@ public class CarController {
         vehicles.getTurboList().forEach(ITurbo::setTurboOn);
     }
 
-    void turboOff() {
-        vehicles.getTurboList().forEach(ITurbo::setTurboOff);
-    }
+    void turboOff() { vehicles.getTurboList().forEach(ITurbo::setTurboOff); }
 
     void liftBed() {
         vehicles.getTransporterList().forEach( t -> t.setRampUp());
     }
-    // check if this changes the pointers probably not...
+    // Does static methods in Production take away the pointers to the specific classes?
     void lowerBed() {
         vehicles.getTransporterList().forEach( t -> t.setRampDown());
     }
@@ -117,6 +115,15 @@ public class CarController {
 
     public void stopAll() {
         vehicles.getVehicleList().forEach(MotorizedVehicle::stopEngine);
+    }
+
+    public void collisionDetection(){
+        vehicles.getVehicleList().forEach(v -> {
+            if (v.getXCord() < 0 || v.getXCord() > 800 || v.getYCord() < 0 || v.getYCord() + 60 > 800 - 240) {
+                // how should this be?
+                v.setDirection(Direction.WEST); // implement getOppositeDirection()
+            }
+        });
     }
 
 }

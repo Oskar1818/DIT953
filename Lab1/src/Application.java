@@ -8,9 +8,9 @@ public class Application {
 
         Production productionVehicles = new Production();
 
-        productionVehicles.addSaab95(factory.addSaab95());
-        productionVehicles.addVolvo240(factory.addVolvo240());
-        productionVehicles.addScania(factory.addScania());
+        productionVehicles.addSaab95(factory.createSaab95());
+        productionVehicles.addVolvo240(factory.createVolvo240());
+        productionVehicles.addScania(factory.createScania());
 
 
         CarView view = new CarView("CarSim 1.1");

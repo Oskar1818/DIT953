@@ -11,12 +11,12 @@ import javax.swing.*;
 public class DrawPanel extends JPanel{
 
     // Just a single image, TODO: Generalize
-   //private List<BufferedImage> carPics = new ArrayList<>();
+    //TODO make some sort of interface for the pictures
+    private ArrayList<BufferedImage> carPics = new ArrayList<>();
     private BufferedImage volvoImage;
     private BufferedImage saabImage;
     private BufferedImage scaniaImage;
 
-    private
 
     // To keep track of a singel cars position
     Point volvoPoint = new Point(0, 0);
@@ -36,6 +36,16 @@ public class DrawPanel extends JPanel{
         else if (name.equals("Scania")) {
             scaniaPoint.x = x;
             scaniaPoint.y = y;
+        }
+    }
+
+    private BufferedImage bufferImages(Vehicle v) {
+        try {
+            return ImageIO.read(getClass().getResource("pics/"+ v.getName() + ".jpg"));
+        }
+        catch (IOException e) {
+            e.printStackTrace(); // this or throw exception, or both?
+            throw new RuntimeException("There is no such url");
         }
     }
 
@@ -66,7 +76,7 @@ public class DrawPanel extends JPanel{
     }
 
     // This method is called each time the panel updates/refreshes/repaints itself
-    // TODO: Change to suit your needs.
+    // TODO: How should this method be designed such that it isn't dependant on the model? A State pattern perhaps?
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
