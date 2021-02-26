@@ -14,7 +14,7 @@ public class VFactory {
     }
 
     public Scania createScania() {
-        return new Scania(Color.red, new Point(0,400), Direction.EAST, 10);
+        return new Scania(Color.red, new Point(0,400), Direction.NORTH, 10);
     }
 
 }
