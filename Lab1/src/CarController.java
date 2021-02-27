@@ -82,13 +82,13 @@ public class CarController {
     // Calls the gas method for each car once
     void gas(int amount) {
         double gas = ((double) amount) / 100;
-        vehicles.getVehicleList().forEach( v -> v.gas((int) gas));
+        vehicles.getVehicleList().forEach( v -> v.gas(gas));
 
     }
 
     void brake(int amount) {
         double brake = ((double) amount / 100);
-        vehicles.getVehicleList().forEach( v -> v.brake( (int) brake));
+        vehicles.getVehicleList().forEach( v -> v.brake(brake));
     }
 
     void turboOn() {
