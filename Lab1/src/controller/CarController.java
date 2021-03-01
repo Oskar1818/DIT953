@@ -1,18 +1,8 @@
-import model.ITurbo;
-import model.MotorizedVehicle;
+package controller;
+
 import production.Production;
 import view.CarView;
-
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-// TODO
-// single responsibility använd morgans "och trick"
-// Carfactory har referens till sina motsvarande bilar
-
-
-//TODO CarController should only have references to production.VFactory. (Instance of).
 
 /*
 * This class represents the Controller part in the MVC pattern.

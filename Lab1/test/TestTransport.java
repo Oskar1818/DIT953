@@ -1,4 +1,8 @@
-import model.*;
+import model.vehicle.*;
+import model.vehicle.car.Saab95;
+import model.vehicle.car.Volvo240;
+import model.vehicle.transporter.MercedesActros;
+import model.vehicle.transporter.Scania;
 import org.junit.Before;
 import org.junit.Test;
 import java.awt.*;

@@ -1,6 +1,4 @@
-package model;
-
-import model.ITransportable;
+package model.interfaces;
 
 import java.util.Collection;
 

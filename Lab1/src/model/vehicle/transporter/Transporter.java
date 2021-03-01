@@ -1,6 +1,9 @@
-package model;
+package model.vehicle.transporter;
 
-import model.MotorizedVehicle;
+import model.interfaces.ITransportable;
+import model.interfaces.ITransporter;
+import model.vehicle.Direction;
+import model.vehicle.MotorizedVehicle;
 
 import java.awt.*;
 import java.util.ArrayDeque;

@@ -1,6 +1,9 @@
 package production;
 
-import model.*;
+import model.vehicle.*;
+import model.vehicle.car.Saab95;
+import model.vehicle.car.Volvo240;
+import model.vehicle.transporter.Scania;
 
 import java.awt.*;
 
@@ -23,5 +26,5 @@ public class VFactory {
 }
 
 
-// interface production.Production <- model.Volvo240 <- model.Saab95
+// interface production.Production <- model.vehicle.car.Volvo240 <- model.vehicle.car.Saab95
 // production.Production.move()

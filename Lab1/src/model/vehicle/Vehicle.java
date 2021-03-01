@@ -1,4 +1,7 @@
-package model;
+package model.vehicle;
+
+import model.interfaces.IMove;
+import model.interfaces.ITransportable;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -36,7 +39,7 @@ public abstract class Vehicle implements IMove, ITransportable {
         this.speed = speed;
     }
 
-    // constructor for model.MotorizedVehicle
+    // constructor for model.vehicle.MotorizedVehicle
     public Vehicle(Color color, int nrDoors, String name, Point point, Direction dir) {
         this.color = color;
         this.nrDoors = nrDoors;
@@ -113,7 +116,7 @@ public abstract class Vehicle implements IMove, ITransportable {
     }
 
     /**
-     * Increases the speed of the model.Vehicle by the input amount times the speed factor, and makes sure the
+     * Increases the speed of the model.vehicle.Vehicle by the input amount times the speed factor, and makes sure the
      * speed doesn't go above the engine power.
      * @param amount amount the amount at which the speed should decrease by.
      */

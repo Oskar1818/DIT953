@@ -1,4 +1,8 @@
-import model.*;
+import model.stationary.Workshop;
+import model.vehicle.car.Car;
+import model.vehicle.Direction;
+import model.vehicle.car.Saab95;
+import model.vehicle.car.Volvo240;
 import org.junit.Before;
 import org.junit.Test;
 

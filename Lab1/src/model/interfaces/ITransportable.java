@@ -1,6 +1,6 @@
-package model;
+package model.interfaces;
 
-import model.Direction;
+import model.vehicle.Direction;
 
 public interface ITransportable {
 

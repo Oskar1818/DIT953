@@ -1,6 +1,4 @@
-package model;
-
-import model.Vehicle;
+package model.vehicle;
 
 import java.awt.*;
 

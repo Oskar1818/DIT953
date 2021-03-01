@@ -1,3 +1,5 @@
+package production;
+
 import view.IObserver;
 
 public interface IObservable {
@@ -5,3 +7,4 @@ public interface IObservable {
     public void removeObserver(IObserver observer);
     public void notifyObservers();
 }
+

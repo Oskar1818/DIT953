@@ -1,6 +1,11 @@
 package production;
 
-import model.*;
+import model.vehicle.*;
+import model.vehicle.car.Car;
+import model.vehicle.car.Saab95;
+import model.vehicle.car.Volvo240;
+import model.vehicle.transporter.Scania;
+import model.vehicle.transporter.Transporter;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -38,16 +43,16 @@ public class VehicleFactory {
     // public getVolvo240
 
 
-//    private model.Transporter addMercedesActros() {
-//        return new model.MercedesActros(Color.BLACK, new Point(0,0), model.Direction.EAST);
+//    private model.vehicle.transporter.Transporter addMercedesActros() {
+//        return new model.vehicle.transporter.MercedesActros(Color.BLACK, new Point(0,0), model.vehicle.Direction.EAST);
 //    }
 //
-//    private model.Transporter addMercedesBlueWonder() {
-//        return new model.MercedesBlueWonder(Color.BLUE, new Point(0,0), model.Direction.EAST);
+//    private model.vehicle.transporter.Transporter addMercedesBlueWonder() {
+//        return new model.vehicle.transporter.MercedesBlueWonder(Color.BLUE, new Point(0,0), model.vehicle.Direction.EAST);
 //    }
 //
-//    private model.Transporter addSSBanger() {
-//        return new model.SSBadger(Color.YELLOW, new Point(0,0), model.Direction.EAST);
+//    private model.vehicle.transporter.Transporter addSSBanger() {
+//        return new model.vehicle.transporter.SSBadger(Color.YELLOW, new Point(0,0), model.vehicle.Direction.EAST);
 //    }
 
 

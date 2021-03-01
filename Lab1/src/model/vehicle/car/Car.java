@@ -1,6 +1,8 @@
-package model;
+package model.vehicle.car;
 
-import model.MotorizedVehicle;
+import model.interfaces.ITransportable;
+import model.vehicle.Direction;
+import model.vehicle.MotorizedVehicle;
 
 import java.awt.*;
 

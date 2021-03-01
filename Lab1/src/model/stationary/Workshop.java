@@ -1,6 +1,8 @@
-package model;
+package model.stationary;
 
-import model.Vehicle;
+import model.interfaces.IStationary;
+import model.interfaces.IStorable;
+import model.vehicle.Vehicle;
 
 import java.awt.*;
 import java.util.ArrayList;

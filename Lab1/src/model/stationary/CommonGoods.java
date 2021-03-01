@@ -1,4 +1,7 @@
-package model;
+package model.stationary;
+
+import model.interfaces.ITransportable;
+import model.vehicle.Direction;
 
 public class CommonGoods implements ITransportable {
     @Override

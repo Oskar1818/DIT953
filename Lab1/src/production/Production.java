@@ -1,29 +1,30 @@
 package production;
 
-import model.*;
-import production.IProduction;
+import model.interfaces.ITurbo;
+import model.vehicle.MotorizedVehicle;
+import model.vehicle.car.Saab95;
+import model.vehicle.transporter.Scania;
+import model.vehicle.transporter.Transporter;
+import view.IObserver;
 
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.List;
 
-public class Production implements IProduction {
+public class Production implements IProduction, IObservable {
 
-    /*private ArrayList<model.ITurbo> turbos;
-    private ArrayList<model.ITransporter<model.CommonGoods>> transporters;
-    private ArrayList<ArrayList<production.IProduction>> vehicleList;*/
+    private final ArrayList<MotorizedVehicle> vehicles;
+    private final ArrayList<ITurbo> turbos; //model.interfaces.ITurbo
+    private final ArrayList<Transporter> transporters; //model.vehicle.transporter.Transporter
 
-    // perhaps a map?
 
-    // TODO should be an abstraction (interface) not an abstract class such as model.Vehicle
+    private final int delay = 50;
 
-    /* TODO cannot rely on abstraction model.ITransporter bs it doesn't define the methods with ramps, think about creating a
-    interface */
+    // The delay (ms) corresponds to 20 updates a sec (hz)
+    public Timer timer = new Timer(delay, new TimerListener());
 
-    // We could make all the lists contain some abstraction, for instance model.MotorizedVehicle, but then we can't have
-    // compile time checking of the correct type of model.Vehicle in the correct list, e.g. a volvo could be added to turbos.
-
-    private ArrayList<MotorizedVehicle> vehicles;
-    private ArrayList<ITurbo> turbos; //model.ITurbo
-    private ArrayList<Transporter> transporters; //model.Transporter
 
     public Production() {
         this.vehicles = new ArrayList<>();
@@ -62,4 +63,74 @@ public class Production implements IProduction {
         return null;
     }
 
+
+    private final List<IObserver> observers = new ArrayList<>();
+
+    @Override
+    public void addObserver(IObserver observer) {
+        observers.add(observer);
+    }
+
+    @Override
+    public void removeObserver(IObserver observer) {
+        observers.remove(observer);
+    }
+
+    @Override
+    public void notifyObservers() { //TODO skicka med data?
+        for (IObserver observer: observers) {
+            observer.update();
+        }
+    }
+
+    private class TimerListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            collisionDetection();
+            move();
+            notifyObservers();
+        }
+    }
+
+    void move() {
+        vehicles.forEach(MotorizedVehicle::move);
+    }
+
+    // Calls the gas method for each car once
+    public void gas(int amount) {
+        double gas = ((double) amount) / 100;
+        vehicles.forEach( v -> v.gas(gas));
+
+    }
+
+    public void brake(int amount) {
+        double brake = ((double) amount / 100);
+        vehicles.forEach( v -> v.brake(brake));
+    }
+
+    public void turboOn() {
+        turbos.forEach(ITurbo::setTurboOn);
+    }
+
+    public void turboOff() { turbos.forEach(ITurbo::setTurboOff); }
+
+    public void liftBed() { transporters.forEach(Transporter::setRampUp); }
+
+    // Does static methods in production.Production take away the pointers to the specific classes?
+    public void lowerBed() {transporters.forEach(Transporter::setRampDown); }
+
+    public void startAll() {
+        vehicles.forEach(MotorizedVehicle::startEngine);
+    }
+
+    public void stopAll() {
+        vehicles.forEach(MotorizedVehicle::stopEngine);
+    }
+
+    public void collisionDetection(){
+        vehicles.forEach(v -> {
+            if (v.getXCord() < 0 || v.getXCord() > 700 || v.getYCord() < 0 || v.getYCord() > 700 - 200) {
+                v.setDirection(v.getOppositeDirection(v.getDirection()));
+            }
+        });
+    }
 }

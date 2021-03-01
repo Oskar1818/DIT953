@@ -1,7 +1,7 @@
-import model.Direction;
-import model.SSBadger;
-import model.Saab95;
-import model.Volvo240;
+import model.vehicle.Direction;
+import model.vehicle.transporter.SSBadger;
+import model.vehicle.car.Saab95;
+import model.vehicle.car.Volvo240;
 import org.junit.Before;
 import org.junit.Test;
 

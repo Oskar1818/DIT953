@@ -16,7 +16,7 @@ public class CarView extends JFrame implements IObserver {
     private static final int X = 800;
     private static final int Y = 800;
 
-    // Försäkra att det är ok att göra knapparna public, för att få access i CarController, eller om det finns
+    // Försäkra att det är ok att göra knapparna public, för att få access i controller.CarController, eller om det finns
     // en bättre metod
 
     public DrawPanel drawPanel = new DrawPanel(X, Y-240);
@@ -30,8 +30,8 @@ public class CarView extends JFrame implements IObserver {
     public JButton brakeButton = new JButton("Brake");
     public JButton turboOnButton = new JButton("Saab Turbo on");
     public JButton turboOffButton = new JButton("Saab Turbo off");
-    public JButton liftBedButton = new JButton("model.Scania Lift Bed");
-    public JButton lowerBedButton = new JButton("model.Scania Lower Bed");
+    public JButton liftBedButton = new JButton("model.vehicle.transporter.Scania Lift Bed");
+    public JButton lowerBedButton = new JButton("model.vehicle.transporter.Scania Lower Bed");
 
     public JButton startButton = new JButton("Start all cars");
     public JButton stopButton = new JButton("Stop all cars");
