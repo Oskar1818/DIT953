@@ -1,3 +1,5 @@
+package model;
+
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -5,7 +7,7 @@ import java.util.Arrays;
 /**
  * The abstract base class for all vehicles.
  */
-public abstract class Vehicle implements IMove, ITransportable{
+public abstract class Vehicle implements IMove, ITransportable {
 
     private double xCord;
     private double yCord;
@@ -34,7 +36,7 @@ public abstract class Vehicle implements IMove, ITransportable{
         this.speed = speed;
     }
 
-    // constructor for MotorizedVehicle
+    // constructor for model.MotorizedVehicle
     public Vehicle(Color color, int nrDoors, String name, Point point, Direction dir) {
         this.color = color;
         this.nrDoors = nrDoors;
@@ -111,7 +113,7 @@ public abstract class Vehicle implements IMove, ITransportable{
     }
 
     /**
-     * Increases the speed of the Vehicle by the input amount times the speed factor, and makes sure the
+     * Increases the speed of the model.Vehicle by the input amount times the speed factor, and makes sure the
      * speed doesn't go above the engine power.
      * @param amount amount the amount at which the speed should decrease by.
      */
@@ -172,6 +174,7 @@ public abstract class Vehicle implements IMove, ITransportable{
             case WEST -> setXCord(getXCord() - getSpeed());
             case NORTH -> setYCord(getYCord() + getSpeed());
             case SOUTH -> setYCord(getYCord() - getSpeed());
+            default -> throw new IllegalStateException("Unexpected value: " + getDirection());
         }
     }
 
@@ -182,6 +185,7 @@ public abstract class Vehicle implements IMove, ITransportable{
             case WEST -> setDirection(Direction.NORTH);
             case NORTH -> setDirection(Direction.EAST);
             case SOUTH -> setDirection(Direction.WEST);
+            default -> throw new IllegalStateException("Unexpected value: " + getDirection());
         }
     }
 
@@ -192,6 +196,8 @@ public abstract class Vehicle implements IMove, ITransportable{
             case WEST -> setDirection(Direction.SOUTH);
             case NORTH -> setDirection(Direction.WEST);
             case SOUTH -> setDirection(Direction.EAST);
+            default -> throw new IllegalStateException("Unexpected value: " + getDirection());
+
         }
     }
 

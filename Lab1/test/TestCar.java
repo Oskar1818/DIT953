@@ -1,3 +1,6 @@
+import model.Direction;
+import model.Saab95;
+import model.Volvo240;
 import org.junit.Before;
 import org.junit.Test;
 import java.awt.*;
@@ -31,12 +34,12 @@ public class TestCar {
 
     @Test
     public void checkVolvoName() {
-        assertEquals("Volvo240", volvo240.getName());
+        assertEquals("model.Volvo240", volvo240.getName());
     }
 
     @Test
     public void checkSaabName() {
-        assertEquals("Saab95", saab95.getName());
+        assertEquals("model.Saab95", saab95.getName());
     }
 
     @Test

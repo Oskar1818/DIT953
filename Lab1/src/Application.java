@@ -1,5 +1,6 @@
-import java.util.ArrayList;
-import java.awt.*;
+import production.Production;
+import production.VFactory;
+import view.CarView;
 
 public class Application {
 
@@ -12,13 +13,9 @@ public class Application {
         productionVehicles.addVolvo240(factory.createVolvo240());
         productionVehicles.addScania(factory.createScania());
 
-
         CarView view = new CarView("CarSim 1.1");
         CarController controller = new CarController(view, productionVehicles);
-        //controller.addButtonFunctionality();
 
         controller.timer.start();
-
     }
-
 }

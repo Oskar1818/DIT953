@@ -1,3 +1,5 @@
+package model;
+
 public interface IStorable<T> {
 
     void putObject(T object);

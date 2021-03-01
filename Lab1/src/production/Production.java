@@ -1,25 +1,29 @@
+package production;
+
+import model.*;
+import production.IProduction;
+
 import java.util.ArrayList;
-import java.util.Map;
 
 public class Production implements IProduction {
 
-    /*private ArrayList<ITurbo> turbos;
-    private ArrayList<ITransporter<CommonGoods>> transporters;
-    private ArrayList<ArrayList<IProduction>> vehicleList;*/
+    /*private ArrayList<model.ITurbo> turbos;
+    private ArrayList<model.ITransporter<model.CommonGoods>> transporters;
+    private ArrayList<ArrayList<production.IProduction>> vehicleList;*/
 
     // perhaps a map?
 
-    // TODO should be an abstraction (interface) not an abstract class such as Vehicle
+    // TODO should be an abstraction (interface) not an abstract class such as model.Vehicle
 
-    /* TODO cannot rely on abstraction ITransporter bs it doesn't define the methods with ramps, think about creating a
+    /* TODO cannot rely on abstraction model.ITransporter bs it doesn't define the methods with ramps, think about creating a
     interface */
 
-    // We could make all the lists contain some abstraction, for instance MotorizedVehicle, but then we can't have
-    // compile time checking of the correct type of Vehicle in the correct list, e.g. a volvo could be added to turbos.
+    // We could make all the lists contain some abstraction, for instance model.MotorizedVehicle, but then we can't have
+    // compile time checking of the correct type of model.Vehicle in the correct list, e.g. a volvo could be added to turbos.
 
     private ArrayList<MotorizedVehicle> vehicles;
-    private ArrayList<ITurbo> turbos; //ITurbo
-    private ArrayList<Transporter> transporters; //Transporter
+    private ArrayList<ITurbo> turbos; //model.ITurbo
+    private ArrayList<Transporter> transporters; //model.Transporter
 
     public Production() {
         this.vehicles = new ArrayList<>();

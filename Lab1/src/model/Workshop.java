@@ -1,3 +1,7 @@
+package model;
+
+import model.Vehicle;
+
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -5,7 +9,7 @@ import java.util.ArrayList;
  * The class representing a workshop that can store vehicles.
  * @param <T> The specified type parameter of which Vehicles that could be stored in a specific workshop.
  */
-public class Workshop<T extends Vehicle> implements IStationary, IStorable<T>{
+public class Workshop<T extends Vehicle> implements IStationary, IStorable<T> {
 
     private final int capacity;
     private final ArrayList<T> workshop; // The data structure representing the storage.
@@ -15,7 +19,7 @@ public class Workshop<T extends Vehicle> implements IStationary, IStorable<T>{
      * @param capacity The maximum amount of vehicles that the workshop can store.
      * @param location The static (not movable) location of the workshop.
      */
-    Workshop(int capacity, Point location){
+    public Workshop(int capacity, Point location){
         this.capacity = capacity;
         workshop = new ArrayList<>(capacity);
         this.location = location;

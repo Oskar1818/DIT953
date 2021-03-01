@@ -1,9 +1,12 @@
+package production;
+
+import model.*;
 
 import java.awt.*;
 
 public class VFactory {
 
-    //public VFactory(){}
+    //public production.VFactory(){}
 
     public MotorizedVehicle createVolvo240() {
         return new Volvo240(Color.red, new Point(0,0), Direction.WEST);
@@ -20,5 +23,5 @@ public class VFactory {
 }
 
 
-// interface Production <- Volvo240 <- Saab95
-// Production.move()
+// interface production.Production <- model.Volvo240 <- model.Saab95
+// production.Production.move()

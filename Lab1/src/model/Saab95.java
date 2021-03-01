@@ -1,27 +1,31 @@
+package model;
+
+import production.IProduction;
 import java.awt.*;
 
+
 /**
- * A class for the cars of model Saab95. Saab95 is a subclass of Car, it inherits the methods and
- * variables of the abstract class Car. Saab95 also implements the interface Movable, which describes the desired
+ * A class for the cars of model model.Saab95. model.Saab95 is a subclass of model.Car, it inherits the methods and
+ * variables of the abstract class model.Car. model.Saab95 also implements the interface Movable, which describes the desired
  * methods for which the car should implement, to be able to move.
  * @author Valter Miari, Oskar Sturebrand, Clara Josefsson
  */
-public class Saab95 extends Car implements ITurbo, IProduction{
+public class Saab95 extends Car implements ITurbo, IProduction {
 
     private boolean turboOn;
     public final static double turboFactor = 1.3;
 
     /**
-     * The constructor that is called upon on creation of a Saab95. It inherits the variables; nrDoors, enginePower,
-     * speed, color and modelName; from its super class Car. With exception of color, all these variables and the
-     * variables; turboOn and dir, have default values for a Saab95, and are assigned a final default value upon
+     * The constructor that is called upon on creation of a model.Saab95. It inherits the variables; nrDoors, enginePower,
+     * speed, color and modelName; from its super class model.Car. With exception of color, all these variables and the
+     * variables; turboOn and dir, have default values for a model.Saab95, and are assigned a final default value upon
      * creation.
      * @param color The color of the car.
      * @param point The starting position of the car. An x- and a y-coordinate.
      * @param dir The starting direction of the car.
      */
     public Saab95(Color color, Point point, Direction dir){
-	    super(color, 125.0, 2, "Saab95", point, dir);
+	    super(color, 125.0, 2, "model.Saab95", point, dir);
         turboOn = false;
         stopEngine();
     }
@@ -34,7 +38,7 @@ public class Saab95 extends Car implements ITurbo, IProduction{
     public boolean isTurboOn() { return this.turboOn; }
 
     /**
-     * Turns on the turbo in the Saab95.
+     * Turns on the turbo in the model.Saab95.
      */
     @Override
     public void setTurboOn(){
@@ -42,7 +46,7 @@ public class Saab95 extends Car implements ITurbo, IProduction{
     }
 
     /**
-     * Turns off the turbo in the Saab95.
+     * Turns off the turbo in the model.Saab95.
      */
     @Override
     public void setTurboOff(){

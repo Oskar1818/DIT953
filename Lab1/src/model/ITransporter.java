@@ -1,3 +1,7 @@
+package model;
+
+import model.ITransportable;
+
 import java.util.Collection;
 
 public interface ITransporter<T extends ITransportable> {

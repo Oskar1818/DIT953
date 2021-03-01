@@ -1,3 +1,7 @@
+package production;
+
+import model.*;
+
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
@@ -34,16 +38,16 @@ public class VehicleFactory {
     // public getVolvo240
 
 
-//    private Transporter addMercedesActros() {
-//        return new MercedesActros(Color.BLACK, new Point(0,0), Direction.EAST);
+//    private model.Transporter addMercedesActros() {
+//        return new model.MercedesActros(Color.BLACK, new Point(0,0), model.Direction.EAST);
 //    }
 //
-//    private Transporter addMercedesBlueWonder() {
-//        return new MercedesBlueWonder(Color.BLUE, new Point(0,0), Direction.EAST);
+//    private model.Transporter addMercedesBlueWonder() {
+//        return new model.MercedesBlueWonder(Color.BLUE, new Point(0,0), model.Direction.EAST);
 //    }
 //
-//    private Transporter addSSBanger() {
-//        return new SSBadger(Color.YELLOW, new Point(0,0), Direction.EAST);
+//    private model.Transporter addSSBanger() {
+//        return new model.SSBadger(Color.YELLOW, new Point(0,0), model.Direction.EAST);
 //    }
 
 

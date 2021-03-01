@@ -1,3 +1,7 @@
+package model;
+
+import model.Direction;
+
 public interface ITransportable {
 
     void setXCord(double x);

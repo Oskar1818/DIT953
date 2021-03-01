@@ -1,6 +1,10 @@
+package model;
+
+import model.Vehicle;
+
 import java.awt.*;
 
-public abstract class ElectricVehicle extends Vehicle{
+public abstract class ElectricVehicle extends Vehicle {
 
     /**
      *  @param color The color of the car.

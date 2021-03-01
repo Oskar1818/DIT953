@@ -1,3 +1,5 @@
+package model;
+
 public interface IStationary {
 
     double getYCord();

@@ -1,3 +1,6 @@
+package model;
+
+import production.IProduction;
 import java.awt.*;
 
 public class Scania extends Transporter<CommonGoods> implements IProduction {
@@ -10,7 +13,7 @@ public class Scania extends Transporter<CommonGoods> implements IProduction {
      * @param capacity The maximum amount of goods the transporter can transport.
      */
     public Scania(Color color, Point point, Direction dir, int capacity){
-        super(color, 500, 2, "Scania", point, dir, capacity);
+        super(color, 500, 2, "model.Scania", point, dir, capacity);
         stopEngine();
     }
 
@@ -20,7 +23,7 @@ public class Scania extends Transporter<CommonGoods> implements IProduction {
      */
     public void setRampAngle(double a){
         if (getSpeed() != 0)
-            System.out.println("Car must not move!");
+            System.out.println("model.Car must not move!");
         else
             setRamp(Math.max(Math.min(a, 70), 0));
     }

@@ -1,4 +1,6 @@
-public class CommonGoods implements ITransportable{
+package model;
+
+public class CommonGoods implements ITransportable {
     @Override
     public void setXCord(double x) {
 

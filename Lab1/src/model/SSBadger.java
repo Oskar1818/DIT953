@@ -1,18 +1,22 @@
+package model;
+
+import model.Transporter;
+
 import java.awt.*;
 
 /**
- * A car ferry in the form of the model SSBadger.
+ * A car ferry in the form of the model model.SSBadger.
  */
 public class SSBadger extends Transporter<Car> {
 
     /**
-     * @param color The color of the SSBadger.
-     * @param point The starting position of the SSBadger. An x- and a y-coordinate.
-     * @param dir The initial direction of the SSBadger.
-     * @param capacity The initial direction of the SSBadger.
+     * @param color The color of the model.SSBadger.
+     * @param point The starting position of the model.SSBadger. An x- and a y-coordinate.
+     * @param dir The initial direction of the model.SSBadger.
+     * @param capacity The initial direction of the model.SSBadger.
      */
     public SSBadger(Color color, Point point, Direction dir, int capacity){
-        super(color, 1000, 10, "SSBadger", point, dir, capacity);
+        super(color, 1000, 10, "model.SSBadger", point, dir, capacity);
     }
 
     @Override
