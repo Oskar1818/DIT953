@@ -6,6 +6,7 @@ import production.Production;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.HashMap;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
@@ -15,9 +16,9 @@ public class DrawPanel extends JPanel implements IObserver {
 
     HashMap<String, Point> position;
 
-    private BufferedImage bufferImages(Vehicle v) {
+    private BufferedImage bufferImage(String name) {
         try {
-            return ImageIO.read(getClass().getResource("view/pics/" + v.getName() + ".jpg"));
+            return ImageIO.read(getClass().getResource("view/pics/" + name + ".jpg"));
         }
         catch (IOException e) {
             e.printStackTrace(); // this or throw exception, or both?
@@ -26,7 +27,8 @@ public class DrawPanel extends JPanel implements IObserver {
     }
 
     // Initializes the panel and reads the images
-    public DrawPanel(int x, int y) {
+    public DrawPanel(int x, int y, HashMap<String, Point> position) {
+        this.position = position;
         this.setDoubleBuffered(true);
         this.setPreferredSize(new Dimension(x, y));
         this.setBackground(Color.lightGray);
@@ -37,9 +39,8 @@ public class DrawPanel extends JPanel implements IObserver {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(volvoImage, volvoPoint.x, volvoPoint.y, null); // see javadoc for more info on the parameters
-        g.drawImage(saabImage, saabPoint.x, saabPoint.y, null);
-        g.drawImage(scaniaImage, scaniaPoint.x, scaniaPoint.y, null);
+        position.forEach( (name, pos) -> g.drawImage(bufferImage(name), pos.x, pos.y, null));
+
     }
 
     @Override

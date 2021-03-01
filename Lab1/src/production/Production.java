@@ -46,9 +46,7 @@ public class Production implements IProduction, IObservable {
         transporters.add(scania);
     }
 
-    public ArrayList<MotorizedVehicle> getVehicleList() {
-        return vehicles;
-    }
+    public ArrayList<MotorizedVehicle> getVehicleList() { return vehicles; }
 
     public ArrayList<ITurbo> getTurboList() {
         return turbos;

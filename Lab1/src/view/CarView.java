@@ -2,6 +2,11 @@ package view;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import model.vehicle.MotorizedVehicle;
+import production.Production;
 
 
 /**
@@ -19,8 +24,11 @@ public class CarView extends JFrame implements IObserver {
     // Försäkra att det är ok att göra knapparna public, för att få access i controller.CarController, eller om det finns
     // en bättre metod
 
-    public DrawPanel drawPanel = new DrawPanel(X, Y-240);
+
+    Production vehicles;
+    HashMap<String, Point> position;
     JPanel controlPanel = new JPanel();
+    public DrawPanel drawPanel = new DrawPanel(X, Y-240, getPosition());
 
     JPanel gasPanel = new JPanel();
     public JSpinner gasSpinner = new JSpinner();
@@ -37,7 +45,8 @@ public class CarView extends JFrame implements IObserver {
     public JButton stopButton = new JButton("Stop all cars");
 
     // Constructor
-    public CarView(String framename){
+    public CarView(String framename, Production vehicles){
+        this.vehicles = vehicles;
         initComponents(framename);
     }
 
@@ -110,8 +119,16 @@ public class CarView extends JFrame implements IObserver {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
+    public void vehiclePos() {
+        position = new HashMap<>();
+        vehicles.getVehicleList().forEach( v -> position.put(v.getName(), new Point((int) v.getXCord(), (int) v.getYCord())));
+    }
+
+    public HashMap<String, Point> getPosition() { return position;}
+
+
     @Override
     public void update() {
-
+        drawPanel.repaint();
     }
 }
