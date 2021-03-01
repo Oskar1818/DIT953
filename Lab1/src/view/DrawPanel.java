@@ -1,8 +1,5 @@
 package view;
 
-import model.vehicle.Vehicle;
-import production.Production;
-
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -12,13 +9,13 @@ import javax.swing.*;
 
 // This panel represent the animated part of the view with the car images.
 
-public class DrawPanel extends JPanel implements IObserver {
+public class DrawPanel extends JPanel{
 
     HashMap<String, Point> position;
 
     private BufferedImage bufferImage(String name) {
         try {
-            return ImageIO.read(getClass().getResource("view/pics/" + name + ".jpg"));
+            return ImageIO.read(getClass().getResource("pics/" + name + ".jpg"));
         }
         catch (IOException e) {
             e.printStackTrace(); // this or throw exception, or both?
@@ -28,23 +25,16 @@ public class DrawPanel extends JPanel implements IObserver {
 
     // Initializes the panel and reads the images
     public DrawPanel(int x, int y, HashMap<String, Point> position) {
-        this.position = position;
         this.setDoubleBuffered(true);
         this.setPreferredSize(new Dimension(x, y));
         this.setBackground(Color.lightGray);
+        this.position = position;
     }
 
     // This method is called each time the panel updates/refreshes/repaints itself
-    // TODO: How should this method be designed such that it isn't dependant on the model? A State pattern perhaps?
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         position.forEach( (name, pos) -> g.drawImage(bufferImage(name), pos.x, pos.y, null));
-
-    }
-
-    @Override
-    public void update() {
-
     }
 }

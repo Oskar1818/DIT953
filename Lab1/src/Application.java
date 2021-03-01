@@ -14,11 +14,10 @@ public class Application {
         productionVehicles.addVolvo240(factory.createVolvo240());
         productionVehicles.addScania(factory.createScania());
 
-        CarView view = new CarView("CarSim 1.1", productionVehicles);
+        CarView view = new CarView("CarSim 1.1");
         CarController controller = new CarController(view, productionVehicles);
 
         productionVehicles.addObserver(view);
-
         productionVehicles.timer.start();
     }
 }

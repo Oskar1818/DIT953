@@ -11,25 +11,30 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Production implements IProduction, IObservable {
 
     private final ArrayList<MotorizedVehicle> vehicles;
     private final ArrayList<ITurbo> turbos; //model.interfaces.ITurbo
     private final ArrayList<Transporter> transporters; //model.vehicle.transporter.Transporter
+    private final ArrayList<IObserver> observers;
 
+    private final static Production production = new Production();
 
     private final int delay = 50;
 
     // The delay (ms) corresponds to 20 updates a sec (hz)
     public Timer timer = new Timer(delay, new TimerListener());
 
+    public static Production production() {
+        return production;
+    }
 
     public Production() {
         this.vehicles = new ArrayList<>();
         this.turbos = new ArrayList<>();
         this.transporters = new ArrayList<>();
+        this.observers = new ArrayList<>();
     }
 
     public void addSaab95(Saab95 saab){
@@ -61,9 +66,6 @@ public class Production implements IProduction, IObservable {
         return null;
     }
 
-
-    private final List<IObserver> observers = new ArrayList<>();
-
     @Override
     public void addObserver(IObserver observer) {
         observers.add(observer);
@@ -75,10 +77,8 @@ public class Production implements IProduction, IObservable {
     }
 
     @Override
-    public void notifyObservers() { //TODO skicka med data?
-        for (IObserver observer: observers) {
-            observer.update();
-        }
+    public void notifyObservers() {
+        observers.forEach(IObserver::update);
     }
 
     private class TimerListener implements ActionListener {
@@ -93,7 +93,6 @@ public class Production implements IProduction, IObservable {
         vehicles.forEach(MotorizedVehicle::move);
     }
 
-    // Calls the gas method for each car once
     public void gas(int amount) {
         double gas = ((double) amount) / 100;
         vehicles.forEach( v -> v.gas(gas));
@@ -113,7 +112,6 @@ public class Production implements IProduction, IObservable {
 
     public void liftBed() { transporters.forEach(Transporter::setRampUp); }
 
-    // Does static methods in production.Production take away the pointers to the specific classes?
     public void lowerBed() {transporters.forEach(Transporter::setRampDown); }
 
     public void startAll() {

@@ -8,6 +8,8 @@ import java.util.HashMap;
 import model.vehicle.MotorizedVehicle;
 import production.Production;
 
+import static production.Production.production;
+
 
 /**
  * This class represents the full view of the MVC pattern of your car simulator.
@@ -21,11 +23,6 @@ public class CarView extends JFrame implements IObserver {
     private static final int X = 800;
     private static final int Y = 800;
 
-    // Försäkra att det är ok att göra knapparna public, för att få access i controller.CarController, eller om det finns
-    // en bättre metod
-
-
-    Production vehicles;
     HashMap<String, Point> position;
     JPanel controlPanel = new JPanel();
     public DrawPanel drawPanel = new DrawPanel(X, Y-240, getPosition());
@@ -38,31 +35,24 @@ public class CarView extends JFrame implements IObserver {
     public JButton brakeButton = new JButton("Brake");
     public JButton turboOnButton = new JButton("Saab Turbo on");
     public JButton turboOffButton = new JButton("Saab Turbo off");
-    public JButton liftBedButton = new JButton("model.vehicle.transporter.Scania Lift Bed");
-    public JButton lowerBedButton = new JButton("model.vehicle.transporter.Scania Lower Bed");
+    public JButton liftBedButton = new JButton("Scania Lift Bed");
+    public JButton lowerBedButton = new JButton("Scania Lower Bed");
 
     public JButton startButton = new JButton("Start all cars");
     public JButton stopButton = new JButton("Stop all cars");
 
     // Constructor
-    public CarView(String framename, Production vehicles){
-        this.vehicles = vehicles;
+    public CarView(String framename){
         initComponents(framename);
     }
 
     // Sets everything in place and fits everything
-    // TODO: Take a good look and make sure you understand how these methods and components work
-
-
     private void initComponents(String title) {
 
         this.setTitle(title);
         this.setPreferredSize(new Dimension(X,Y));
         this.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
-
         this.add(drawPanel);
-
-
 
         SpinnerModel spinnerModel =
                 new SpinnerNumberModel(0, //initial value
@@ -119,12 +109,12 @@ public class CarView extends JFrame implements IObserver {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    public void vehiclePos() {
+    public HashMap<String, Point> getPosition() {
         position = new HashMap<>();
-        vehicles.getVehicleList().forEach( v -> position.put(v.getName(), new Point((int) v.getXCord(), (int) v.getYCord())));
+        production().getVehicleList().forEach( v -> position.put(
+                v.getName(), new Point((int) v.getXCord(), (int) v.getYCord())));
+        return position;
     }
-
-    public HashMap<String, Point> getPosition() { return position;}
 
 
     @Override
