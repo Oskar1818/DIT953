@@ -24,7 +24,7 @@ public class Volvo240 extends Car implements IProduction {
      * @param point The starting position of the car. An x- and a y-coordinate.
      */
     public Volvo240(Color color, Point point, Direction dir){
-        super(color, 100.0, 4, "model.vehicle.car.Volvo240", point, dir);
+        super(color, 100.0, 4, "Volvo240", point, dir);
         stopEngine();
     }
 

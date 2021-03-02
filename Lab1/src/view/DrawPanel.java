@@ -11,11 +11,12 @@ import javax.swing.*;
 
 public class DrawPanel extends JPanel{
 
-    HashMap<String, Point> position;
+    HashMap<String, Point> positions;
 
     private BufferedImage bufferImage(String name) {
         try {
-            return ImageIO.read(getClass().getResource("pics/" + name + ".jpg"));
+            return ImageIO.read(DrawPanel.class.getResourceAsStream("pics/" + name + ".jpg"));
+            // src/view/pics/Saab95.jpg
         }
         catch (IOException e) {
             e.printStackTrace(); // this or throw exception, or both?
@@ -24,17 +25,17 @@ public class DrawPanel extends JPanel{
     }
 
     // Initializes the panel and reads the images
-    public DrawPanel(int x, int y, HashMap<String, Point> position) {
+    public DrawPanel(int x, int y, HashMap<String, Point> positions) {
         this.setDoubleBuffered(true);
         this.setPreferredSize(new Dimension(x, y));
         this.setBackground(Color.lightGray);
-        this.position = position;
+        this.positions = positions;
     }
 
     // This method is called each time the panel updates/refreshes/repaints itself
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        position.forEach( (name, pos) -> g.drawImage(bufferImage(name), pos.x, pos.y, null));
+        positions.forEach( (name, pos) -> g.drawImage(bufferImage(name), pos.x, pos.y, null));
     }
 }

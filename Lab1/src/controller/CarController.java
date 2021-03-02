@@ -25,7 +25,7 @@ public class CarController {
 
     CarView view;
     Production production;
-    int gasAmount = 0;
+    int gasAmount;
 
     public CarController(CarView view, Production production){
         this.view = view;

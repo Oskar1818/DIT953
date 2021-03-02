@@ -23,9 +23,9 @@ public class CarView extends JFrame implements IObserver {
     private static final int X = 800;
     private static final int Y = 800;
 
-    HashMap<String, Point> position;
+    HashMap<String, Point> positions = production().getPositions();
     JPanel controlPanel = new JPanel();
-    public DrawPanel drawPanel = new DrawPanel(X, Y-240, getPosition());
+    public DrawPanel drawPanel = new DrawPanel(X, Y-240, positions);
 
     JPanel gasPanel = new JPanel();
     public JSpinner gasSpinner = new JSpinner();
@@ -108,14 +108,6 @@ public class CarView extends JFrame implements IObserver {
         // Make sure the frame exits when "x" is pressed
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
-
-    public HashMap<String, Point> getPosition() {
-        position = new HashMap<>();
-        production().getVehicleList().forEach( v -> position.put(
-                v.getName(), new Point((int) v.getXCord(), (int) v.getYCord())));
-        return position;
-    }
-
 
     @Override
     public void update() {

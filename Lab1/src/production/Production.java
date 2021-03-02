@@ -8,9 +8,11 @@ import model.vehicle.transporter.Transporter;
 import view.IObserver;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Production implements IProduction, IObservable {
 
@@ -18,6 +20,7 @@ public class Production implements IProduction, IObservable {
     private final ArrayList<ITurbo> turbos; //model.interfaces.ITurbo
     private final ArrayList<Transporter> transporters; //model.vehicle.transporter.Transporter
     private final ArrayList<IObserver> observers;
+    private final HashMap<String, Point> positions;
 
     private final static Production production = new Production();
 
@@ -35,6 +38,7 @@ public class Production implements IProduction, IObservable {
         this.turbos = new ArrayList<>();
         this.transporters = new ArrayList<>();
         this.observers = new ArrayList<>();
+        this.positions = new HashMap<>();
     }
 
     public void addSaab95(Saab95 saab){
@@ -89,6 +93,7 @@ public class Production implements IProduction, IObservable {
         }
     }
 
+    // is it necessary to have error handling here, for instance if there is no cars in the list
     void move() {
         vehicles.forEach(MotorizedVehicle::move);
     }
@@ -128,5 +133,12 @@ public class Production implements IProduction, IObservable {
                 v.setDirection(v.getOppositeDirection(v.getDirection()));
             }
         });
+    }
+
+    // Law of Demeter
+    public HashMap<String, Point> getPositions() {
+        vehicles.forEach( v -> positions.put(
+                v.getName(), new Point((int) v.getXCord(), (int) v.getYCord())));
+        return positions;
     }
 }

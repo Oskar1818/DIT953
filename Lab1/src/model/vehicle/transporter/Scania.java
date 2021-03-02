@@ -15,7 +15,7 @@ public class Scania extends Transporter<CommonGoods> implements IProduction {
      * @param capacity The maximum amount of goods the transporter can transport.
      */
     public Scania(Color color, Point point, Direction dir, int capacity){
-        super(color, 500, 2, "model.vehicle.transporter.Scania", point, dir, capacity);
+        super(color, 500, 2, "Scania", point, dir, capacity);
         stopEngine();
     }
 

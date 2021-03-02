@@ -27,7 +27,7 @@ public class Saab95 extends Car implements ITurbo, IProduction {
      * @param dir The starting direction of the car.
      */
     public Saab95(Color color, Point point, Direction dir){
-	    super(color, 125.0, 2, "model.vehicle.car.Saab95", point, dir);
+	    super(color, 125.0, 2, "Saab95", point, dir);
         turboOn = false;
         stopEngine();
     }

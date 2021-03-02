@@ -17,7 +17,7 @@ public class SSBadger extends Transporter<Car> {
      * @param capacity The initial direction of the model.vehicle.transporter.SSBadger.
      */
     public SSBadger(Color color, Point point, Direction dir, int capacity){
-        super(color, 1000, 10, "model.vehicle.transporter.SSBadger", point, dir, capacity);
+        super(color, 1000, 10, "SSBadger", point, dir, capacity);
     }
 
     @Override
