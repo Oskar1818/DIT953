@@ -20,7 +20,7 @@ public class CarController {
     // The frame that represents this instance View of the MVC pattern
 
     CarView view;
-    int gasAmount;
+    int gasAmount = 0;
 
     public CarController(CarView view){
         this.view = view;
