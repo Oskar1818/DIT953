@@ -1,17 +1,17 @@
 package view;
 
+import production.IInfoObserver;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.HashMap;
-import production.Production.*;
-import static production.Production.production;
 
 
-public class InfoView extends JFrame implements IObserver{
+
+public class InfoView extends JFrame implements IInfoObserver {
 
 
     JTextArea label = new JTextArea();
-    HashMap<String, Integer> information = production().getInformation();
 
     public InfoView() {
         initComponents();
@@ -43,8 +43,8 @@ public class InfoView extends JFrame implements IObserver{
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     @Override
-    public void update() {
+     public void update(HashMap<String, Integer> info ) {
         label.setText("");
-        information.forEach( (name, speed) -> label.setText(label.getText() + "\n" + name + ": " + speed));
+        info.forEach( (name, speed) -> label.setText(label.getText() + "\n" + name + ": " + speed));
     }
 }

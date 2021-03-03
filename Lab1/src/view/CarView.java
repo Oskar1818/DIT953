@@ -1,14 +1,10 @@
 package view;
 
+import production.IPositionObserver;
+
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.HashMap;
-
-import model.vehicle.MotorizedVehicle;
-import production.Production;
-
-import static production.Production.production;
 
 
 /**
@@ -19,13 +15,12 @@ import static production.Production.production;
  * TODO: Write more actionListeners and wire the rest of the buttons
  **/
 
-public class CarView extends JFrame implements IObserver {
+public class CarView extends JFrame implements IPositionObserver {
     private static final int X = 800;
     private static final int Y = 800;
 
-    HashMap<String, Point> positions = production().getPositions();
     JPanel controlPanel = new JPanel();
-    public DrawPanel drawPanel = new DrawPanel(X, Y-240, positions);
+    public DrawPanel drawPanel = new DrawPanel(X, Y-240);
 
     JPanel gasPanel = new JPanel();
     public JSpinner gasSpinner = new JSpinner();
@@ -110,7 +105,8 @@ public class CarView extends JFrame implements IObserver {
     }
 
     @Override
-    public void update() {
+    public void update(HashMap<String, Point> positions) {
+        drawPanel.receivePositions(positions);
         drawPanel.repaint();
     }
 }

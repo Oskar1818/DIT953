@@ -25,11 +25,14 @@ public class DrawPanel extends JPanel{
     }
 
     // Initializes the panel and reads the images
-    public DrawPanel(int x, int y, HashMap<String, Point> positions) {
+    public DrawPanel(int x, int y) {
         this.setDoubleBuffered(true);
         this.setPreferredSize(new Dimension(x, y));
         this.setBackground(Color.lightGray);
-        this.positions = positions;
+    }
+
+    public void receivePositions(HashMap<String, Point> positions) {
+        this.positions = new HashMap<>(positions);
     }
 
     // This method is called each time the panel updates/refreshes/repaints itself

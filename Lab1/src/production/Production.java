@@ -19,26 +19,28 @@ public class Production implements IProduction, IObservable {
     private final ArrayList<MotorizedVehicle> vehicles;
     private final ArrayList<ITurbo> turbos; //model.interfaces.ITurbo
     private final ArrayList<Transporter> transporters; //model.vehicle.transporter.Transporter
-    private final ArrayList<IObserver> observers;
+    private final ArrayList<IPositionObserver> positionObservers;
+    private final ArrayList<IInfoObserver> informationObservers;
     private final HashMap<String, Point> positions;
     private final HashMap<String, Integer> information;
 
-    private final static Production production = new Production();
+    //private final static Production production = new Production();
 
     private final int delay = 50;
 
     // The delay (ms) corresponds to 20 updates a sec (hz)
     public Timer timer = new Timer(delay, new TimerListener());
 
-    public static Production production() {
+    /*public static Production production() {
         return production;
-    }
+    }*/
 
     public Production() {
         this.vehicles = new ArrayList<>();
         this.turbos = new ArrayList<>();
         this.transporters = new ArrayList<>();
-        this.observers = new ArrayList<>();
+        this.positionObservers = new ArrayList<>();
+        this.informationObservers = new ArrayList<>();
         this.positions = new HashMap<>();
         this.information = new HashMap<>();
     }
@@ -73,25 +75,44 @@ public class Production implements IProduction, IObservable {
     }
 
     @Override
-    public void addObserver(IObserver observer) {
-        observers.add(observer);
+    public void addInfoObserver(IInfoObserver observer) {
+        informationObservers.add(observer);
     }
 
     @Override
-    public void removeObserver(IObserver observer) {
-        observers.remove(observer);
+    public void addPositionObserver(IPositionObserver observer) {
+        positionObservers.add(observer);
     }
 
     @Override
-    public void notifyObservers() {
-        observers.forEach(IObserver::update);
+    public void removePositionObserver(IPositionObserver observer) {
+        positionObservers.remove(observer);
+    }
+
+    @Override
+    public void removeInformationObserver(IInfoObserver obs) {
+        informationObservers.remove(obs);
+    }
+    
+
+    @Override
+    public void notifyPositionObservers(HashMap<String, Point> positions) {
+        positionObservers.forEach( o -> o.update(positions));
+    }
+
+    @Override
+    public void notifyInformationObservers(HashMap<String, Integer> information) {
+        informationObservers.forEach( o -> o.update(information));
     }
 
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             collisionDetection();
             move();
-            notifyObservers();
+            notifyPositionObservers(getPositions());
+            notifyInformationObservers(getInformation());
+            positions.clear();
+            information.clear();
         }
     }
 
