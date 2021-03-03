@@ -9,13 +9,13 @@ import java.util.Map;
 
 public interface IObservable{
 
-    public void addPositionObserver(IPositionObserver positions);
+    void addPositionObserver(IPositionObserver positions);
     void notifyPositionObservers(HashMap<String, Point> positions);
     void removePositionObserver(IPositionObserver observer);
 
     void notifyInformationObservers(HashMap<String, Integer> information);
-    public void removeInformationObserver(IInfoObserver obs);
+    void removeInformationObserver(IInfoObserver obs);
 
+    void addInfoObserver(IInfoObserver observer);
 
-    public void addInfoObserver(IInfoObserver observer);
-    }
+}

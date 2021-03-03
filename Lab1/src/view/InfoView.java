@@ -6,17 +6,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.HashMap;
 
-
-
 public class InfoView extends JFrame implements IInfoObserver {
-
 
     JTextArea label = new JTextArea();
 
     public InfoView() {
         initComponents();
     }
-
 
     private void initComponents() {
 
@@ -25,7 +21,6 @@ public class InfoView extends JFrame implements IInfoObserver {
 
         label.setEditable(false);
         this.add(label);
-
 
         // Make the frame pack all it's components by respecting the sizes if possible.
         this.pack();

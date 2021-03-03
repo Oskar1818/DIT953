@@ -5,7 +5,7 @@ import model.vehicle.Direction;
 import production.IProduction;
 import java.awt.*;
 
-public class Scania extends Transporter<CommonGoods> implements IProduction {
+public class Scania extends Transporter<CommonGoods> {
 
     /**
      *

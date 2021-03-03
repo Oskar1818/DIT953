@@ -8,10 +8,9 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 
 // This panel represent the animated part of the view with the car images.
-
 public class DrawPanel extends JPanel{
 
-    HashMap<String, Point> positions;
+    private HashMap<String, Point> positions;
 
     private BufferedImage bufferImage(String name) {
         try {
@@ -29,10 +28,12 @@ public class DrawPanel extends JPanel{
         this.setDoubleBuffered(true);
         this.setPreferredSize(new Dimension(x, y));
         this.setBackground(Color.lightGray);
+        this.positions = new HashMap<>();
     }
 
-    public void receivePositions(HashMap<String, Point> positions) {
+    public void updateUI(HashMap<String, Point> positions) {
         this.positions = new HashMap<>(positions);
+        repaint();
     }
 
     // This method is called each time the panel updates/refreshes/repaints itself

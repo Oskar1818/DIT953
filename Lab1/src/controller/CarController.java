@@ -29,6 +29,7 @@ public class CarController {
     }
 
     private void addButtonFunctionality(){
+
         view.gasSpinner.addChangeListener(e -> gasAmount = (int) ((JSpinner)e.getSource()).getValue());
 
         view.gasButton.addActionListener(e -> production.gas(gasAmount));
@@ -46,6 +47,10 @@ public class CarController {
         view.startButton.addActionListener(e -> production.startAll());
 
         view.stopButton.addActionListener(e -> production.stopAll());
+
+        view.addButton.addActionListener(e -> production.addRandomVehicle());
+
+        view.removeButton.addActionListener(e -> production.removeVehicle());
     }
 
 }

@@ -36,6 +36,9 @@ public class CarView extends JFrame implements IPositionObserver {
     public JButton startButton = new JButton("Start all cars");
     public JButton stopButton = new JButton("Stop all cars");
 
+    public JButton addButton = new JButton("Add a new random car");
+    public JButton removeButton = new JButton("Remove a car");
+
     // Constructor
     public CarView(String framename){
         initComponents(framename);
@@ -71,6 +74,8 @@ public class CarView extends JFrame implements IPositionObserver {
         controlPanel.add(brakeButton, 3);
         controlPanel.add(turboOffButton, 4);
         controlPanel.add(lowerBedButton, 5);
+        controlPanel.add(addButton, 6);
+        controlPanel.add(removeButton, 7);
         controlPanel.setPreferredSize(new Dimension((X/2)+4, 200));
         this.add(controlPanel);
         controlPanel.setBackground(Color.BLACK);
@@ -106,7 +111,6 @@ public class CarView extends JFrame implements IPositionObserver {
 
     @Override
     public void update(HashMap<String, Point> positions) {
-        drawPanel.receivePositions(positions);
-        drawPanel.repaint();
+        drawPanel.updateUI(positions);
     }
 }
