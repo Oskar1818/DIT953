@@ -21,6 +21,7 @@ public class Production implements IProduction, IObservable {
     private final ArrayList<Transporter> transporters; //model.vehicle.transporter.Transporter
     private final ArrayList<IObserver> observers;
     private final HashMap<String, Point> positions;
+    private final HashMap<String, Integer> information;
 
     private final static Production production = new Production();
 
@@ -39,6 +40,7 @@ public class Production implements IProduction, IObservable {
         this.transporters = new ArrayList<>();
         this.observers = new ArrayList<>();
         this.positions = new HashMap<>();
+        this.information = new HashMap<>();
     }
 
     public void addSaab95(Saab95 saab){
@@ -140,5 +142,10 @@ public class Production implements IProduction, IObservable {
         vehicles.forEach( v -> positions.put(
                 v.getName(), new Point((int) v.getXCord(), (int) v.getYCord())));
         return positions;
+    }
+
+    public HashMap<String, Integer> getInformation() {
+        vehicles.forEach(v -> information.put( v.getName(), (int) v.getSpeed()));
+        return information;
     }
 }

@@ -2,6 +2,7 @@ import controller.CarController;
 import production.Production;
 import production.VFactory;
 import view.CarView;
+import view.InfoView;
 
 import static production.Production.production;
 
@@ -17,9 +18,12 @@ public class Application {
         production().addScania(factory.createScania());
 
         CarView view = new CarView("CarSim 1.1");
-        CarController controller = new CarController(view, production());
+        InfoView secondView = new InfoView();
+        CarController controller = new CarController(view);
 
         production().addObserver(view);
+        production().addObserver(secondView);
+
         production().timer.start();
     }
 }
