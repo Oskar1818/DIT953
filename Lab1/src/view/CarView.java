@@ -28,16 +28,16 @@ public class CarView extends JFrame implements IPositionObserver {
 
     public JButton gasButton = new JButton("Gas");
     public JButton brakeButton = new JButton("Brake");
-    public JButton turboOnButton = new JButton("Saab Turbo on");
-    public JButton turboOffButton = new JButton("Saab Turbo off");
-    public JButton liftBedButton = new JButton("Scania Lift Bed");
-    public JButton lowerBedButton = new JButton("Scania Lower Bed");
+    public JButton turboOnButton = new JButton("<html><center>Saab<br><center>Turbo<br>on</center></html>\n"); //"<html><center>READER<br>STOP</center></html>\n"
+    public JButton turboOffButton = new JButton("<html><center>Saab<br><center>Turbo<br>off</center></html>\n");
+    public JButton liftBedButton = new JButton("<html><center>Scania<br><center>Lift<br>Bed</center></html>\n");
+    public JButton lowerBedButton = new JButton("<html><center>Scania<br><center>Lower<br>Bed</center></html>\n");
 
-    public JButton startButton = new JButton("Start all cars");
-    public JButton stopButton = new JButton("Stop all cars");
+    public JButton startButton = new JButton("<html><center>Start<br><center>All<br>Cars</center></html>\n");
+    public JButton stopButton = new JButton("<html><center>Stop<br><center>All<br>Cars</center></html>\n");
 
-    public JButton addButton = new JButton("Add a new random car");
-    public JButton removeButton = new JButton("Remove a car");
+    public JButton addButton = new JButton("<html><center>Add<br><center>Random<br>Car</center></html>\n");
+    public JButton removeButton = new JButton("<html><center>Remove<br><center>a<br>Car</center></html>\n");
 
     // Constructor
     public CarView(String framename){
@@ -71,10 +71,10 @@ public class CarView extends JFrame implements IPositionObserver {
         controlPanel.add(gasButton, 0);
         controlPanel.add(turboOnButton, 1);
         controlPanel.add(liftBedButton, 2);
-        controlPanel.add(brakeButton, 3);
-        controlPanel.add(turboOffButton, 4);
-        controlPanel.add(lowerBedButton, 5);
-        controlPanel.add(addButton, 6);
+        controlPanel.add(addButton, 3);
+        controlPanel.add(brakeButton, 4);
+        controlPanel.add(turboOffButton, 5);
+        controlPanel.add(lowerBedButton, 6);
         controlPanel.add(removeButton, 7);
         controlPanel.setPreferredSize(new Dimension((X/2)+4, 200));
         this.add(controlPanel);

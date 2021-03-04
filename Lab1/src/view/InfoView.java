@@ -28,8 +28,8 @@ public class InfoView extends JFrame implements IInfoObserver {
         // Get the computer screen resolution
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 
-        // Center the frame
-        this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
+        // Center the speed frame
+        this.setLocation(dim.width/4-this.getSize().width/2, dim.height/2-this.getSize().height/2);
 
         // Make the frame visible
         this.setVisible(true);
