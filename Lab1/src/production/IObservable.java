@@ -1,6 +1,9 @@
 package production;
 
 
+import view.IInfoObserver;
+import view.IPositionObserver;
+
 import java.awt.*;
 import java.util.ArrayList;
 
