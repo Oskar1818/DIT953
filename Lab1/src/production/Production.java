@@ -1,10 +1,8 @@
 package production;
 
 import model.interfaces.ITurbo;
-import model.vehicle.Direction;
 import model.vehicle.MotorizedVehicle;
 import model.vehicle.car.Saab95;
-import model.vehicle.car.Volvo240;
 import model.vehicle.transporter.Scania;
 import model.vehicle.transporter.Transporter;
 
@@ -85,6 +83,8 @@ public class Production implements IProduction, IObservable {
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             collisionDetection();
+            notifyPositionObservers(getPositions());
+            notifyInformationObservers(getInformation());
             move();
             notifyPositionObservers(getPositions());
             notifyInformationObservers(getInformation());
@@ -134,7 +134,7 @@ public class Production implements IProduction, IObservable {
 
     public void addRandomVehicle() {
         if (vehicles.size() < 10) {
-            int rnd = new Random().nextInt(2);
+            int rnd = new Random().nextInt(3);
             switch (rnd) {
                 case 0 -> addVolvo240();
                 case 1 -> addSaab95();

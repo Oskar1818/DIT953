@@ -15,7 +15,6 @@ public class DrawPanel extends JPanel{
     private BufferedImage bufferImage(String name) {
         try {
             return ImageIO.read(DrawPanel.class.getResourceAsStream("pics/" + name + ".jpg"));
-            // src/view/pics/Saab95.jpg
         }
         catch (IOException e) {
             e.printStackTrace(); // this or throw exception, or both?
