@@ -40,7 +40,7 @@ public class Saab95 extends Car implements ITurbo {
     public boolean isTurboOn() { return this.turboOn; }
 
     /**
-     * Turns on the turbo in the model.vehicle.car.Saab95.
+     * Turns on the turbo in the model.vehicle.car.Saab95. Hej
      */
     @Override
     public void setTurboOn(){
