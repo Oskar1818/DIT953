@@ -12,7 +12,7 @@ import javax.swing.*;
 // This panel represent the animated part of the view with the car images.
 public class DrawPanel extends JPanel{
 
-    private HashMap<String, Point> positions;
+    private ArrayList<Tuple<String, Point>> positions;
 
     private BufferedImage bufferImage(String name) {
         try {
