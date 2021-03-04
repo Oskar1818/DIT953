@@ -1,5 +1,6 @@
 package production;
 
+import model.vehicle.Direction;
 import java.awt.*;
 import java.util.Random;
 

@@ -144,7 +144,7 @@ public class Production implements IProduction, IObservable {
 
     public void collisionDetection(){
         vehicles.forEach(v -> {
-            if (v.getXCord() < 0 || v.getXCord() > 700 || v.getYCord() < 0 || v.getYCord() > 700 - 200) {
+            if (v.getXCord() < 0 || v.getXCord() > 700 || v.getYCord() < 0 || v.getYCord() > 500) {
                 v.setDirection(v.getOppositeDirection(v.getDirection()));
             }
         });
