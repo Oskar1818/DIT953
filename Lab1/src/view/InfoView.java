@@ -1,10 +1,11 @@
 package view;
 
 import production.IInfoObserver;
+import production.Tuple;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.HashMap;
+import java.util.ArrayList;
 
 public class InfoView extends JFrame implements IInfoObserver {
 
@@ -38,8 +39,8 @@ public class InfoView extends JFrame implements IInfoObserver {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     @Override
-     public void update(HashMap<String, Integer> info ) {
+     public void update(ArrayList<Tuple<String, Integer>> info ) {
         label.setText("");
-        info.forEach( (name, speed) -> label.setText(label.getText() + "\n" + name + ": " + speed));
+        info.forEach( t -> label.setText(label.getText() + "\n" + t.getFst() + ": " + t.getSnd()));
     }
 }

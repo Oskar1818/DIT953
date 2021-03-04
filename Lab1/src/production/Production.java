@@ -21,8 +21,8 @@ public class Production implements IProduction, IObservable {
     private final ArrayList<Transporter> transporters;
     private final ArrayList<IPositionObserver> positionObservers;
     private final ArrayList<IInfoObserver> informationObservers;
-    private final HashMap<String, Point> positions;
-    private final HashMap<String, Integer> information;
+    private final ArrayList<Tuple<String, Point>> positions;
+    private final ArrayList<Tuple<String, Integer>> information;
 
     private final int delay = 50;
     private final VehicleFactory factory = new VehicleFactory();
@@ -36,22 +36,22 @@ public class Production implements IProduction, IObservable {
         this.transporters = new ArrayList<>();
         this.positionObservers = new ArrayList<>();
         this.informationObservers = new ArrayList<>();
-        this.positions = new HashMap<>();
-        this.information = new HashMap<>();
+        this.positions = new ArrayList<>();
+        this.information = new ArrayList<>();
     }
 
     public void addSaab95(){
-        Saab95 saab = factory.createSaab95(CoordinateCalculator.calc(vehicles.size()));
+        Saab95 saab = factory.createSaab95(CoordinateCalculator.randPos());
         vehicles.add(saab);
         turbos.add(saab);
     }
 
     public void addVolvo240() {
-        vehicles.add(factory.createVolvo240(CoordinateCalculator.calc(vehicles.size())));
+        vehicles.add(factory.createVolvo240(CoordinateCalculator.randPos()));
     }
 
     public void addScania() {
-        Scania scania = factory.createScania(CoordinateCalculator.calc(vehicles.size()));
+        Scania scania = factory.createScania(CoordinateCalculator.randPos());
         vehicles.add(scania);
         transporters.add(scania);
     }
@@ -71,12 +71,12 @@ public class Production implements IProduction, IObservable {
     public void removeInformationObserver(IInfoObserver obs) { informationObservers.remove(obs); }
 
     @Override
-    public void notifyPositionObservers(HashMap<String, Point> positions) {
+    public void notifyPositionObservers(ArrayList<Tuple<String, Point>> positions) {
         positionObservers.forEach( o -> o.update(positions));
     }
 
     @Override
-    public void notifyInformationObservers(HashMap<String, Integer> information) {
+    public void notifyInformationObservers(ArrayList<Tuple<String, Integer>> information) {
         informationObservers.forEach( o -> o.update(information));
     }
 
@@ -152,14 +152,15 @@ public class Production implements IProduction, IObservable {
     }
 
     // Law of Demeter
-    public HashMap<String, Point> getPositions() {
-        vehicles.forEach( v -> positions.put(
-                v.getName(), new Point((int) v.getXCord(), (int) v.getYCord())));
+    public ArrayList<Tuple<String, Point>> getPositions() {
+        vehicles.forEach( v -> positions.add(
+                new Tuple(v.getName(), new Point((int) v.getXCord(), (int) v.getYCord()))));
         return positions;
     }
 
-    public HashMap<String, Integer> getInformation() {
-        vehicles.forEach(v -> information.put( v.getName(), (int) v.getSpeed()));
+    public ArrayList<Tuple<String, Integer>> getInformation() {
+        vehicles.forEach( v -> information.add(
+                new Tuple(v.getName(), v.getSpeed())));
         return information;
     }
 }

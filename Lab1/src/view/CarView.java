@@ -1,10 +1,11 @@
 package view;
 
 import production.IPositionObserver;
+import production.Tuple;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.HashMap;
+import java.util.ArrayList;
 
 
 /**
@@ -110,7 +111,7 @@ public class CarView extends JFrame implements IPositionObserver {
     }
 
     @Override
-    public void update(HashMap<String, Point> positions) {
+    public void update(ArrayList<Tuple<String, Point>> positions) {
         drawPanel.updateUI(positions);
     }
 }

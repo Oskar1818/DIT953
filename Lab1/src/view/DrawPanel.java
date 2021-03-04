@@ -1,9 +1,11 @@
 package view;
 
+import production.Tuple;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.HashMap;
+import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
@@ -27,11 +29,11 @@ public class DrawPanel extends JPanel{
         this.setDoubleBuffered(true);
         this.setPreferredSize(new Dimension(x, y));
         this.setBackground(Color.lightGray);
-        this.positions = new HashMap<>();
+        this.positions = new ArrayList<>();
     }
 
-    public void updateUI(HashMap<String, Point> positions) {
-        this.positions = new HashMap<>(positions);
+    public void updateUI(ArrayList<Tuple<String, Point>> positions) {
+        this.positions = new ArrayList<>(positions);
         repaint();
     }
 
@@ -39,6 +41,6 @@ public class DrawPanel extends JPanel{
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        positions.forEach( (name, pos) -> g.drawImage(bufferImage(name), pos.x, pos.y, null));
+        positions.forEach( t -> g.drawImage(bufferImage(t.getFst()), t.getSnd().x, t.getSnd().y, null));
     }
 }

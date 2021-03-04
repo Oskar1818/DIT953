@@ -1,9 +1,10 @@
 package production;
 
+
 import view.IObserver;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 
 public interface IInfoObserver extends IObserver<String, Integer> {
-    void update(HashMap<String, Integer> information);
+    void update(ArrayList<Tuple<String, Integer>> information);
 }
