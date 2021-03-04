@@ -1,5 +1,6 @@
-package production;
+package view;
 
+import production.Tuple;
 import view.IObserver;
 
 import java.awt.*;

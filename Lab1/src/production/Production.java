@@ -5,6 +5,8 @@ import model.vehicle.MotorizedVehicle;
 import model.vehicle.car.Saab95;
 import model.vehicle.transporter.Scania;
 import model.vehicle.transporter.Transporter;
+import view.IInfoObserver;
+import view.IPositionObserver;
 
 import javax.swing.*;
 import java.awt.*;

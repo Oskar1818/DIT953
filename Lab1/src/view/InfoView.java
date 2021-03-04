@@ -1,6 +1,5 @@
 package view;
 
-import production.IInfoObserver;
 import production.Tuple;
 
 import javax.swing.*;
