@@ -1,7 +1,5 @@
 package production;
 
-import java.util.ArrayList;
-
 public interface IProduction {
 
     void move();
@@ -13,5 +11,4 @@ public interface IProduction {
     void lowerBed();
     void startAll();
     void stopAll();
-
 }

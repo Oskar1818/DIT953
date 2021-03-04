@@ -84,8 +84,6 @@ public class Production implements IProduction, IObservable {
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             collisionDetection();
-            notifyPositionObservers(getPositions());
-            notifyInformationObservers(getInformation());
             move();
             notifyPositionObservers(getPositions());
             notifyInformationObservers(getInformation());

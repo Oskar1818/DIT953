@@ -1,7 +1,6 @@
 package view;
 
 import production.Tuple;
-import view.IObserver;
 
 import java.awt.*;
 import java.util.ArrayList;
