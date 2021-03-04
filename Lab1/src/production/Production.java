@@ -40,17 +40,17 @@ public class Production implements IProduction, IObservable {
     }
 
     public void addSaab95(){
-        Saab95 saab = factory.createSaab95(CoordinateCalculator.randPos());
+        Saab95 saab = factory.createSaab95(Randomizer.randPos(), Randomizer.randDir());
         vehicles.add(saab);
         turbos.add(saab);
     }
 
     public void addVolvo240() {
-        vehicles.add(factory.createVolvo240(CoordinateCalculator.randPos()));
+        vehicles.add(factory.createVolvo240(Randomizer.randPos(), Randomizer.randDir()));
     }
 
     public void addScania() {
-        Scania scania = factory.createScania(CoordinateCalculator.randPos());
+        Scania scania = factory.createScania(Randomizer.randPos(), Randomizer.randDir());
         vehicles.add(scania);
         transporters.add(scania);
     }

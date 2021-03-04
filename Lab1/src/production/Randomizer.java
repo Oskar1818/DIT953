@@ -3,7 +3,7 @@ package production;
 import java.awt.*;
 import java.util.Random;
 
-public class CoordinateCalculator {
+public class Randomizer {
 
     static Random rand = new Random();
 
@@ -24,8 +24,15 @@ public class CoordinateCalculator {
         return new Point(randX, randY);
     }
 
-   /* public int randDir() {
-
-    }*/
+   public static Direction randDir() {
+        int seed = rand.nextInt(3);
+        switch (seed) {
+            case 0 -> {return Direction.SOUTH;}
+            case 1 -> {return Direction.EAST;}
+            case 2 -> {return Direction.WEST;}
+            case 3 -> {return Direction.NORTH;}
+            default -> {return null;}
+        }
+   }
 
 }

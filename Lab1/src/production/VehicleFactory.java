@@ -9,18 +9,18 @@ import java.awt.*;
 
 public class VehicleFactory {
 
-    public MotorizedVehicle createVolvo240(Point p) {
+    public MotorizedVehicle createVolvo240(Point p, Direction dir) {
         int stockYCord = 0;
-        return new Volvo240(Color.red, new Point(p.x, p.y), Direction.WEST);
+        return new Volvo240(Color.red, new Point(p.x, p.y), dir);
     }
 
-    public Saab95 createSaab95(Point p) {
+    public Saab95 createSaab95(Point p, Direction dir) {
         int stockYCord = 100;
-        return new Saab95(Color.BLACK, new Point(p.x, p.y), Direction.EAST);
+        return new Saab95(Color.BLACK, new Point(p.x, p.y), dir);
     }
 
-    public Scania createScania(Point p) {
+    public Scania createScania(Point p, Direction dir) {
         int stockYCord = 200;
-        return new Scania(Color.red, new Point(p.x, p.y), Direction.NORTH, 10);
+        return new Scania(Color.red, new Point(p.x, p.y), dir, 10);
     }
 }
