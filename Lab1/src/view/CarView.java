@@ -48,16 +48,17 @@ public class CarView extends JFrame implements IPositionObserver {
     private void initComponents(String title) {
 
         this.setTitle(title);
-        this.setPreferredSize(new Dimension(X,Y));
-        this.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
+        this.setPreferredSize(new Dimension(X+20,Y+5));
+        this.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 2));
         this.add(drawPanel);
 
         SpinnerModel spinnerModel =
                 new SpinnerNumberModel(0, //initial value
                         0, //min
-                        100, //max
-                        1);//step
+                        1000, //max
+                        10);//step
         gasSpinner = new JSpinner(spinnerModel);
+        gasSpinner.setPreferredSize(new Dimension(100,50));
 
 
         gasPanel.setLayout(new BorderLayout());

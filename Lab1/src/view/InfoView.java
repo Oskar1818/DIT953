@@ -16,7 +16,7 @@ public class InfoView extends JFrame implements IInfoObserver {
 
     private void initComponents() {
 
-        this.setPreferredSize(new Dimension(200,100));
+        this.setPreferredSize(new Dimension(200,300));
         this.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
 
         label.setEditable(false);
@@ -29,7 +29,7 @@ public class InfoView extends JFrame implements IInfoObserver {
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 
         // Center the speed frame
-        this.setLocation(dim.width/4-this.getSize().width/2, dim.height/2-this.getSize().height/2);
+        this.setLocation((dim.width/2-this.getSize().width/2+500), dim.height/2-this.getSize().height/2-250);
 
         // Make the frame visible
         this.setVisible(true);

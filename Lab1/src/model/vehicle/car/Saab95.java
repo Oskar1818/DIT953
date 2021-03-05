@@ -63,7 +63,7 @@ public class Saab95 extends Car implements ITurbo {
     @Override
     public double speedFactor() {
         if(turboOn)
-            return getEnginePower() * 0.01 * turboFactor;
+            return 25;//getEnginePower() * 0.01 * turboFactor;
         else
             return getEnginePower() * 0.01;
     }
