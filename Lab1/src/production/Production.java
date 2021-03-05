@@ -2,8 +2,6 @@ package production;
 
 import model.interfaces.ITurbo;
 import model.vehicle.MotorizedVehicle;
-import model.vehicle.car.Saab95;
-import model.vehicle.transporter.Scania;
 import model.vehicle.transporter.Transporter;
 import view.IInfoObserver;
 import view.IPositionObserver;
@@ -42,8 +40,8 @@ public class Production implements IProduction, IObservable {
     }
 
     public void addSaab95(){
-        Saab95 saab = factory.createSaab95(Randomizer.randPos(), Randomizer.randDir());
-        vehicles.add(saab);
+        ITurbo saab = factory.createSaab95(Randomizer.randPos(), Randomizer.randDir());
+        vehicles.add((MotorizedVehicle) saab);
         turbos.add(saab);
     }
 
@@ -52,7 +50,7 @@ public class Production implements IProduction, IObservable {
     }
 
     public void addScania() {
-        Scania scania = factory.createScania(Randomizer.randPos(), Randomizer.randDir());
+        Transporter scania = factory.createScania(Randomizer.randPos(), Randomizer.randDir());
         vehicles.add(scania);
         transporters.add(scania);
     }

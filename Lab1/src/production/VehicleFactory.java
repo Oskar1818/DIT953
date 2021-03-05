@@ -1,26 +1,25 @@
 package production;
 
+import model.interfaces.ITurbo;
 import model.vehicle.*;
 import model.vehicle.car.Saab95;
 import model.vehicle.car.Volvo240;
 import model.vehicle.transporter.Scania;
+import model.vehicle.transporter.Transporter;
 
 import java.awt.*;
 
-public class VehicleFactory {
+public class VehicleFactory implements IVehicleFactory {
 
     public MotorizedVehicle createVolvo240(Point p, Direction dir) {
-        int stockYCord = 0;
         return new Volvo240(Color.red, new Point(p.x, p.y), dir);
     }
 
-    public Saab95 createSaab95(Point p, Direction dir) {
-        int stockYCord = 100;
+    public ITurbo createSaab95(Point p, Direction dir) {
         return new Saab95(Color.BLACK, new Point(p.x, p.y), dir);
     }
 
-    public Scania createScania(Point p, Direction dir) {
-        int stockYCord = 200;
+    public Transporter createScania(Point p, Direction dir) {
         return new Scania(Color.red, new Point(p.x, p.y), dir, 10);
     }
 }
