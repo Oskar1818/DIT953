@@ -79,7 +79,7 @@ public class CarView extends JFrame implements IPositionObserver {
         controlPanel.add(removeButton, 7);
         controlPanel.setPreferredSize(new Dimension((X/2)+4, 200));
         this.add(controlPanel);
-        controlPanel.setBackground(Color.BLACK);
+        //controlPanel.setBackground(Color.WHITE);
 
 
         //startButton.setBackground(Color.BLUE);
