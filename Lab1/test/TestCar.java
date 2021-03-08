@@ -3,6 +3,8 @@ import model.vehicle.car.Saab95;
 import model.vehicle.car.Volvo240;
 import org.junit.Before;
 import org.junit.Test;
+import point.Point;
+
 import java.awt.*;
 import static org.junit.Assert.*;
 
@@ -21,13 +23,13 @@ public class TestCar {
 
     @Before
     public void setUp(){
-        volvo240 = new Volvo240(Color.black, new Point(10, 10), Direction.NORTH);
+        volvo240 = new Volvo240(Color.black, new point.Point(10, 10), Direction.NORTH);
         saab95 = new Saab95(Color.red, new Point(30, 20), Direction.EAST);
         volvo240.setSpeed(10);
         saab95.setSpeed(20);
 
-        volvo240two = new Volvo240(Color.black, new Point(10, 10), Direction.EAST);
-        saab95two = new Saab95(Color.red, new Point(30, 20), Direction.NORTH);
+        volvo240two = new Volvo240(Color.black, new point.Point(10, 10), Direction.EAST);
+        saab95two = new Saab95(Color.red, new point.Point(30, 20), Direction.NORTH);
         volvo240two.setSpeed(10);
         saab95two.setSpeed(20);
     }
@@ -109,10 +111,10 @@ public class TestCar {
 
 
     @Test
-    public void checkVolvo240Color() {assertEquals(Color.black.toString(), volvo240.getColor());}
+    public void checkVolvo240Color() {assertEquals(Color.black.toString(), volvo240.getColorName());}
 
     @Test
-    public void checkSaab95Color() {assertEquals(Color.red.toString(), saab95.getColor());}
+    public void checkSaab95Color() {assertEquals(Color.red.toString(), saab95.getColorName());}
 
     @Test
     public void checkVolvo240GetNrDoors() {assertEquals(4, volvo240.getNrDoors());}

@@ -2,19 +2,19 @@ package model.interfaces;
 
 public interface IMove {
 
-    void move();
+    IMove move();
 
-    void turnRight();
+    IMove turnRight();
 
-    void turnLeft();
+    IMove turnLeft();
 
-    void setSpeed(double d);
+    IMove setSpeed(double d);
 
     double getSpeed();
 
-    void incrementSpeed(double amount);
+    IMove incrementSpeed(double amount);
 
-    void decrementSpeed(double amount);
+    IMove decrementSpeed(double amount);
 
     double speedFactor();
 }

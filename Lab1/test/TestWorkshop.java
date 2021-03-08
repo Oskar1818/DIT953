@@ -5,8 +5,10 @@ import model.vehicle.car.Saab95;
 import model.vehicle.car.Volvo240;
 import org.junit.Before;
 import org.junit.Test;
+import point.Point;
 
-import java.awt.*;
+import java.awt.Color;
+import point.Point;
 
 import static org.junit.Assert.assertEquals;
 
@@ -21,10 +23,10 @@ public class TestWorkshop {
 
     @Before
     public void setUp() {
-        carWS = new Workshop<>(20, new Point(0,0));
-        volvo240WS = new Workshop<>(10, new Point(20,20));
-        saab95WS = new Workshop<>(45, new Point(200, 10));
-        volvo240 = new Volvo240(Color.green, new Point(0,0), Direction.NORTH);
+        carWS = new Workshop<>(20, new point.Point(0,0));
+        volvo240WS = new Workshop<>(10, new point.Point(20,20));
+        saab95WS = new Workshop<>(45, new point.Point(200, 10));
+        volvo240 = new Volvo240(Color.green, new point.Point(0,0), Direction.NORTH);
         saab95 = new Saab95(Color.yellow, new Point(1,1), Direction.NORTH);
     }
 

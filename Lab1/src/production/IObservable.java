@@ -4,19 +4,19 @@ package production;
 import view.IInfoObserver;
 import view.IPositionObserver;
 
-import java.awt.*;
+import point.Point;
 import java.util.ArrayList;
 
 public interface IObservable{
 
-    void addPositionObserver(IPositionObserver positions);
+    IObservable addPositionObserver(IPositionObserver positions);
     void notifyPositionObservers(ArrayList<Tuple<String, Point>> positions);
 
-    void removePositionObserver(IPositionObserver observer);
+    IObservable removePositionObserver(IPositionObserver observer);
 
     void notifyInformationObservers(ArrayList<Tuple<String, Integer>> information);
-    void removeInformationObserver(IInfoObserver obs);
+    IObservable removeInformationObserver(IInfoObserver obs);
 
-    void addInfoObserver(IInfoObserver observer);
+    IObservable addInfoObserver(IInfoObserver observer);
 
 }

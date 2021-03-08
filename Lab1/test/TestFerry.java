@@ -4,6 +4,7 @@ import model.vehicle.car.Saab95;
 import model.vehicle.car.Volvo240;
 import org.junit.Before;
 import org.junit.Test;
+import point.Point;
 
 import java.awt.*;
 
@@ -20,8 +21,8 @@ public class TestFerry {
     @Before
     public void setUp() {
         volvo240 = new Volvo240(Color.green, new Point(400,400), Direction.NORTH);
-        saab95 = new Saab95(Color.yellow, new Point(399,399), Direction.NORTH);
-        ferry = new SSBadger(Color.cyan, new Point(400, 400), Direction.SOUTH, 200);
+        saab95 = new Saab95(Color.yellow, new point.Point(399,399), Direction.NORTH);
+        ferry = new SSBadger(Color.cyan, new point.Point(400, 400), Direction.SOUTH, 200);
     }
 
     @Test

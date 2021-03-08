@@ -17,4 +17,13 @@ public class Tuple<K, V> {
     public V getSnd() {
         return v;
     }
+
+
+    @Override
+    public String toString() {
+        return "Tuple{" +
+                "k=" + k +
+                ", v=" + v +
+                '}';
+    }
 }

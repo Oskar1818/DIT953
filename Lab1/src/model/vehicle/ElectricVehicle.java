@@ -1,6 +1,7 @@
 package model.vehicle;
 
-import java.awt.*;
+import java.awt.Color;
+import point.Point;
 
 public abstract class ElectricVehicle extends Vehicle {
 
@@ -20,7 +21,7 @@ public abstract class ElectricVehicle extends Vehicle {
     public ElectricVehicle(Color color, int nrDoors, String name, Point point,
                            Direction dir, double batteryCapacity, double range){
 
-        super(color, 0, nrDoors, name, point, dir);
+        super(color, nrDoors, name, point, dir);
         this.batteryCapacity = batteryCapacity;
         this.range = range;
     }

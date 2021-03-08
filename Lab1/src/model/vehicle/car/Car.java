@@ -4,7 +4,8 @@ import model.interfaces.ITransportable;
 import model.vehicle.Direction;
 import model.vehicle.MotorizedVehicle;
 
-import java.awt.*;
+import java.awt.Color;
+import point.Point;
 
 /**
  * The abstract base class for all cars.
@@ -21,5 +22,9 @@ public abstract class Car extends MotorizedVehicle implements ITransportable {
      */
     public Car(Color color, double enginePower, int nrDoors, String name, Point point, Direction dir){
         super(color, enginePower, 0, nrDoors, name, point, dir);
+    }
+
+    public Car(Color color, double enginePower, double speed, int nrDoors, String name, Point point, Direction dir) {
+        super(color, enginePower, speed, nrDoors, name, point, dir);
     }
 }

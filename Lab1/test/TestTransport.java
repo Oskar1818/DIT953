@@ -5,6 +5,8 @@ import model.vehicle.transporter.MercedesActros;
 import model.vehicle.transporter.Scania;
 import org.junit.Before;
 import org.junit.Test;
+import point.Point;
+
 import java.awt.*;
 import static org.junit.Assert.*;
 
@@ -17,10 +19,10 @@ public class TestTransport {
 
     @Before
     public void setUp() {
-        scania = new Scania(Color.red, new Point(0,0), Direction.WEST, 10);
+        scania = new Scania(Color.red, new point.Point(0,0), Direction.WEST, 10);
         //scania.setSpeed(10);
-        carTransport = new MercedesActros(Color.blue, new Point(0,0), Direction.NORTH, 20);
-        volvo240 = new Volvo240(Color.green, new Point(0,0), Direction.NORTH);
+        carTransport = new MercedesActros(Color.blue, new point.Point(0,0), Direction.NORTH, 20);
+        volvo240 = new Volvo240(Color.green, new point.Point(0,0), Direction.NORTH);
         saab95 = new Saab95(Color.yellow, new Point(1,1), Direction.NORTH);
 
 

@@ -1,7 +1,7 @@
 package production;
 
 import model.vehicle.Direction;
-import java.awt.*;
+import point.Point;
 import java.util.Random;
 
 public class Randomizer {

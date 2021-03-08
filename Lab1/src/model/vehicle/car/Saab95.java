@@ -2,8 +2,10 @@ package model.vehicle.car;
 
 import model.interfaces.ITurbo;
 import model.vehicle.Direction;
-import production.IProduction;
-import java.awt.*;
+import model.vehicle.Vehicle;
+import point.Point;
+import java.awt.Color;
+
 
 
 /**
@@ -30,6 +32,10 @@ public class Saab95 extends Car implements ITurbo {
 	    super(color, 125.0, 2, "Saab95", point, dir);
         turboOn = false;
         stopEngine();
+    }
+
+    private Saab95(Color color, Point point, Direction dir, double speed) {
+        super(color, 125, speed, 2, "Saab95", point, dir);
     }
 
     // Specific to saab95.
@@ -63,8 +69,33 @@ public class Saab95 extends Car implements ITurbo {
     @Override
     public double speedFactor() {
         if(turboOn)
-            return 25;//getEnginePower() * 0.01 * turboFactor;
+            return 25; //getEnginePower() * 0.01 * turboFactor;
         else
             return getEnginePower() * 0.01;
+    }
+
+    @Override
+    public Vehicle createVehicleWithNewCord(Point point) {
+        return new Saab95(this.getColor(), point, this.getDirection());
+    }
+
+    @Override
+    public Vehicle createVehicleWithNewDirection(Direction dir) {
+        return new Saab95(this.getColor(), this.getPoint(), dir);
+    }
+
+    @Override
+    public Vehicle createVehicleWithNewSpeed(double amount) {
+        return new Saab95(this.getColor(), this.getPoint(), this.getDirection(), amount);
+    }
+
+    @Override
+    public Vehicle createVehicleWithNewX(int xCord) {
+        return new Saab95(this.getColor(), new Point(xCord, (int) this.getYCord()), this.getDirection());
+    }
+
+    @Override
+    public Vehicle createVehicleWithNewY(int yCord) {
+        return new Saab95(this.getColor(), new Point((int) this.getXCord(), yCord), this.getDirection());
     }
 }

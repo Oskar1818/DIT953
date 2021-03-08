@@ -2,7 +2,7 @@ package view;
 
 import production.Tuple;
 
-import java.awt.*;
+import point.Point;
 import java.util.ArrayList;
 
 public interface IPositionObserver extends IObserver<String, Point> {

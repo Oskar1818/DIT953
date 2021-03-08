@@ -2,8 +2,10 @@ package model.vehicle.transporter;
 
 import model.stationary.CommonGoods;
 import model.vehicle.Direction;
-import production.IProduction;
-import java.awt.*;
+import model.vehicle.Vehicle;
+import point.Point;
+import java.awt.Color;
+
 
 public class Scania extends Transporter<CommonGoods> {
 
@@ -17,6 +19,10 @@ public class Scania extends Transporter<CommonGoods> {
     public Scania(Color color, Point point, Direction dir, int capacity){
         super(color, 500, 2, "Scania", point, dir, capacity);
         stopEngine();
+    }
+
+    private Scania(Color color, Point point, Direction dir, double speed, int capacity){
+        super(color, 500, speed, 2, "Scania", point, dir, capacity);
     }
 
     /**
@@ -38,5 +44,30 @@ public class Scania extends Transporter<CommonGoods> {
     @Override
     public double speedFactor() {
         return getEnginePower() * 0.01;
+    }
+
+    @Override
+    public Vehicle createVehicleWithNewCord(Point point) {
+        return new Scania(this.getColor(), point, this.getDirection(), this.getCapacity());
+    }
+
+    @Override
+    public Vehicle createVehicleWithNewDirection(Direction dir) {
+        return new Scania(this.getColor(), this.getPoint(), dir, this.getCapacity());
+    }
+
+    @Override
+    public Vehicle createVehicleWithNewSpeed(double amount) {
+        return new Scania(this.getColor(), this.getPoint(), this.getDirection(), amount, this.getCapacity());
+    }
+
+    @Override
+    public Vehicle createVehicleWithNewX(int xCord) {
+        return new Scania(this.getColor(), new Point(xCord, (int) this.getYCord()), this.getDirection(), this.getCapacity());
+    }
+
+    @Override
+    public Vehicle createVehicleWithNewY(int yCord) {
+        return new Scania(this.getColor(), new Point((int) this.getXCord(), yCord), this.getDirection(), this.getCapacity());
     }
 }

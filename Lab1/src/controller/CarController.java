@@ -28,7 +28,7 @@ public class CarController {
         addButtonFunctionality();
     }
 
-    private void addButtonFunctionality(){
+    public void addButtonFunctionality(){
 
         view.gasSpinner.addChangeListener(e -> gasAmount = (int) ((JSpinner)e.getSource()).getValue());
 

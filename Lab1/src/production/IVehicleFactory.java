@@ -5,7 +5,7 @@ import model.vehicle.Direction;
 import model.vehicle.MotorizedVehicle;
 import model.vehicle.transporter.Transporter;
 
-import java.awt.*;
+import point.Point;
 
 public interface IVehicleFactory {
     ITurbo createSaab95(Point position, Direction direction);

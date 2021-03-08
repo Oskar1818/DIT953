@@ -1,9 +1,10 @@
 package model.vehicle;
 
+import point.Point;
 import model.interfaces.IMove;
 import model.interfaces.ITransportable;
 
-import java.awt.*;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -14,55 +15,61 @@ public abstract class Vehicle implements IMove, ITransportable {
 
     private double xCord;
     private double yCord;
+    private final Point point;
     private Direction dir;
-    private Color color;
-    private String name;
-    private double speed;
-    private int nrDoors;
+    private final Color color;
+    private final String name;
+    private final int nrDoors;
 
     /**
      *
      * @param color - The color of a vehicle.
-     * @param speed The current speed of a vehicle.
      * @param nrDoors The number of doors of a vehicle.
      * @param name - The name of a specific instance of a vehicle.
      * @param point - The coordinates of a vehicle, represented as a point (x, y).
      * @param dir - The initial direction of the vehicle.
      */
-    public Vehicle(Color color, double speed, int nrDoors, String name, Point point, Direction dir) {
-        this.color = color;
-        this.nrDoors = nrDoors;
-        this.name = name;
-        this.xCord = point.getX();
-        this.yCord = point.getY();
-        this.dir = dir;
-        this.speed = speed;
-    }
 
     // constructor for model.vehicle.MotorizedVehicle
     public Vehicle(Color color, int nrDoors, String name, Point point, Direction dir) {
-        this.color = color;
+        this.color = new Color(color.getRGB());
         this.nrDoors = nrDoors;
         this.name = name;
+        this.point = point;
         this.xCord = point.getX();
         this.yCord = point.getY();
         this.dir = dir;
     }
 
+    public abstract Vehicle createVehicleWithNewCord(Point p);
+
+    public abstract Vehicle createVehicleWithNewDirection(Direction dir);
+
+    public abstract Vehicle createVehicleWithNewSpeed(double amount);
+
+    public abstract Vehicle createVehicleWithNewX(int xCord);
+
+    public abstract Vehicle createVehicleWithNewY(int yCord);
+
+    //public abstract Vehicle
 
     /**
-     * @return Returns the number of doors the car has.
+     * @return Returns the number of doors the vehicle has.
      */
     public int getNrDoors(){ return this.nrDoors; }
 
+    /**
+     * @return Returns the x- and the y-coordinate of the vehicle.
+     */
+    public Point getPoint() {return this.point; }
 
     /**
      * Makes the car go faster by increasing the speed via the incrementSpeed method.
      * @param amount amount the amount at which the speed should increase by.
      */
-    public void gas(double amount) {
+    public Vehicle gas(double amount) {
         double gasFactor = Math.max(Math.min(amount, 1), 0);
-        incrementSpeed(gasFactor);
+        return incrementSpeed(gasFactor);
     }
     //make gas abstract possibly
 
@@ -70,9 +77,9 @@ public abstract class Vehicle implements IMove, ITransportable {
      * Makes the car go slower by decreasing the speed via the decrementSpeed method.
      * @param amount amount amount the amount at which the speed should decrease by.
      */
-    public void brake(double amount) {
+    public Vehicle brake(double amount) {
         double brakeFactor = Math.max(Math.min(amount, 1), 0); // 0 <= breakFactor <= 1
-        decrementSpeed(brakeFactor);
+        return decrementSpeed(brakeFactor);
     }
 
     /**
@@ -83,7 +90,9 @@ public abstract class Vehicle implements IMove, ITransportable {
     /**
      * @return Returns vehicle colour.
      */
-    public String getColor(){ return color.toString(); }
+    public String getColorName(){ return new Color(color.getRGB()).toString(); }
+
+    public Color getColor() { return new Color(color.getRGB()); }
 
     /* interface functions */
 
@@ -91,7 +100,7 @@ public abstract class Vehicle implements IMove, ITransportable {
      * @param d - Sets direction.
      */
     @Override
-    public void setDirection(Direction d) { this.dir = d; }
+    public Vehicle setDirection(Direction d) { return createVehicleWithNewDirection(d); }
 
     /**
      * @return Returns direction of vehicle.
@@ -102,17 +111,13 @@ public abstract class Vehicle implements IMove, ITransportable {
     @Override
     public Direction getOppositeDirection(Direction dir) {
         ArrayList<Direction> directions = new ArrayList<>(Arrays.asList(Direction.values()));
-        switch (directions.indexOf(dir)) {
-            case 0:
-                return directions.get(1);
-            case 1:
-                return directions.get(0);
-            case 2:
-                return directions.get(3);
-            case 3:
-                return directions.get(2);
-        }
-        return null;
+        return switch (directions.indexOf(dir)) {
+            case 0 -> directions.get(1);
+            case 1 -> directions.get(0);
+            case 2 -> directions.get(3);
+            case 3 -> directions.get(2);
+            default -> null;
+        };
     }
 
     /**
@@ -121,7 +126,7 @@ public abstract class Vehicle implements IMove, ITransportable {
      * @param amount amount the amount at which the speed should decrease by.
      */
     @Override
-    public abstract void incrementSpeed(double amount);
+    public abstract Vehicle incrementSpeed(double amount);
 
     /**
      * Decreases the speed of the Saab by the input amount times the speed factor, and makes sure the
@@ -129,15 +134,15 @@ public abstract class Vehicle implements IMove, ITransportable {
      * @param amount amount the amount at which the speed should decrease by.
      */
     @Override
-    public void decrementSpeed(double amount){
-        setSpeed(Math.max(getSpeed() - speedFactor() * amount,0));
+    public Vehicle decrementSpeed(double amount){
+        return setSpeed(Math.max(getSpeed() - speedFactor() * amount,0));
     }
 
     /**
      * @param x - Sets the x-coordinate.
      */
     @Override
-    public void setXCord(double x) { this.xCord = x; }
+    public Vehicle setXCord(double x) { return createVehicleWithNewX( (int) x); }
 
     /**
      * @return Returns the x-coordinate.
@@ -149,7 +154,7 @@ public abstract class Vehicle implements IMove, ITransportable {
      * @param y - Sets the y-coordinate.
      */
     @Override
-    public void setYCord(double y) { this.yCord = y;}
+    public Vehicle setYCord(double y) { return createVehicleWithNewY( (int) y); }
 
     /**
      * @return Returns y coordinate of vehicle.
@@ -161,7 +166,7 @@ public abstract class Vehicle implements IMove, ITransportable {
      * @param speed - the desired speed.
      */
     @Override
-    public abstract void setSpeed(double speed);
+    public abstract Vehicle setSpeed(double speed);
     //  this.speed = speed;
 
     /**
@@ -171,37 +176,33 @@ public abstract class Vehicle implements IMove, ITransportable {
     public abstract double getSpeed();
 
     @Override
-    public void move() {
-        switch (getDirection()) {
+    public Vehicle move() {
+        return switch (getDirection()) {
             case EAST -> setXCord(getXCord() + getSpeed());
             case WEST -> setXCord(getXCord() - getSpeed());
             case NORTH -> setYCord(getYCord() + getSpeed());
             case SOUTH -> setYCord(getYCord() - getSpeed());
-            default -> throw new IllegalStateException("Unexpected value: " + getDirection());
-        }
+        };
     }
 
     @Override
-    public void turnRight() {
-        switch (getDirection()) {
+    public Vehicle turnRight() {
+        return switch (getDirection()) {
             case EAST -> setDirection(Direction.SOUTH);
             case WEST -> setDirection(Direction.NORTH);
             case NORTH -> setDirection(Direction.EAST);
             case SOUTH -> setDirection(Direction.WEST);
-            default -> throw new IllegalStateException("Unexpected value: " + getDirection());
-        }
+        };
     }
 
     @Override
-    public void turnLeft() {
-        switch (getDirection()) {
+    public Vehicle turnLeft() {
+        return switch (getDirection()) {
             case EAST -> setDirection(Direction.NORTH);
             case WEST -> setDirection(Direction.SOUTH);
             case NORTH -> setDirection(Direction.WEST);
             case SOUTH -> setDirection(Direction.EAST);
-            default -> throw new IllegalStateException("Unexpected value: " + getDirection());
-
-        }
+        };
     }
 
 }

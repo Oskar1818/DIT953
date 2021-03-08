@@ -4,7 +4,7 @@ import model.interfaces.IStationary;
 import model.interfaces.IStorable;
 import model.vehicle.Vehicle;
 
-import java.awt.*;
+import point.Point;
 import java.util.ArrayList;
 
 /**

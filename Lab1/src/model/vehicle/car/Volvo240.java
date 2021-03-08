@@ -1,8 +1,9 @@
 package model.vehicle.car;
 
 import model.vehicle.Direction;
-import production.IProduction;
-import java.awt.*;
+import model.vehicle.Vehicle;
+import java.awt.Color;
+import point.Point;
 
 /**
  * A class for the cars of model model.vehicle.car.Volvo240. model.vehicle.car.Volvo240 is a subclass of model.vehicle.car.Car, it inherits the methods and
@@ -11,7 +12,7 @@ import java.awt.*;
  * @author Valter Miari, Oskar Sturebrand, Clara Josefsson
  */
 
-public class Volvo240 extends Car {
+public final class Volvo240 extends Car {
 
     public final static double trimFactor = 1.25;
 
@@ -28,10 +29,38 @@ public class Volvo240 extends Car {
         stopEngine();
     }
 
+    private Volvo240(Color color, Point point, Direction dir, double speed) {
+        super(color, 125, speed, 2, "Saab95", point, dir);
+    }
+
     @Override
     public double speedFactor(){
         return getEnginePower() * 0.01 * trimFactor;
     }
 
 
+    @Override
+    public Vehicle createVehicleWithNewCord(Point point) {
+        return new Volvo240(this.getColor(), point, this.getDirection());
+    }
+
+    @Override
+    public Vehicle createVehicleWithNewDirection(Direction dir) {
+        return new Volvo240(this.getColor(), this.getPoint(), dir);
+    }
+
+    @Override
+    public Vehicle createVehicleWithNewSpeed(double amount) {
+        return new Volvo240(this.getColor(), this.getPoint(), this.getDirection(), amount);
+    }
+
+    @Override
+    public Vehicle createVehicleWithNewX(int xCord) {
+        return new Volvo240(this.getColor(), new Point(xCord, (int) this.getYCord()), this.getDirection());
+    }
+
+    @Override
+    public Vehicle createVehicleWithNewY(int yCord) {
+        return new Volvo240(this.getColor(), new Point((int) this.getXCord(), yCord), this.getDirection());
+    }
 }

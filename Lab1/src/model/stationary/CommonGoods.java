@@ -5,13 +5,13 @@ import model.vehicle.Direction;
 
 public class CommonGoods implements ITransportable {
     @Override
-    public void setXCord(double x) {
-
+    public CommonGoods setXCord(double x) {
+        return null;
     }
 
     @Override
-    public void setYCord(double y) {
-
+    public CommonGoods setYCord(double y) {
+        return null;
     }
 
     @Override
@@ -25,8 +25,8 @@ public class CommonGoods implements ITransportable {
     }
 
     @Override
-    public void setDirection(Direction d) {
-
+    public CommonGoods setDirection(Direction d) {
+        return null;
     }
 
     @Override

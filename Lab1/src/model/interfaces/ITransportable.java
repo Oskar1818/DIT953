@@ -4,15 +4,15 @@ import model.vehicle.Direction;
 
 public interface ITransportable {
 
-    void setXCord(double x);
+    ITransportable setXCord(double x);
 
-    void setYCord(double y);
+    ITransportable setYCord(double y);
 
     double getXCord();
 
     double getYCord();
 
-    void setDirection(Direction d);
+    ITransportable setDirection(Direction d);
 
     Direction getDirection();
 

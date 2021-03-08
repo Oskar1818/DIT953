@@ -1,6 +1,7 @@
 package model.vehicle;
 
-import java.awt.*;
+import java.awt.Color;
+import point.Point;
 
 public abstract class MotorizedVehicle extends Vehicle {
     /**
@@ -11,8 +12,8 @@ public abstract class MotorizedVehicle extends Vehicle {
      * @param point The starting position of the car. An x- and a y-coordinate.
      * @param dir The initial direction of the car.
      */
-    private double enginePower;
-    private double speed;
+    private final double enginePower;
+    private final double speed;
 
     public MotorizedVehicle(Color color,  double enginePower, double speed, int nrDoors, String name, Point point, Direction dir) {
         super(color, nrDoors, name, point, dir);
@@ -28,23 +29,26 @@ public abstract class MotorizedVehicle extends Vehicle {
     /**
      * Starts the engine and sets the initial speed to 1.
      */
-    public void startEngine(){ this.speed = 1; }
+    public Vehicle startEngine(){ return createVehicleWithNewSpeed(1); }
 
     /**
      * Stops the engine, which makes the car stop.
      */
-    public void stopEngine(){ this.speed = 0; }
+    public Vehicle stopEngine(){ return createVehicleWithNewSpeed(0); }
 
     @Override
     public double getSpeed() { return this.speed;}
 
     @Override
-    public void incrementSpeed(double amount){
-        this.speed = Math.min(speed + speedFactor() * amount, getEnginePower());
+    public Vehicle incrementSpeed(double amount) {
+        return setSpeed(Math.min(getSpeed() + speedFactor() * amount, getEnginePower()));
     }
 
     @Override
-    public void setSpeed(double speed){ this.speed = (Math.min(speed, this.enginePower)); }
+    public Vehicle setSpeed(double speed) {
+        double s = (Math.min(speed, this.enginePower));
+        return createVehicleWithNewSpeed(s);
+    }
 
    /* @Override
     public void gas(double amount) {

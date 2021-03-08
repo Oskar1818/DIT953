@@ -1,9 +1,11 @@
 package model.vehicle.transporter;
 
 import model.vehicle.Direction;
+import model.vehicle.Vehicle;
 import model.vehicle.car.Car;
 
-import java.awt.*;
+import java.awt.Color;
+import point.Point;
 
 /**
  * A car ferry in the form of the model model.vehicle.transporter.SSBadger.
@@ -60,4 +62,28 @@ public class SSBadger extends Transporter<Car> {
         return null;
     }
 
+    @Override
+    public Vehicle createVehicleWithNewCord(Point p) {
+        return null;
+    }
+
+    @Override
+    public Vehicle createVehicleWithNewDirection(Direction dir) {
+        return null;
+    }
+
+    @Override
+    public Vehicle createVehicleWithNewSpeed(double amount) {
+        return null;
+    }
+
+    @Override
+    public Vehicle createVehicleWithNewX(int xCord) {
+        return null;
+    }
+
+    @Override
+    public Vehicle createVehicleWithNewY(int yCord) {
+        return null;
+    }
 }

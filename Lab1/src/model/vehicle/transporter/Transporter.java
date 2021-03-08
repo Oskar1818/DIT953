@@ -5,7 +5,10 @@ import model.interfaces.ITransporter;
 import model.vehicle.Direction;
 import model.vehicle.MotorizedVehicle;
 
-import java.awt.*;
+import java.awt.Color;
+
+import model.vehicle.Vehicle;
+import point.Point;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
@@ -31,6 +34,13 @@ public abstract class Transporter<T extends ITransportable> extends MotorizedVeh
      */
     public Transporter(Color color, double enginePower, int nrDoors, String name, Point p, Direction dir, int capacity){
         super(color, enginePower, 0, nrDoors, name, p, dir);
+        this.capacity = capacity;
+        this.load = new ArrayDeque<>(capacity);
+        this.rampAngle = 0;
+    }
+
+    public Transporter(Color color, double enginePower, double speed, int nrDoors, String name, Point p, Direction dir, int capacity){
+        super(color, enginePower, speed, nrDoors, name, p, dir);
         this.capacity = capacity;
         this.load = new ArrayDeque<>(capacity);
         this.rampAngle = 0;
@@ -111,14 +121,15 @@ public abstract class Transporter<T extends ITransportable> extends MotorizedVeh
 
     /**
      * Moves the transporter and its corresponding load by changing the x- or y -coordinate with its speed.
+     * @return
      */
     @Override
-    public void move() {
+    public Vehicle move() {
         if (isRampDown()) {
-            System.out.println("Cannot drive with ramp down");
+            throw new RuntimeException("Cannot drive with ramp down!");
         } else {
-           super.move();
-           moveCargo(getDirection());
+            moveCargo(getDirection());
+            return super.move();
         }
     }
 
@@ -126,12 +137,12 @@ public abstract class Transporter<T extends ITransportable> extends MotorizedVeh
     * Changes the direction of the car and its corresponding load.
     */
    @Override
-   public void turnRight () {
+   public Vehicle turnRight () {
        if (isRampDown()) {
-           System.out.println("Cannot drive with ramp down");
+           throw new RuntimeException("Cannot drive with ramp down!");
        } else {
-           super.turnRight();
            turnCargo(getDirection());
+           return super.turnRight();
        }
    }
 
@@ -139,12 +150,12 @@ public abstract class Transporter<T extends ITransportable> extends MotorizedVeh
     * Changes the direction of the car and its corresponding load.
     */
    @Override
-   public void turnLeft () {
+   public Vehicle turnLeft () {
        if (isRampDown()) {
-           System.out.println("Cannot drive with ramp down");
+           throw new RuntimeException("Cannot drive with ramp down!");
        } else {
-           super.turnLeft();
            turnCargo(getDirection());
+           return super.turnLeft();
        }
    }
 }

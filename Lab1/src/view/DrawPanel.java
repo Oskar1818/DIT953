@@ -3,6 +3,7 @@ package view;
 import production.Tuple;
 
 import java.awt.*;
+import point.Point;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -41,6 +42,6 @@ public class DrawPanel extends JPanel{
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        positions.forEach( t -> g.drawImage(bufferImage(t.getFst()), t.getSnd().x, t.getSnd().y, null));
+        positions.forEach( t -> g.drawImage(bufferImage(t.getFst()), t.getSnd().getX(), t.getSnd().getY(), null));
     }
 }
