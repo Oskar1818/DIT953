@@ -46,6 +46,11 @@ public class SSBadger extends Transporter<Car> {
             System.out.println("Ramp must be open!");
     }
 
+    @Override
+    public Transporter<Car> createTransporterWithRampAngel(boolean state) {
+        return null;
+    }
+
     /**
      * Unloads the car using the first in, first out principle.
      * @return Returns the first car in the queue.
@@ -78,12 +83,12 @@ public class SSBadger extends Transporter<Car> {
     }
 
     @Override
-    public Vehicle createVehicleWithNewX(int xCord) {
+    public Vehicle createVehicleWithNewX(double xCord) {
         return null;
     }
 
     @Override
-    public Vehicle createVehicleWithNewY(int yCord) {
+    public Vehicle createVehicleWithNewY(double yCord) {
         return null;
     }
 }

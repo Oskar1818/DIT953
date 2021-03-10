@@ -2,13 +2,14 @@ package production;
 
 import model.interfaces.ITurbo;
 import model.vehicle.MotorizedVehicle;
+import model.vehicle.car.Saab95;
 import model.vehicle.transporter.Transporter;
 import view.IInfoObserver;
 import view.IPositionObserver;
 
-import javax.swing.*;
-//import java.awt.*;
 import point.Point;
+
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -16,19 +17,18 @@ import java.util.Random;
 
 public class Production implements IProduction, IObservable {
 
-    private final ArrayList<MotorizedVehicle> vehicles;
-    private final ArrayList<ITurbo> turbos;
-    private final ArrayList<Transporter> transporters;
+    private ArrayList<MotorizedVehicle> vehicles;
+    private ArrayList<ITurbo> turbos;
+    private ArrayList<Transporter> transporters;
     private final ArrayList<IPositionObserver> positionObservers;
     private final ArrayList<IInfoObserver> informationObservers;
     private final ArrayList<Tuple<String, Point>> positions;
     private final ArrayList<Tuple<String, Integer>> information;
 
-    private final int delay = 50;
     private final VehicleFactory factory = new VehicleFactory();
-    ImmutableProduction immutableProduction = new ImmutableProduction();
 
     // The delay (ms) corresponds to 20 updates a sec (hz)
+    private final int delay = 50;
     public Timer timer = new Timer(delay, new TimerListener());
 
     public Production() {
@@ -41,87 +41,35 @@ public class Production implements IProduction, IObservable {
         this.information = new ArrayList<>();
     }
 
-    private Production(ArrayList<MotorizedVehicle> vehicles, ArrayList<ITurbo> turbos,
-                       ArrayList<Transporter> transporters, ArrayList<IPositionObserver> pObservers,
-                       ArrayList<IInfoObserver> iObservers)
-    {
-        this.vehicles = vehicles;
-        this.turbos = turbos;
-        this.transporters = transporters;
-        this.positionObservers = pObservers;
-        this.informationObservers = iObservers;
-        this.positions = new ArrayList<>();
-        this.information = new ArrayList<>();
-    }
-
-    private Production(Production p){
-        this.vehicles = p.vehicles;
-        this.turbos = p.turbos;
-        this.transporters = p.transporters;
-        this.positionObservers = p.positionObservers;
-        this.informationObservers = p.informationObservers;
-        this.positions = p.positions;
-        this.information = p.information;
-        this.timer = p.timer;
-    }
-
-    public Production addSaab95(){
+    public void addSaab95(){
         ITurbo saab = factory.createSaab95(Randomizer.randPos(), Randomizer.randDir());
-        ArrayList<MotorizedVehicle> copy1 = new ArrayList<>();
-        for (int i = 0; i < vehicles.size(); i++){ copy1.add(i, vehicles.get(i)); }
-        copy1.add((MotorizedVehicle) saab);
-        ArrayList<ITurbo> copy2 = new ArrayList<>();
-        for (int i = 0; i < turbos.size(); i++){ copy2.add(i, turbos.get(i)); }
-        copy2.add(saab);
-        return new Production(copy1, copy2, transporters, positionObservers, informationObservers);
+        vehicles.add((MotorizedVehicle) saab);
+        turbos.add(saab);
     }
 
-    public Production addVolvo240() {
-        ArrayList<MotorizedVehicle> copy = new ArrayList<>();
-        for (int i = 0; i < vehicles.size(); i++){ copy.add(i, vehicles.get(i)); }
-        copy.add(factory.createVolvo240(Randomizer.randPos(), Randomizer.randDir()));
-        return new Production(copy, turbos, transporters, positionObservers, informationObservers);
+    public void addVolvo240() {
+        vehicles.add(factory.createVolvo240(Randomizer.randPos(), Randomizer.randDir()));
     }
 
-    public Production addScania() {
+    public void addScania() {
         Transporter scania = factory.createScania(Randomizer.randPos(), Randomizer.randDir());
-        ArrayList<MotorizedVehicle> copy1 = new ArrayList<>();
-        for (int i = 0; i < vehicles.size(); i++) copy1.add(i, vehicles.get(i));
-        copy1.add(scania);
-        ArrayList<Transporter> copy2 = new ArrayList<>();
-        for (int i = 0; i < transporters.size(); i++) copy2.add(i, transporters.get(i));
-        copy2.add(scania);
-        return new Production(copy1, turbos, copy2, positionObservers, informationObservers);
+        vehicles.add(scania);
+        transporters.add(scania);
     }
 
     @Override
-    public Production addInfoObserver(IInfoObserver observer) {
-        ArrayList<IInfoObserver> copy = new ArrayList<>(informationObservers);
-        copy.add(observer);
-        return new Production(vehicles, turbos, transporters, positionObservers, copy);
+    public void addInfoObserver(IInfoObserver observer) { informationObservers.add(observer); }
+
+    @Override
+    public void addPositionObserver(IPositionObserver observer) { positionObservers.add(observer); }
+
+    @Override
+    public void removePositionObserver(IPositionObserver observer) {
+        positionObservers.remove(observer);
     }
 
     @Override
-    public Production addPositionObserver(IPositionObserver observer) {
-        ArrayList<IPositionObserver> copy = new ArrayList<>(positionObservers);
-        copy.add(observer);
-        return new Production(vehicles, turbos, transporters, copy, informationObservers);
-
-    }
-
-    @Override
-    public Production removePositionObserver(IPositionObserver observer) {
-        ArrayList<IPositionObserver> copy = new ArrayList<>(positionObservers);
-        copy.remove(observer);
-        return new Production(vehicles, turbos, transporters, copy, informationObservers);
-    }
-
-    @Override
-    public Production removeInformationObserver(IInfoObserver observer) {
-        ArrayList<IInfoObserver> copy = new ArrayList<>(informationObservers);
-        copy.remove(observer);
-        return new Production(vehicles, turbos, transporters, positionObservers, copy);
-    }
+    public void removeInformationObserver(IInfoObserver obs) { informationObservers.remove(obs); }
 
     @Override
     public void notifyPositionObservers(ArrayList<Tuple<String, Point>> positions) {
@@ -135,8 +83,8 @@ public class Production implements IProduction, IObservable {
 
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            immutableProduction.receiveProduction(new Production(move().collisionDetection()));
-            System.out.println("Hello");
+            collisionDetection();
+            move();
             notifyPositionObservers(getPositions());
             notifyInformationObservers(getInformation());
             positions.clear();
@@ -144,92 +92,93 @@ public class Production implements IProduction, IObservable {
         }
     }
 
-    // is it necessary to have error handling here, for instance if there is no cars in the list
     @Override
-    public Production move() {
+    public void move() {
         ArrayList<MotorizedVehicle> copy = new ArrayList<>();
         for (int i = 0; i < vehicles.size(); i++) {
             copy.add(i, (MotorizedVehicle) vehicles.get(i).move());
         }
-        return new Production(copy, turbos, transporters, positionObservers, informationObservers);
+        this.vehicles = copy;
     }
 
     @Override
-    public Production gas(int amount) {
+    public void gas(int amount) {
         double gas = ((double) amount) / 100;
         ArrayList<MotorizedVehicle> copy = new ArrayList<>();
         for (int i = 0; i < vehicles.size(); i++) {
             copy.add(i, (MotorizedVehicle) vehicles.get(i).gas(gas));
         }
-        return new Production(copy, turbos, transporters, positionObservers, informationObservers);
+        this.vehicles = copy;
     }
     @Override
-    public Production brake(int amount) {
+    public void brake(int amount) {
         double brake = ((double) amount / 100);
         ArrayList<MotorizedVehicle> copy = new ArrayList<>();
         for (int i = 0; i < vehicles.size(); i++) {
             copy.add(i, (MotorizedVehicle) vehicles.get(i).brake(brake));
         }
-        return new Production(copy, turbos, transporters, positionObservers, informationObservers);
+        this.vehicles = copy;
     }
 
     @Override
-    public Production turboOn() {
+    public void turboOn() {
+        ArrayList<ITurbo> copy = new ArrayList<>();// this requires new createSaab methods with specified boolean
+        double speed = getSaabSpeed();
+        for (int i = 0; i < turbos.size(); i++){
+            copy.add(i, turbos.get(i).setTurboOn());
+        }
+        this.turbos = copy;
+    }
+
+    @Override
+    public void turboOff() {
         ArrayList<ITurbo> copy = new ArrayList<>();
-        for (int i = 0; i < turbos.size(); i++) copy.add(i, turbos.get(i));
-        copy.forEach(ITurbo::setTurboOn);
-        return new Production(vehicles, copy, transporters, positionObservers, informationObservers);
+        for (int i = 0; i < turbos.size(); i++){
+            copy.add(i, turbos.get(i).setTurboOff());
+        }
+        this.turbos = copy;
     }
 
     @Override
-    public Production turboOff() {
-        ArrayList<ITurbo> copy = new ArrayList<>();
-        for (int i = 0; i < turbos.size(); i++) copy.add(i, turbos.get(i));
-        copy.forEach(ITurbo::setTurboOff);
-        return new Production(vehicles, copy, transporters, positionObservers, informationObservers);
+    public void liftBed() {
+        ArrayList<Transporter> copy = new ArrayList<>(); // this requires new createScania methods with specified bool
+        for (int i = 0; i < transporters.size(); i++){
+            copy.add(i, transporters.get(i).setRampUp());
+        }
+        this.transporters = copy;
     }
 
     @Override
-    public Production liftBed() {
+    public void lowerBed() {
         ArrayList<Transporter> copy = new ArrayList<>();
-        copy.forEach(Transporter::setRampUp);
-        return new Production(vehicles, turbos, copy, positionObservers, informationObservers);
+        for (int i = 0; i < transporters.size(); i++){
+            copy.add(i, transporters.get(i).setRampDown());
+        }
+        this.transporters = copy;
     }
 
     @Override
-    public Production lowerBed() {
-        ArrayList<Transporter> copy = new ArrayList<>();
-        for (int i = 0; i < transporters.size(); i++) copy.add(i, transporters.get(i));
-        copy.forEach(Transporter::setRampDown);
-        return new Production(vehicles, turbos, copy, positionObservers, informationObservers);
+    public void startAll() {
+        ArrayList<MotorizedVehicle> copy = new ArrayList<>();
+        for (int i = 0; i < vehicles.size(); i++) {
+            copy.add(i, (MotorizedVehicle) vehicles.get(i).startEngine());
+        }
+        this.vehicles = copy;
     }
 
     @Override
-    public Production startAll() {
+    public void stopAll() {
         ArrayList<MotorizedVehicle> copy = new ArrayList<>();
-        for (int i = 0; i < vehicles.size(); i++) copy.add(i, vehicles.get(i));
-        copy.forEach(MotorizedVehicle::startEngine);
-        return new Production(copy, turbos, transporters, positionObservers, informationObservers);
+        for (int i = 0; i < vehicles.size(); i++) {
+            copy.add(i, (MotorizedVehicle) vehicles.get(i).stopEngine());
+        }
+        this.vehicles = copy;
     }
 
-    @Override
-    public Production stopAll() {
-        ArrayList<MotorizedVehicle> copy = new ArrayList<>();
-        for (int i = 0; i < vehicles.size(); i++) copy.add(i, vehicles.get(i));
-        copy.forEach(MotorizedVehicle::stopEngine);
-        return new Production(copy, turbos, transporters, positionObservers, informationObservers);
-    }
-
-    public Production removeVehicle() {
-        ArrayList<MotorizedVehicle> copy = new ArrayList<>();
-        for (int i = 0; i < vehicles.size(); i++) copy.add(i, vehicles.get(i));
-        if (copy.size() > 0) copy.remove(0);
-        return new Production(copy, turbos, transporters, positionObservers, informationObservers);
-    }
+    public void removeVehicle() { if (vehicles.size() > 0) vehicles.remove(0); }
 
     public void addRandomVehicle() {
-        ArrayList<MotorizedVehicle> copy = new ArrayList<>(vehicles);
-        if (copy.size() < 10) {
+        if (vehicles.size() < 10) {
             int rnd = new Random().nextInt(3);
             switch (rnd) {
                 case 0 -> addVolvo240();
@@ -239,14 +188,12 @@ public class Production implements IProduction, IObservable {
         }
     }
 
-    public Production collisionDetection(){
-        ArrayList<MotorizedVehicle> copy = new ArrayList<>(vehicles);
-        copy.forEach(v -> {
+    public void collisionDetection(){
+        vehicles.forEach(v -> {
             if (v.getXCord() < 0 || v.getXCord() > 700 || v.getYCord() < 0 || v.getYCord() > 500) {
                 v.setDirection(v.getOppositeDirection(v.getDirection()));
             }
         });
-        return new Production(copy, turbos, transporters, positionObservers, informationObservers);
     }
 
     // Law of Demeter
@@ -260,5 +207,23 @@ public class Production implements IProduction, IObservable {
         vehicles.forEach( v -> information.add(
                 new Tuple(v.getName(), v.getSpeed())));
         return information;
+    }
+
+    private double getSaabSpeed() {
+        double saabSpeed = 0;
+        for (MotorizedVehicle v : vehicles){
+            if (v instanceof ITurbo)
+                saabSpeed = v.getSpeed();
+        }
+        return saabSpeed;
+    }
+
+    private double getScaniaSpeed() {
+        double scaniaSpeed = 0;
+        for (MotorizedVehicle v : vehicles){
+            if (v instanceof Transporter)
+                scaniaSpeed= v.getSpeed();
+        }
+        return scaniaSpeed;
     }
 }

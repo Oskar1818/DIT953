@@ -9,14 +9,14 @@ import java.util.ArrayList;
 
 public interface IObservable{
 
-    IObservable addPositionObserver(IPositionObserver positions);
+    void addPositionObserver(IPositionObserver positions);
     void notifyPositionObservers(ArrayList<Tuple<String, Point>> positions);
 
-    IObservable removePositionObserver(IPositionObserver observer);
+    void removePositionObserver(IPositionObserver observer);
 
     void notifyInformationObservers(ArrayList<Tuple<String, Integer>> information);
-    IObservable removeInformationObserver(IInfoObserver obs);
+    void removeInformationObserver(IInfoObserver obs);
 
-    IObservable addInfoObserver(IInfoObserver observer);
+    void addInfoObserver(IInfoObserver observer);
 
 }

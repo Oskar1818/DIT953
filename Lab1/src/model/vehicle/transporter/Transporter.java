@@ -46,6 +46,7 @@ public abstract class Transporter<T extends ITransportable> extends MotorizedVeh
         this.rampAngle = 0;
     }
 
+
     /**
      * @return returns the ramp angel
      */
@@ -56,16 +57,14 @@ public abstract class Transporter<T extends ITransportable> extends MotorizedVeh
     /**
      * Turns down the ramp.
      */
-    public void setRampDown(){
-        rampAngle = 70;
-    }
+    public Transporter setRampDown(){ return createTransporterWithRampAngel(false); }
 
     /**
      * Turns the ramp to 0 degrees.
      */
-    public void setRampUp() { rampAngle = 0; }
+    public Transporter setRampUp() { return createTransporterWithRampAngel(true); }
 
-    public void setRamp(double d) { rampAngle = d; }
+    protected void setRamp(double d) { rampAngle = d; }
 
     /**
      * @return Returns if the ramp is down or not.
@@ -105,6 +104,8 @@ public abstract class Transporter<T extends ITransportable> extends MotorizedVeh
             case SOUTH -> { for (T v : load) v.setDirection(Direction.WEST); }
         }
     }
+
+    public abstract Transporter<T> createTransporterWithRampAngel(boolean state);
 
     /**
      * @return Returns the load of the specific vehicle type.

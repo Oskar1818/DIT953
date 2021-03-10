@@ -8,13 +8,13 @@ import java.util.ArrayList;
 
 public interface IProduction {
 
-    IProduction move();
-    IProduction gas(int amount);
-    IProduction brake(int amount);
-    IProduction turboOn();
-    IProduction turboOff();
-    IProduction liftBed();
-    IProduction lowerBed();
-    IProduction startAll();
-    IProduction stopAll();
+    void move();
+    void gas(int amount);
+    void brake(int amount);
+    void turboOn();
+    void turboOff();
+    void liftBed();
+    void lowerBed();
+    void startAll();
+    void stopAll();
 }

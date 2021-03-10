@@ -4,10 +4,14 @@ public interface ITurbo {
 
     boolean isTurboOn();
 
-    void setTurboOn();
+    ITurbo setTurboOn();
 
-    void setTurboOff();
+    ITurbo setTurboOff();
 
     double getTurboPower();
+
+    ITurbo createVehicleWithTurbo(boolean state);
+
+    ITurbo speedSetter(double speed);
 
 }

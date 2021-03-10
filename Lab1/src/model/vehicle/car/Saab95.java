@@ -38,6 +38,11 @@ public class Saab95 extends Car implements ITurbo {
         super(color, 125, speed, 2, "Saab95", point, dir);
     }
 
+    private Saab95(Color color, Point point, Direction dir, double speed, boolean turbo) {
+        super(color, 125, speed, 2, "Saab95", point, dir);
+        turboOn = turbo;
+    }
+
     // Specific to saab95.
     /**
      * Checks if the turbo in the Saab is on.
@@ -49,22 +54,26 @@ public class Saab95 extends Car implements ITurbo {
      * Turns on the turbo in the model.vehicle.car.Saab95. Hej
      */
     @Override
-    public void setTurboOn(){
-	    turboOn = true;
+    public ITurbo setTurboOn(){
+	    return createVehicleWithTurbo(true);
     }
 
     /**
      * Turns off the turbo in the model.vehicle.car.Saab95.
      */
     @Override
-    public void setTurboOff(){
-	    turboOn = false;
+    public ITurbo setTurboOff(){
+        return createVehicleWithTurbo(false);
     }
+
+    /*@Override
+    public ITurbo speedSetter(double speed) {
+        return createVehicleWithNewSpeed(speed);
+    }*/
 
 
     @Override
     public double getTurboPower() {return turboFactor; }
-
 
     @Override
     public double speedFactor() {
@@ -75,13 +84,23 @@ public class Saab95 extends Car implements ITurbo {
     }
 
     @Override
+    public ITurbo createVehicleWithTurbo(boolean state) {
+        return new Saab95(this.getColor(), this.getPoint(), this.getDirection(), this.getSpeed(), state);
+    }
+
+    @Override
+    public ITurbo speedSetter(double speed) {
+        return null;
+    }
+
+    @Override
     public Vehicle createVehicleWithNewCord(Point point) {
-        return new Saab95(this.getColor(), point, this.getDirection());
+        return new Saab95(this.getColor(), point, this.getDirection(), this.getSpeed());
     }
 
     @Override
     public Vehicle createVehicleWithNewDirection(Direction dir) {
-        return new Saab95(this.getColor(), this.getPoint(), dir);
+        return new Saab95(this.getColor(), this.getPoint(), dir, this.getSpeed());
     }
 
     @Override
@@ -90,12 +109,12 @@ public class Saab95 extends Car implements ITurbo {
     }
 
     @Override
-    public Vehicle createVehicleWithNewX(int xCord) {
-        return new Saab95(this.getColor(), new Point(xCord, (int) this.getYCord()), this.getDirection());
+    public Vehicle createVehicleWithNewX(double xCord) {
+        return new Saab95(this.getColor(), new Point(xCord, this.getYCord()), this.getDirection(), this.getSpeed());
     }
 
     @Override
-    public Vehicle createVehicleWithNewY(int yCord) {
-        return new Saab95(this.getColor(), new Point((int) this.getXCord(), yCord), this.getDirection());
+    public Vehicle createVehicleWithNewY(double yCord) {
+        return new Saab95(this.getColor(), new Point(this.getXCord(), yCord), this.getDirection(), this.getSpeed());
     }
 }

@@ -47,9 +47,9 @@ public abstract class Vehicle implements IMove, ITransportable {
 
     public abstract Vehicle createVehicleWithNewSpeed(double amount);
 
-    public abstract Vehicle createVehicleWithNewX(int xCord);
+    public abstract Vehicle createVehicleWithNewX(double xCord);
 
-    public abstract Vehicle createVehicleWithNewY(int yCord);
+    public abstract Vehicle createVehicleWithNewY(double yCord);
 
     //public abstract Vehicle
 
@@ -142,7 +142,7 @@ public abstract class Vehicle implements IMove, ITransportable {
      * @param x - Sets the x-coordinate.
      */
     @Override
-    public Vehicle setXCord(double x) { return createVehicleWithNewX( (int) x); }
+    public Vehicle setXCord(double x) { return createVehicleWithNewX(x); }
 
     /**
      * @return Returns the x-coordinate.
@@ -154,7 +154,7 @@ public abstract class Vehicle implements IMove, ITransportable {
      * @param y - Sets the y-coordinate.
      */
     @Override
-    public Vehicle setYCord(double y) { return createVehicleWithNewY( (int) y); }
+    public Vehicle setYCord(double y) { return createVehicleWithNewY(y); }
 
     /**
      * @return Returns y coordinate of vehicle.

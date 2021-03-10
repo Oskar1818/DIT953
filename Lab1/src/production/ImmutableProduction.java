@@ -1,5 +1,6 @@
 package production;
 
+import controller.CarController;
 import view.CarView;
 import view.InfoView;
 
@@ -7,20 +8,23 @@ public final class ImmutableProduction {
 
     private final CarView view = new CarView("CarSim 1.1");
     private final InfoView secondView = new InfoView();
+    private final Production production = new Production();
 
-    private Production production = new Production().addSaab95().addVolvo240().addScania()
-            .addPositionObserver(view).addInfoObserver(secondView);
+    public ImmutableProduction() {
+        init();
+        new CarController(view, production);
+    }
+
+    private void init() {
+        production.addSaab95();
+        production.addVolvo240();
+        production.addScania();
+        production.addPositionObserver(view);
+        production.addInfoObserver(secondView);
+    }
 
     public Production getProduction() {
         return this.production;
-    }
-
-    public void receiveProduction(Production p) {
-        this.production = p;
-    }
-
-    public CarView getView() {
-        return this.view;
     }
 
 }

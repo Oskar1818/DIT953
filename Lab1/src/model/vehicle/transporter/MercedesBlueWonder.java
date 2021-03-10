@@ -35,6 +35,11 @@ public class MercedesBlueWonder extends Transporter<Car> {
     }
 
     @Override
+    public Transporter<Car> createTransporterWithRampAngel(boolean state) {
+        return null;
+    }
+
+    @Override
     public Car unload() {
         if (getLoadSize() > 0 && isRampDown()) {
             Car car = getLoad().getLast();
@@ -67,12 +72,12 @@ public class MercedesBlueWonder extends Transporter<Car> {
     }
 
     @Override
-    public Vehicle createVehicleWithNewX(int xCord) {
+    public Vehicle createVehicleWithNewX(double xCord) {
         return null;
     }
 
     @Override
-    public Vehicle createVehicleWithNewY(int yCord) {
+    public Vehicle createVehicleWithNewY(double yCord) {
         return null;
     }
 }

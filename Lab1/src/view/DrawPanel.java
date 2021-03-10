@@ -42,6 +42,6 @@ public class DrawPanel extends JPanel{
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        positions.forEach( t -> g.drawImage(bufferImage(t.getFst()), t.getSnd().getX(), t.getSnd().getY(), null));
+        positions.forEach( t -> g.drawImage(bufferImage(t.getFst()), (int) t.getSnd().getX(), (int) t.getSnd().getY(), null));
     }
 }

@@ -30,7 +30,7 @@ public final class Volvo240 extends Car {
     }
 
     private Volvo240(Color color, Point point, Direction dir, double speed) {
-        super(color, 125, speed, 2, "Saab95", point, dir);
+        super(color, 125, speed, 2, "Volvo240", point, dir);
     }
 
     @Override
@@ -41,12 +41,12 @@ public final class Volvo240 extends Car {
 
     @Override
     public Vehicle createVehicleWithNewCord(Point point) {
-        return new Volvo240(this.getColor(), point, this.getDirection());
+        return new Volvo240(this.getColor(), point, this.getDirection(), this.getSpeed());
     }
 
     @Override
     public Vehicle createVehicleWithNewDirection(Direction dir) {
-        return new Volvo240(this.getColor(), this.getPoint(), dir);
+        return new Volvo240(this.getColor(), this.getPoint(), dir, this.getSpeed());
     }
 
     @Override
@@ -55,12 +55,12 @@ public final class Volvo240 extends Car {
     }
 
     @Override
-    public Vehicle createVehicleWithNewX(int xCord) {
-        return new Volvo240(this.getColor(), new Point(xCord, (int) this.getYCord()), this.getDirection());
+    public Vehicle createVehicleWithNewX(double xCord) {
+        return new Volvo240(this.getColor(), new Point(xCord, this.getYCord()), this.getDirection(), this.getSpeed());
     }
 
     @Override
-    public Vehicle createVehicleWithNewY(int yCord) {
-        return new Volvo240(this.getColor(), new Point((int) this.getXCord(), yCord), this.getDirection());
+    public Vehicle createVehicleWithNewY(double yCord) {
+        return new Volvo240(this.getColor(), new Point(this.getXCord(), yCord), this.getDirection(), this.getSpeed());
     }
 }

@@ -25,6 +25,14 @@ public class Scania extends Transporter<CommonGoods> {
         super(color, 500, speed, 2, "Scania", point, dir, capacity);
     }
 
+    private Scania(Color color, Point point, Direction dir, double speed, int capacity, boolean state) {
+        super(color, 500, speed, 2, "Scania", point, dir, capacity);
+        if (state)
+            setRampAngle(0);
+        else
+            setRampAngle(70);
+    }
+
     /**
      * Sets the angle at which the ramp should tilt.
      * @param a The specified angel, which cannot go beyond 70 degrees or beneath 0 degrees.
@@ -39,7 +47,7 @@ public class Scania extends Transporter<CommonGoods> {
     @Override
     public void addLoad(CommonGoods something) {
         getLoad().add(something);
-    }
+    } // not immutable yet
 
     @Override
     public double speedFactor() {
@@ -48,12 +56,12 @@ public class Scania extends Transporter<CommonGoods> {
 
     @Override
     public Vehicle createVehicleWithNewCord(Point point) {
-        return new Scania(this.getColor(), point, this.getDirection(), this.getCapacity());
+        return new Scania(this.getColor(), point, this.getDirection(), this.getSpeed(), this.getCapacity());
     }
 
     @Override
     public Vehicle createVehicleWithNewDirection(Direction dir) {
-        return new Scania(this.getColor(), this.getPoint(), dir, this.getCapacity());
+        return new Scania(this.getColor(), this.getPoint(), dir, this.getSpeed(), this.getCapacity());
     }
 
     @Override
@@ -62,12 +70,21 @@ public class Scania extends Transporter<CommonGoods> {
     }
 
     @Override
-    public Vehicle createVehicleWithNewX(int xCord) {
-        return new Scania(this.getColor(), new Point(xCord, (int) this.getYCord()), this.getDirection(), this.getCapacity());
+    public Vehicle createVehicleWithNewX(double xCord) {
+        return new Scania(this.getColor(), new Point(xCord, this.getYCord()),
+                this.getDirection(), this.getSpeed(), this.getCapacity());
     }
 
     @Override
-    public Vehicle createVehicleWithNewY(int yCord) {
-        return new Scania(this.getColor(), new Point((int) this.getXCord(), yCord), this.getDirection(), this.getCapacity());
+    public Vehicle createVehicleWithNewY(double yCord) {
+        return new Scania(this.getColor(), new Point(this.getXCord(), yCord),
+                this.getDirection(), this.getSpeed(), this.getCapacity());
+    }
+
+    @Override
+    public Transporter<CommonGoods> createTransporterWithRampAngel(boolean state) {
+        return new Scania(this.getColor(), this.getPoint(),
+                this.getDirection(), this.getSpeed(), this.getCapacity(), state);
+
     }
 }
